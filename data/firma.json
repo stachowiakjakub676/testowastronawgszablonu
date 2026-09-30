@@ -1,9 +1,9 @@
 {
   "$schema": "../tools/schemat/firma.schema.json",
-  "$komentarz": "Szkielet dla branży „uslugi” (tools/start.py). null = brak danych — element strony się nie pokaże. Każdy fakt (telefon, godziny, rok, liczby) wpisz ze źródłem w „zrodla”; niepewne dopisz do „do_potwierdzenia”. Opis pól: docs/KONTRAKT.md §4.1.",
+  "$komentarz": "Szkielet dla branży „producent” (tools/start.py). null = brak danych — element strony się nie pokaże. Każdy fakt (telefon, godziny, rok, liczby) wpisz ze źródłem w „zrodla”; niepewne dopisz do „do_potwierdzenia”. Opis pól: docs/KONTRAKT.md §4.1.",
   "wersja_danych": 1,
   "przyklad": false,
-  "branza": "uslugi",
+  "branza": "producent",
   "typ_schema": null,
   "firma": {
     "nazwa": null,

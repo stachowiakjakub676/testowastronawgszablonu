@@ -21,7 +21,7 @@
   },
   // Formularz: 5 wiadomości na minutę z jednego adresu IP. namespace_id — dowolna liczba, inna dla każdej strony na koncie.
   "ratelimits": [
-    { "name": "LIMIT_KONTAKT", "namespace_id": "1101", "simple": { "limit": 5, "period": 60 } }
+    { "name": "LIMIT_KONTAKT", "namespace_id": "856841", "simple": { "limit": 5, "period": 60 } }
   ],
   // Nocny build (czas UTC: 2:17 = 4:17 latem, 3:17 zimą w Polsce), żeby daty na stronie były aktualne.
   // Działa po dodaniu sekretu DEPLOY_HOOK_URL; bez niego Worker tylko zapisuje informację w dzienniku.
