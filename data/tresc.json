@@ -1,6 +1,6 @@
 {
   "$schema": "../tools/schemat/tresc.schema.json",
-  "$komentarz": "Sekcje strony głównej dla branży „uslugi” (kolejność z presetu): hero, ogloszenie, oferta, cennik, proces, zasady, zespol, opinie, aktualnosci, godziny, faq, kontakt. Blok null = sekcja się nie pokazuje. Wypełniaj tylko prawdziwą treścią od firmy. Struktura bloków: docs/KONTRAKT.md §4.2.",
+  "$komentarz": "Sekcje strony głównej dla branży „producent” (kolejność z presetu): hero, ogloszenie, produkty, cennik, o_firmie, proces, liczby, zasady, wspolpraca, gdzie_kupic, do_pobrania, faq, aktualnosci, kontakt. Blok null = sekcja się nie pokazuje. Wypełniaj tylko prawdziwą treścią od firmy. Struktura bloków: docs/KONTRAKT.md §4.2.",
   "wersja_danych": 1,
   "hero": {
     "naglowek": null,
