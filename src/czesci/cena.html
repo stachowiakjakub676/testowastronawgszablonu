@@ -1,0 +1,3 @@
+{# Cena pozycji przez filtr cena: „1 250 zł”, „od 45 zł/m²”, „32–46 zł”; 0 = „bezpłatnie”. Zmienne: cena, jednostka.
+   Wywołujący wcześniej sprawdza, że cena nie jest null (warunek: x.cena != null). #}
+{% if cena == 0 %}bezpłatnie{% else %}<span class="nowrap">{{ cena | cena }}{% if jednostka %}/{{ jednostka }}{% endif %}</span>{% endif %}

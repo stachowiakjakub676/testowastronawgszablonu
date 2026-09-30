@@ -1,0 +1,5 @@
+{
+  "$schema": "../tools/schemat/zdjecia.schema.json",
+  "wersja_danych": 1,
+  "zdjecia": []
+}

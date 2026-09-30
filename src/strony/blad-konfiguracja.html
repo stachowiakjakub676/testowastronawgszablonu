@@ -1,0 +1,16 @@
+{# strona: sciezka="/blad-konfiguracja" tytul="Wysyłka z formularza jest wyłączona" indeksuj="nie" #}
+{# Tu Worker przekierowuje (303) bez JavaScriptu, gdy wysyłka nie jest skonfigurowana (kod nie_skonfigurowano:
+   brak RESEND_API_KEY albo ADRESAT). Odwiedzający dostaje gotową wiadomość e-mail i telefon zamiast „spróbuj później”.
+   Strona powstaje tylko przy funkcje.formularz.tryb = "worker". #}
+<section class="section" aria-labelledby="tytul-strony">
+  <div class="wrap prose">
+    <h1 id="tytul-strony">Wysyłka z formularza jest wyłączona</h1>
+    <p class="lead">Wiadomość nie dotarła, bo wysyłka z formularza nie jest jeszcze włączona.{% if auto.formularz.mailto_href %} Napisz e-mail – przycisk otworzy program pocztowy z gotowym szablonem zapytania.{% endif %}</p>
+    {% if auto.formularz.mailto_href %}
+    <p><a class="btn btn--primary" href="{{ auto.formularz.mailto_href | url }}">Napisz zapytanie</a></p>
+    {% endif %}
+    {% if auto.tel_href %}
+    <p>Telefon: <a class="tel" href="{{ auto.tel_href | url }}">{{ auto.telefon_krajowy }}</a>.</p>
+    {% endif %}
+  </div>
+</section>

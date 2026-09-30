@@ -1,0 +1,12 @@
+{# wymaga: auto.ogloszenie #}
+{# Ogłoszenie (KONTRAKT §4.2, §9.1): pasek tuż pod hero, nigdy okno ani nic nad nagłówkiem strony. Build wstawia je
+   tylko między „od” a „do” (auto.ogloszenie); między nocnymi buildami 70-ogloszenie.js chowa pasek dzień po dacie
+   data-do (liczonej w Europe/Warsaw). Nagłówek jest tylko dla czytników ekranu — widać sam komunikat. #}
+<section class="ogloszenie" id="{{ sekcja.html_id }}" aria-labelledby="ogloszenie-h"{% if auto.ogloszenie.do %} data-do="{{ auto.ogloszenie.do | data_iso }}"{% endif %}>
+  <div class="wrap">
+    <div class="ogloszenie__pasek">
+      <h2 id="ogloszenie-h" class="wizualnie-ukryte">Ogłoszenie</h2>
+      <p class="ogloszenie__tekst">{{ auto.ogloszenie.tekst }}</p>
+    </div>
+  </div>
+</section>

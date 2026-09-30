@@ -1,0 +1,63 @@
+/* 12 — karta (menu): działy z nagłówkiem po lewej (przyklejonym na komputerze), dania w dwóch kolumnach, cena do prawej
+   cyframi tabelarycznymi; oznaczenia W/O tekstem z legendą. Na końcu druk karty i cennika (A4, czarno na białym). */
+.menu__info {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--s-3) var(--s-7);
+  margin-bottom: var(--s-7); color: var(--tekst-2);
+}
+.menu__legenda { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-5); }
+.menu__legenda div { display: flex; align-items: baseline; gap: .4em; }
+/* znak W/O w ramce 1 px: pojedyncza litera obok nazwy nie może czytać się jak przyimek („Pyry z gzikiem w”) */
+.menu__legenda dt, .menu__znak {
+  display: inline-block; min-width: 1.5em; padding: 0 .3em; border: 1px solid currentColor;
+  font-family: var(--font-tekst); font-weight: var(--fw-mocna); font-size: 1rem; line-height: 1.25; text-align: center;
+  color: var(--marka-tekst); vertical-align: .1em;
+}
+.menu__znak { margin-left: .4em; }
+
+.menu__dzialy { display: grid; gap: var(--s-8); }
+.menu__dzial { display: grid; gap: var(--s-4); padding-top: var(--s-4); border-top: 1px solid var(--tekst); }
+.menu__h { font-size: var(--fs-h3); }
+.menu__lista { list-style: none; padding: 0; }
+.menu__poz { padding-block: var(--s-3) var(--s-4); border-bottom: 1px solid var(--linia); break-inside: avoid; }
+.menu__poz:last-child { border-bottom: 0; }
+.menu__wiersz { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-5); }
+.menu__nazwa { font-weight: var(--fw-mocna); }
+.menu__cena { flex: none; white-space: nowrap; font-variant-numeric: tabular-nums; font-weight: var(--fw-mocna); }
+.menu__opis { margin-top: 2px; color: var(--tekst-2); max-width: 48ch; }
+.menu__porcja { margin-left: .5em; font-weight: var(--fw-tekst); color: var(--tekst-2); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.menu__alergeny { margin-top: var(--s-1); font-size: var(--fs-maly); color: var(--tekst-2); }
+.menu__uwagi { margin-top: var(--s-7); color: var(--tekst-2); max-width: 60ch; }
+
+@media (min-width: 960px) {
+  .menu__dzialy { gap: var(--s-8); }
+  .menu__dzial { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--s-6); padding-top: var(--s-5); }
+  .menu__h { grid-column: 1 / 4; align-self: start; position: sticky; top: calc(var(--header-h) + var(--s-5)); }
+  .menu__lista { grid-column: 4 / 13; columns: 2; column-gap: var(--s-7); }
+  .menu__poz:last-child { border-bottom: 1px solid var(--linia); }
+}
+
+/* ---------- druk: /menu i /oferta (cennik) ---------- */
+@media print {
+  @page { margin: 14mm 12mm; }
+  .okruszki, .section__wiecej, .menu__pdf, .cennik__pdf, .filtr, .usluga__akcja, .site-footer__nav { display: none !important; }
+  .page-head { padding-block: 0 8pt; border: 0; }
+  .page-head h1 { font-size: 22pt; }
+  .menu__info { margin-bottom: 10pt; color: var(--tekst); }
+  .menu__legenda dt, .menu__znak { color: var(--tekst); }
+  .menu__dzialy { gap: 12pt; }
+  .menu__dzial { display: block; padding-top: 6pt; border-top: 1pt solid var(--tekst); break-inside: auto; }
+  .menu__h { position: static; font-size: 13pt; margin-bottom: 4pt; break-after: avoid; }
+  .menu__lista { columns: 2; column-gap: 10mm; }
+  .menu__poz { padding-block: 3pt; border-bottom: .5pt solid var(--linia-mocna); }
+  .menu__opis, .menu__alergeny { color: var(--tekst-2); }
+  .menu__opis { font-size: 10pt; }
+  .menu__alergeny { font-size: 8.5pt; }
+  .cennik__meta { position: static; color: var(--tekst); }
+  .cennik__siatka { display: block; }
+  .cennik__grupa + .cennik__grupa { margin-top: 12pt; }
+  .cennik__grupa { break-inside: avoid; }
+  .cennik__tabela tbody th, .cennik__tabela tbody td { padding-block: 4pt; border-bottom: .5pt solid var(--linia-mocna); }
+  .cennik__tabela thead th { border-bottom: 1pt solid var(--tekst); color: var(--tekst); }
+  .cennik__opis { color: var(--tekst-2); }
+  .oferta__foto, .produkt__foto { display: none; }
+}

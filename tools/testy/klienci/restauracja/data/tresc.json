@@ -1,0 +1,346 @@
+{
+  "$schema": "../../../../../tools/schemat/tresc.schema.json",
+  "$komentarz": "FIKSTURA TESTOWA — treść wymyślona do sprawdzenia modułów szablonu (generuj.py).",
+  "wersja_danych": 1,
+  "hero": {
+    "naglowek": "Kuchnia polska w Testowie, kolacje do późna",
+    "lead": "Obiady od wtorku do niedzieli, w piątek i sobotę kuchnia do 23:00, bar do 2:00. Dane i zdjęcia są testowe.",
+    "zdjecie": "sala",
+    "podpis": "Sala główna (zdjęcie testowe)",
+    "cta_glowne": null,
+    "cta_drugie": null
+  },
+  "ogloszenie": {
+    "tekst": "Test ogłoszenia: 01.11 lokal nieczynny",
+    "od": "2026-09-25",
+    "do": "2026-11-01"
+  },
+  "oferta": null,
+  "cennik": {
+    "naglowek": "Przyjęcia i catering",
+    "dla": "konsumenci",
+    "data": "2026-09-01",
+    "uwagi": null,
+    "pdf": null,
+    "grupy": [
+      {
+        "nazwa": "Przyjęcia w sali",
+        "pozycje": [
+          {
+            "nazwa": "Menu okolicznościowe",
+            "opis": "zupa, danie główne, deser",
+            "cena": 120,
+            "jednostka": "os.",
+            "czas": null
+          },
+          {
+            "nazwa": "Wynajem sali na wyłączność",
+            "opis": null,
+            "cena": {
+              "od": 800,
+              "do": 1500
+            },
+            "jednostka": null,
+            "czas": "4 h"
+          }
+        ]
+      },
+      {
+        "nazwa": "Catering",
+        "pozycje": [
+          {
+            "nazwa": "Obiad w pojemnikach",
+            "opis": "od 10 porcji",
+            "cena": 32,
+            "jednostka": "porcja",
+            "czas": null
+          }
+        ]
+      }
+    ]
+  },
+  "menu": {
+    "naglowek": null,
+    "data": "2026-09-01",
+    "uwagi": "Ceny brutto. Porcje dziecięce za pół ceny (dane testowe).",
+    "pdf": "assets/img/pliki/karta-testowa.pdf",
+    "kategorie": [
+      {
+        "nazwa": "Zupy",
+        "pozycje": [
+          {
+            "nazwa": "Żurek na zakwasie",
+            "opis": "z jajkiem i białą kiełbasą",
+            "cena": 18,
+            "wege": false,
+            "ostre": false,
+            "alergeny": [
+              "gluten",
+              "jaja",
+              "seler"
+            ],
+            "porcja": "350 ml"
+          },
+          {
+            "nazwa": "Pomidorowa",
+            "opis": "z makaronem",
+            "cena": 14.5,
+            "wege": true,
+            "ostre": false,
+            "alergeny": [
+              "gluten",
+              "seler"
+            ],
+            "porcja": "350 ml"
+          },
+          {
+            "nazwa": "Gulaszowa",
+            "opis": "pikantna, z papryką",
+            "cena": 21,
+            "wege": false,
+            "ostre": true,
+            "alergeny": [
+              "seler"
+            ],
+            "porcja": null
+          }
+        ]
+      },
+      {
+        "nazwa": "Dania główne",
+        "pozycje": [
+          {
+            "nazwa": "Pierogi ruskie",
+            "opis": "z cebulką",
+            "cena": 29,
+            "wege": true,
+            "ostre": false,
+            "alergeny": [
+              "gluten",
+              "mleko",
+              "jaja"
+            ],
+            "porcja": "10 szt."
+          },
+          {
+            "nazwa": "Schabowy z ziemniakami",
+            "opis": "i kapustą zasmażaną",
+            "cena": 42,
+            "wege": false,
+            "ostre": false,
+            "alergeny": [
+              "gluten",
+              "jaja",
+              "mleko"
+            ],
+            "porcja": null
+          },
+          {
+            "nazwa": "Placki ziemniaczane",
+            "opis": "z gulaszem",
+            "cena": {
+              "od": 32,
+              "do": 38
+            },
+            "wege": false,
+            "ostre": true,
+            "alergeny": [
+              "gluten",
+              "jaja"
+            ],
+            "porcja": null
+          },
+          {
+            "nazwa": "Sandacz z masłem",
+            "opis": null,
+            "cena": 58,
+            "wege": false,
+            "ostre": false,
+            "alergeny": [
+              "ryby",
+              "mleko"
+            ],
+            "porcja": "200 g"
+          }
+        ]
+      },
+      {
+        "nazwa": "Desery i napoje",
+        "pozycje": [
+          {
+            "nazwa": "Sernik",
+            "opis": null,
+            "cena": 16,
+            "wege": true,
+            "ostre": false,
+            "alergeny": [
+              "mleko",
+              "jaja",
+              "gluten"
+            ],
+            "porcja": null
+          },
+          {
+            "nazwa": "Kompot",
+            "opis": "z sezonowych owoców",
+            "cena": 8,
+            "wege": true,
+            "ostre": false,
+            "alergeny": [],
+            "porcja": "0,3 l"
+          },
+          {
+            "nazwa": "Woda z kranu",
+            "opis": "dzbanek",
+            "cena": 0,
+            "wege": true,
+            "ostre": false,
+            "alergeny": null,
+            "porcja": "1 l"
+          }
+        ]
+      }
+    ]
+  },
+  "produkty": null,
+  "realizacje": null,
+  "przetargi": null,
+  "proces": null,
+  "zasady": {
+    "naglowek": "Rezerwacje i płatności",
+    "wstep": null,
+    "pozycje": [
+      {
+        "nazwa": "Rezerwacje",
+        "opis": "Telefonicznie, stolik trzymamy 15 minut po umówionej godzinie."
+      },
+      {
+        "nazwa": "Płatność",
+        "opis": "Gotówka, karta, BLIK."
+      },
+      {
+        "nazwa": "Psy",
+        "opis": "Mile widziane w ogródku."
+      }
+    ]
+  },
+  "o_firmie": {
+    "naglowek": null,
+    "wstep": null,
+    "tresc": "tresc/o-firmie.md",
+    "zdjecie": "kuchnia",
+    "fakty": [
+      {
+        "nazwa": "Otwarta od",
+        "wartosc": "2015 r."
+      },
+      {
+        "nazwa": "Miejsca",
+        "wartosc": "48 w sali i 20 w ogródku"
+      }
+    ]
+  },
+  "zespol": {
+    "naglowek": null,
+    "wstep": null,
+    "osoby": [
+      {
+        "imie": "Jan Testowy",
+        "rola": "szef kuchni, współwłaściciel",
+        "fakt": "gotuje od 2004 r.",
+        "zdjecie": "szef",
+        "zgoda": true
+      },
+      {
+        "imie": "Anna Próbna",
+        "rola": "sala i rezerwacje, współwłaścicielka",
+        "fakt": null,
+        "zdjecie": null,
+        "zgoda": false
+      }
+    ]
+  },
+  "liczby": null,
+  "opinie": {
+    "naglowek": null,
+    "weryfikacja": "Cytujemy opinie z serwisu Mapy (test); nie sprawdzamy, czy autor był naszym gościem.",
+    "pozycje": [
+      {
+        "tekst": "Testowa opinia: żurek gorący, obsługa szybka, stolik czekał mimo spóźnienia.",
+        "autor": "Marta",
+        "miejscowosc": "Testowo",
+        "data": "2026-08-22",
+        "url": "https://mapy.example/restauracja-testowa/opinie/1"
+      },
+      {
+        "tekst": "Testowa opinia: pierogi jak u babci, ceny w porządku.",
+        "autor": "Piotr K.",
+        "miejscowosc": null,
+        "data": "2026-07-18",
+        "url": "https://mapy.example/restauracja-testowa/opinie/2"
+      }
+    ]
+  },
+  "certyfikaty": null,
+  "faq": {
+    "naglowek": null,
+    "pozycje": [
+      {
+        "pytanie": "Czy można zamówić na wynos?",
+        "odpowiedz": "Tak, każde danie z karty. Pojemnik **2 zł**."
+      },
+      {
+        "pytanie": "Czy jest menu dla dzieci?",
+        "odpowiedz": "Porcje dziecięce za pół ceny:\n\n- pomidorowa\n- pierogi\n- placki"
+      },
+      {
+        "pytanie": "Gdzie zaparkować?",
+        "odpowiedz": "Na podwórzu (4 miejsca) albo przy [ul. Próbnej](/kontakt)."
+      }
+    ]
+  },
+  "galeria": {
+    "naglowek": null,
+    "zdjecia": [
+      "zupa",
+      "pierogi",
+      "ogrod",
+      "bar",
+      "kuchnia",
+      "deser",
+      "wejscie"
+    ]
+  },
+  "do_pobrania": null,
+  "kariera": {
+    "naglowek": null,
+    "wstep": "Szukamy osób do kuchni i na salę (oferty testowe).",
+    "kontakt": null,
+    "pozycje": [
+      {
+        "stanowisko": "Kucharz / kucharka",
+        "miejsce": "Testowo",
+        "wymiar": "pełny etat",
+        "wynagrodzenie": "6500–7500 zł brutto",
+        "opis": "Kuchnia polska, praca od wtorku do soboty.",
+        "wazne_do": "2026-11-30",
+        "opublikowano": "2026-09-21"
+      },
+      {
+        "stanowisko": "Kelner / kelnerka (weekendy)",
+        "miejsce": "Testowo",
+        "wymiar": "umowa zlecenie",
+        "wynagrodzenie": null,
+        "opis": "Oferta wygasła — nie może się pokazać.",
+        "wazne_do": "2026-08-31",
+        "opublikowano": "2026-07-03"
+      }
+    ]
+  },
+  "wspolpraca": null,
+  "gdzie_kupic": null,
+  "kontakt": {
+    "naglowek": null,
+    "wstep": null
+  }
+}

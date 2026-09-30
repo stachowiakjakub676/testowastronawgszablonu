@@ -1,0 +1,91 @@
+/* 16 — godziny (sekcja użytkowa, section--sm): tabela z kolumną na zestaw; dziś (.is-dzis) — tło marki, pogrubienie
+   i „dziś” (widać też bez kolorów); < 600 px skrócone dni. Obok (≥ 960): zmiany godzin i uwagi. Ogłoszenie: pasek pod hero. */
+
+/* ---------- godziny ---------- */
+.otwarcie__status { font-size: var(--fs-lead); }
+.otwarcie__siatka { display: grid; gap: var(--s-7); }
+
+.otwarcie__tabela { width: 100%; font-variant-numeric: tabular-nums; border-top: 1px solid var(--tekst); }
+.otwarcie__tabela th, .otwarcie__tabela td {
+  padding: var(--s-3) var(--s-3); text-align: left; vertical-align: top;
+  border-bottom: 1px solid var(--linia); font-weight: var(--fw-tekst);
+}
+.otwarcie__tabela tbody th { padding-right: var(--s-5); }
+.otwarcie__tabela thead th {
+  padding-block: var(--s-3); font-weight: var(--fw-mocna); color: var(--tekst); border-bottom-color: var(--tekst);
+}
+/* jeden zestaw: dzień po lewej, godziny do prawej krawędzi — czyta się jak rozkład */
+.otwarcie__tabela:not(.otwarcie__tabela--kilka) td { text-align: right; }
+.otwarcie__tabela td.is-zamkniete { color: var(--tekst-2); }
+.otwarcie__tabela tr.is-dzis th, .otwarcie__tabela tr.is-dzis td {
+  background: var(--marka-jasna); color: var(--tekst); font-weight: var(--fw-mocna);
+}
+.otwarcie__tabela tr.is-dzis th::after {
+  content: " – dziś"; font-weight: var(--fw-tekst); color: var(--tekst-2);
+}
+.otwarcie__dzien-krotki { display: none; }
+
+/* kilka kolumn na wąskim ekranie: skrócone dni i mniejsze odstępy (dwa przedziały łamią się po przecinku) */
+@media (max-width: 599px) {
+  .otwarcie__tabela--kilka { font-size: var(--fs-maly); }
+  .otwarcie__tabela--kilka th, .otwarcie__tabela--kilka td { padding-inline: var(--s-2); }
+  .otwarcie__tabela--kilka .otwarcie__dzien {
+    position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+  }
+  .otwarcie__tabela--kilka .otwarcie__dzien-krotki { display: inline; }
+  .otwarcie__tabela--kilka .nowrap { white-space: normal; }   /* trzy kolumny godzin: „10:00–” / „16:00” */
+  .otwarcie__tabela--kilka tr.is-dzis th::after { content: none; }
+}
+
+.otwarcie__h { font-size: 1.25rem; line-height: 1.25; margin-bottom: var(--s-4); }
+.otwarcie__wyjatki { border-top: 1px solid var(--tekst); }
+.otwarcie__wyjatek {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s-4);
+  padding-block: var(--s-3); border-bottom: 1px solid var(--linia);
+}
+.otwarcie__kiedy { display: grid; gap: 2px; }
+.otwarcie__kiedy time { font-weight: var(--fw-mocna); }
+.otwarcie__opis { color: var(--tekst-2); }
+.otwarcie__godz { font-variant-numeric: tabular-nums; white-space: nowrap; text-align: right; }
+.otwarcie__godz.is-zamkniete { color: var(--tekst-2); }
+.otwarcie__uwagi { color: var(--tekst-2); max-width: 44ch; }
+.otwarcie__dodatek { max-width: 36rem; }
+.otwarcie__wyjatki + .otwarcie__uwagi { margin-top: var(--s-5); }
+
+@media (min-width: 960px) {
+  .otwarcie__siatka { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--s-6); align-items: start; }
+  .otwarcie__tabela { grid-column: 1 / 7; }
+  .otwarcie__siatka--kilka .otwarcie__tabela { grid-column: 1 / 8; }
+  .otwarcie__dodatek { grid-column: 8 / 13; max-width: none; }
+  .otwarcie__siatka--kilka .otwarcie__dodatek { grid-column: 9 / 13; }
+}
+
+/* ---------- ogłoszenie ---------- */
+.ogloszenie { padding-bottom: var(--s-6); }
+/* bez wypełnienia na całą szerokość (czytało się jak ogólny alert) — mocna linia nad tekstem, cienka pod nim
+   (bez kolorowego paska: lint_slop V-PASEK-BOCZNY) */
+.ogloszenie__pasek {
+  padding: var(--s-5) 0;
+  background: none; color: var(--tekst);
+  border-top: 2px solid var(--tekst); border-bottom: 1px solid var(--linia);
+}
+.ogloszenie__tekst {
+  max-width: 46ch;
+  font-family: var(--font-naglowki); font-weight: var(--fw-naglowki);
+  font-size: var(--fs-h3); line-height: 1.3; letter-spacing: -.005em; text-wrap: balance;
+}
+@media (min-width: 960px) {
+  .ogloszenie { padding-bottom: 0; }
+  .ogloszenie__pasek { padding: var(--s-6) 0; }
+}
+
+@media (forced-colors: active) {
+  .ogloszenie__pasek { border: 1px solid CanvasText; }
+  .otwarcie__tabela tr.is-dzis th, .otwarcie__tabela tr.is-dzis td { border-block: 2px solid CanvasText; }
+}
+@media print {
+  .ogloszenie__pasek { background: none; border: 1pt solid #000; padding: 8pt; }
+  .otwarcie__tabela tr.is-dzis th, .otwarcie__tabela tr.is-dzis td { background: none; }
+  .otwarcie__tabela tr.is-dzis th::after { content: none; }
+  .otwarcie__tabela tr { break-inside: avoid; }
+}

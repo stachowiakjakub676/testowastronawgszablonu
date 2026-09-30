@@ -1,0 +1,75 @@
+{# wymaga: tresc.cennik.grupy #}
+{# Cennik: tabele cen w grupach, cyfry tabelaryczne, cena wyrównana do prawej (KONTRAKT §4.2, critic §4.7).
+   Ceny brutto; "dla": "firmy" (tylko w branży z cennik_netto) — „Cena netto” w nagłówku kolumny i zdanie nad tabelami.
+   - tryb="skrot" (główna, gdy jest podstrona /oferta): po kilka pozycji z każdej grupy do limitu z presetu i link
+     „Pełny cennik (…)” do /oferta#cennik — tylko gdy coś zostało ukryte;
+   - pełna wersja: wszystkie grupy i plik PDF z typem i rozmiarem policzonymi w buildzie (uwagi — w obu wersjach). #}
+{% set pelny = tryb == "pelny" or not sekcja.strona %}
+{% if pelny %}
+{% set grupy = auto.cennik.grupy %}
+{% else %}
+{% set grupy = auto.cennik.skrot %}
+{% endif %}
+{% if auto.cennik.netto %}
+{% set rodzaj = "netto" %}
+{% else %}
+{% set rodzaj = "brutto" %}
+{% endif %}
+<section class="section{% if sekcja.klasa %} {{ sekcja.klasa }}{% endif %} cennik" id="{{ sekcja.html_id }}" aria-labelledby="{% if bez_naglowka %}tytul-strony{% else %}cennik-h{% endif %}">
+  <div class="wrap">
+    {% if not bez_naglowka %}
+    <div class="section__head">
+      <h2 id="cennik-h">{{ sekcja.naglowek }}</h2>
+    </div>
+    {% endif %}
+    <div class="cennik__siatka">
+      <p class="cennik__meta">{% if auto.cennik.netto %}<strong>Ceny netto</strong> (bez VAT), dla firm.{% else %}Ceny brutto.{% endif %}{% if tresc.cennik.data %} Cennik z dnia <time datetime="{{ tresc.cennik.data | data_iso }}">{{ tresc.cennik.data | data }}</time>.{% endif %}</p>
+      <div class="cennik__grupy">
+        {% for g in grupy %}
+        <div class="cennik__grupa">
+          {% if g.nazwa %}
+          <h{{ hn }} class="cennik__h">{{ g.nazwa }}</h{{ hn }}>
+          {% endif %}
+          <table class="cennik__tabela">
+            <caption class="wizualnie-ukryte">{% if g.nazwa %}{{ g.nazwa }}{% else %}{{ sekcja.naglowek }}{% endif %}: ceny {{ rodzaj }}</caption>
+            <thead>
+              <tr>
+                <th scope="col"><span class="wizualnie-ukryte">Pozycja</span></th>
+                {% if g.ma_czas %}
+                <th scope="col" class="cennik__czas">Czas</th>
+                {% endif %}
+                <th scope="col" class="cennik__cena">Cena {{ rodzaj }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for p in g.pozycje %}
+              <tr>
+                <th scope="row"><span class="cennik__nazwa">{{ p.nazwa }}</span>{% if p.opis %} <span class="cennik__opis">{{ p.opis }}</span>{% endif %}{% if p.czas %} <span class="cennik__czas-waski">Czas: {{ p.czas }}</span>{% endif %}</th>
+                {% if g.ma_czas %}
+                <td class="cennik__czas">{% if p.czas %}{{ p.czas }}{% endif %}</td>
+                {% endif %}
+                <td class="cennik__cena">{% if p.cena != null %}{% include "czesci/cena.html" cena=p.cena jednostka=p.jednostka %}{% endif %}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% endfor %}
+        {# uwagi są częścią cen („robocizna bez materiałów”) — także w skrócie; PDF tylko w pełnej wersji #}
+        {% if tresc.cennik.uwagi or (pelny and auto.cennik.pdf) %}
+        <div class="cennik__dopiski">
+          {% if tresc.cennik.uwagi %}
+          <p class="cennik__uwagi">{{ tresc.cennik.uwagi }}</p>
+          {% endif %}
+          {% if pelny and auto.cennik.pdf %}
+          <p class="cennik__pdf"><a href="{{ auto.cennik.pdf.href | zasob }}">Cennik do pobrania ({{ auto.cennik.pdf.tekst }})</a></p>
+          {% endif %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% if not pelny and auto.cennik.wiecej %}
+    <p class="section__wiecej"><a href="{{ sekcja.strona | url }}#{{ sekcja.html_id }}">{{ auto.cennik.wiecej }}</a></p>
+    {% endif %}
+  </div>
+</section>

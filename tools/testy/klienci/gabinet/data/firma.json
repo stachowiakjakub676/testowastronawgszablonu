@@ -1,0 +1,217 @@
+{
+  "$schema": "../../../../../tools/schemat/firma.schema.json",
+  "$komentarz": "FIKSTURA TESTOWA — dane wymyślone (tools/testy/klienci/README.md). Nie kopiuj ich do strony klienta. Plik generuje tools/testy/klienci/generuj.py — zmiany wprowadzaj tam.",
+  "wersja_danych": 1,
+  "przyklad": true,
+  "branza": "gabinet",
+  "typ_schema": null,
+  "firma": {
+    "nazwa": "Gabinet Testowy",
+    "nazwa_prawna": "Gabinet Testowy Anna Testowa",
+    "opis": "Fikcyjny gabinet lekarski do testów szablonu: interna, pediatria i fizjoterapia w Testowie.",
+    "rok_zalozenia": 2012,
+    "domena": "https://gabinet-testowy.example",
+    "adres_roboczy": null
+  },
+  "kontakt": {
+    "telefon": "+48500000004",
+    "email": "rejestracja@gabinet-testowy.example",
+    "adres": {
+      "ulica": "ul. Testowa 4 lok. 2",
+      "kod": "00-004",
+      "miasto": "Testowo",
+      "wojewodztwo": "mazowieckie",
+      "kraj": "PL"
+    },
+    "geo": {
+      "lat": 52.24137,
+      "lng": 21.02219
+    },
+    "obszar_dzialania": null,
+    "dzialy": null,
+    "dojazd": "Wejście od podwórza, drugie piętro, winda.",
+    "dostepnosc_lokalu": "Winda, toaleta dla osób z niepełnosprawnością.",
+    "czas_odpowiedzi": null
+  },
+  "godziny": {
+    "nazwa": "Gabinet",
+    "tydzien": {
+      "pn": [
+        [
+          "08:00",
+          "12:00"
+        ],
+        [
+          "15:00",
+          "19:00"
+        ]
+      ],
+      "wt": [
+        [
+          "08:00",
+          "14:00"
+        ]
+      ],
+      "sr": [
+        [
+          "08:00",
+          "12:00"
+        ],
+        [
+          "15:00",
+          "19:00"
+        ]
+      ],
+      "cz": [
+        [
+          "12:00",
+          "20:00"
+        ]
+      ],
+      "pt": [
+        [
+          "08:00",
+          "14:00"
+        ]
+      ],
+      "sb": [],
+      "nd": []
+    },
+    "dodatkowe": [
+      {
+        "nazwa": "Rejestracja telefoniczna",
+        "tydzien": {
+          "pn": [
+            [
+              "07:30",
+              "19:00"
+            ]
+          ],
+          "wt": [
+            [
+              "07:30",
+              "14:00"
+            ]
+          ],
+          "sr": [
+            [
+              "07:30",
+              "19:00"
+            ]
+          ],
+          "cz": [
+            [
+              "11:00",
+              "20:00"
+            ]
+          ],
+          "pt": [
+            [
+              "07:30",
+              "14:00"
+            ]
+          ],
+          "sb": [],
+          "nd": []
+        }
+      }
+    ],
+    "wyjatki": [
+      {
+        "data": "2026-10-14",
+        "godziny": [],
+        "opis": "Szkolenie zespołu"
+      },
+      {
+        "data": "2026-12-24",
+        "godziny": [
+          [
+            "08:00",
+            "12:00"
+          ]
+        ],
+        "opis": "Wigilia"
+      }
+    ],
+    "uwagi": "Wizyty domowe po wcześniejszym uzgodnieniu (dane testowe).",
+    "pokazuj_status": true
+  },
+  "rejestr": {
+    "forma_prawna": "jdg",
+    "nip": "0000000046",
+    "regon": "000000046",
+    "krs": null,
+    "sad_rejestrowy": null,
+    "kapital_zakladowy": null,
+    "wlasciciel": "Anna Testowa",
+    "wspolnicy": null,
+    "samorzad_zawodowy": "Okręgowa Izba Lekarska w Testowie, nr prawa wykonywania zawodu 0000000 (test)"
+  },
+  "marka": {
+    "logo": "assets/img/logo.png",
+    "logo_na_ciemnym": null,
+    "logo_szerokosc": 130,
+    "kolor": "#7FC8C2",
+    "kolor_zrodlo": "fikstura testowa (tools/testy/klienci/generuj.py) — dane wymyślone",
+    "kolor_dodatkowy": null,
+    "tlo": "#FCFCFA",
+    "font_naglowki": "source-serif-4",
+    "font_tekst": "public-sans",
+    "promien": 2,
+    "sekcja_ciemna": "brak"
+  },
+  "seo": {
+    "fraza": "Gabinet lekarski",
+    "miasto": "Testowo",
+    "opis": "Gabinet Testowy w Testowie (dane fikcyjne): interna, pediatria i fizjoterapia, wizyty prywatne, cennik i godziny przyjęć."
+  },
+  "social": {
+    "facebook": null,
+    "instagram": null,
+    "google_maps": "https://mapy.example/gabinet-testowy",
+    "linkedin": null,
+    "youtube": null,
+    "tiktok": null
+  },
+  "funkcje": {
+    "hosting": "cloudflare",
+    "formularz": null,
+    "mapa": "link",
+    "statystyki_cf_token": null,
+    "tytul_tryb": "fraza",
+    "telefon_w_naglowku": null,
+    "etykiety_sekcji": false,
+    "animacje": "brak",
+    "myslnik": "polpauza",
+    "boty_ai": "blokuj_trening",
+    "hsts_subdomeny": false,
+    "hsts_preload": false,
+    "faq_schema": false,
+    "strona_dostepnosci": true,
+    "rss": false
+  },
+  "przekierowania": [
+    {
+      "z": "/cennik.php",
+      "do": "/oferta"
+    },
+    {
+      "z": "/zespol.html",
+      "do": "/o-firmie"
+    }
+  ],
+  "dostepnosc": {
+    "data_oceny": "2026-09-11",
+    "metoda": "samoocena",
+    "wykonawca": null,
+    "zgodnosc": "czesciowa",
+    "niedostepne": [
+      "Skan cennika w PDF nie ma warstwy tekstowej (dokument testowy)."
+    ]
+  },
+  "opinie_zbiorczo": null,
+  "zrodla": {
+    "firma": "fikstura testowa (tools/testy/klienci/generuj.py) — dane wymyślone"
+  },
+  "do_potwierdzenia": []
+}

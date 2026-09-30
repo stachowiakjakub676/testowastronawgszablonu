@@ -1,0 +1,40 @@
+{# wymaga: tresc.wspolpraca.tresc|tresc.wspolpraca.warunki #}
+{# Współpraca B2B (KONTRAKT §4.2): dla kogo i jak — tekst z data/tresc/*.md (tresc.wspolpraca.tresc), obok warunki
+   jako zwykła lista faktów (minimum zamówienia, terminy, próbki), pod spodem jedna akcja: e-mail z gotowym tematem
+   (albo /kontakt, gdy firma nie ma adresu). Telefonu tu nie powtarzamy — stoi w kontakcie i w stopce. #}
+<section class="section{% if sekcja.klasa %} {{ sekcja.klasa }}{% endif %} wspolpraca" id="{{ sekcja.html_id }}" aria-labelledby="{% if bez_naglowka %}tytul-strony{% else %}wspolpraca-h{% endif %}">
+  <div class="wrap{% if not bez_naglowka %} bok{% endif %}">
+    {% if not bez_naglowka %}
+    <div class="section__head">
+      <h2 id="wspolpraca-h">{{ sekcja.naglowek }}</h2>
+      {% if tresc.wspolpraca.wstep %}
+      <p class="section__lead">{{ tresc.wspolpraca.wstep }}</p>
+      {% endif %}
+    </div>
+    {% endif %}
+    <div class="wspolpraca__siatka{% if tresc.wspolpraca.tresc and tresc.wspolpraca.warunki %} wspolpraca__siatka--dwie{% endif %}">
+      {% if tresc.wspolpraca.tresc %}
+      <div class="wspolpraca__tresc prose">
+        {{ tresc.wspolpraca.tresc | md_plik:hn }}
+      </div>
+      {% endif %}
+      {% if tresc.wspolpraca.warunki %}
+      <div class="wspolpraca__warunki">
+        <h{{ hn }} class="wspolpraca__h">Warunki</h{{ hn }}>
+        <ul class="warunki">
+          {% for w in tresc.wspolpraca.warunki %}
+          <li class="warunki__poz">{{ w }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+    <p class="wspolpraca__akcja">
+      {% if auto.wspolpraca_mailto %}
+      <a class="btn btn--primary" href="{{ auto.wspolpraca_mailto | url }}">Napisz w sprawie współpracy</a>
+      {% else %}
+      <a class="btn btn--primary" href="{{ "/kontakt" | url }}">Kontakt w sprawie współpracy</a>
+      {% endif %}
+    </p>
+  </div>
+</section>

@@ -1,0 +1,265 @@
+{
+  "$schema": "../../../../../tools/schemat/firma.schema.json",
+  "$komentarz": "FIKSTURA TESTOWA — dane wymyślone (tools/testy/klienci/README.md). Nie kopiuj ich do strony klienta. Plik generuje tools/testy/klienci/generuj.py — zmiany wprowadzaj tam.",
+  "wersja_danych": 1,
+  "przyklad": true,
+  "branza": "restauracja",
+  "typ_schema": null,
+  "firma": {
+    "nazwa": "Restauracja Testowa",
+    "nazwa_prawna": "Restauracja Testowa",
+    "opis": "Fikcyjna restauracja do testów szablonu: kuchnia polska, obiady w tygodniu i kolacje do późna.",
+    "rok_zalozenia": 2015,
+    "domena": "https://restauracja-testowa.example",
+    "adres_roboczy": null
+  },
+  "kontakt": {
+    "telefon": "+48500000001",
+    "email": "stolik@restauracja-testowa.example",
+    "adres": {
+      "ulica": "ul. Testowa 1",
+      "kod": "00-001",
+      "miasto": "Testowo",
+      "wojewodztwo": "mazowieckie",
+      "kraj": "PL"
+    },
+    "geo": {
+      "lat": 52.23014,
+      "lng": 21.01127
+    },
+    "obszar_dzialania": null,
+    "dzialy": [
+      {
+        "nazwa": "Rezerwacje i przyjęcia",
+        "do_czego": "stoliki powyżej 8 osób, przyjęcia",
+        "telefon": "+48500000011",
+        "email": null,
+        "osoba": null
+      }
+    ],
+    "dojazd": "Wejście od ulicy Testowej, parking dla gości na podwórzu (4 miejsca).",
+    "dostepnosc_lokalu": "Wejście bez progu, toaleta dostosowana dla osób na wózku.",
+    "czas_odpowiedzi": null
+  },
+  "godziny": {
+    "nazwa": "Sala",
+    "tydzien": {
+      "pn": [],
+      "wt": [
+        [
+          "12:00",
+          "15:00"
+        ],
+        [
+          "17:00",
+          "22:00"
+        ]
+      ],
+      "sr": [
+        [
+          "12:00",
+          "15:00"
+        ],
+        [
+          "17:00",
+          "22:00"
+        ]
+      ],
+      "cz": [
+        [
+          "12:00",
+          "15:00"
+        ],
+        [
+          "17:00",
+          "22:00"
+        ]
+      ],
+      "pt": [
+        [
+          "12:00",
+          "15:00"
+        ],
+        [
+          "17:00",
+          "02:00"
+        ]
+      ],
+      "sb": [
+        [
+          "12:00",
+          "02:00"
+        ]
+      ],
+      "nd": [
+        [
+          "12:00",
+          "21:00"
+        ]
+      ]
+    },
+    "dodatkowe": [
+      {
+        "nazwa": "Kuchnia",
+        "tydzien": {
+          "pn": [],
+          "wt": [
+            [
+              "12:00",
+              "14:30"
+            ],
+            [
+              "17:00",
+              "21:30"
+            ]
+          ],
+          "sr": [
+            [
+              "12:00",
+              "14:30"
+            ],
+            [
+              "17:00",
+              "21:30"
+            ]
+          ],
+          "cz": [
+            [
+              "12:00",
+              "14:30"
+            ],
+            [
+              "17:00",
+              "21:30"
+            ]
+          ],
+          "pt": [
+            [
+              "12:00",
+              "14:30"
+            ],
+            [
+              "17:00",
+              "23:00"
+            ]
+          ],
+          "sb": [
+            [
+              "12:00",
+              "23:00"
+            ]
+          ],
+          "nd": [
+            [
+              "12:00",
+              "20:00"
+            ]
+          ]
+        }
+      }
+    ],
+    "wyjatki": [
+      {
+        "data": "2026-08-15",
+        "godziny": [],
+        "opis": "Wyjątek z przeszłości (test)"
+      },
+      {
+        "data": "2026-11-01",
+        "godziny": [],
+        "opis": "Wszystkich Świętych"
+      },
+      {
+        "data": "2026-11-11",
+        "godziny": [
+          [
+            "12:00",
+            "18:00"
+          ]
+        ],
+        "opis": "Święto Niepodległości"
+      },
+      {
+        "data": "2026-12-24",
+        "godziny": [],
+        "opis": "Wigilia"
+      }
+    ],
+    "uwagi": "Ostatnie zamówienia z kuchni przyjmujemy pół godziny przed jej zamknięciem.",
+    "pokazuj_status": true
+  },
+  "rejestr": {
+    "forma_prawna": "spolka_cywilna",
+    "nip": "0000000017",
+    "regon": "000000017",
+    "krs": null,
+    "sad_rejestrowy": null,
+    "kapital_zakladowy": null,
+    "wlasciciel": null,
+    "wspolnicy": [
+      "Jan Testowy",
+      "Anna Próbna"
+    ],
+    "samorzad_zawodowy": null
+  },
+  "marka": {
+    "logo": "assets/img/logo.png",
+    "logo_na_ciemnym": null,
+    "logo_szerokosc": 150,
+    "kolor": "#8A2E1F",
+    "kolor_zrodlo": "fikstura testowa (tools/testy/klienci/generuj.py) — dane wymyślone",
+    "kolor_dodatkowy": null,
+    "tlo": "cieple",
+    "font_naglowki": "newsreader",
+    "font_tekst": "source-serif-4",
+    "promien": 2,
+    "sekcja_ciemna": "stopka"
+  },
+  "seo": {
+    "fraza": "Restauracja testowa",
+    "miasto": "Testowo",
+    "opis": "Restauracja Testowa w Testowie (dane fikcyjne): obiady od wtorku do niedzieli, kolacje w piątek i sobotę do 2:00, karta i rezerwacje."
+  },
+  "social": {
+    "facebook": "https://www.facebook.example/restauracja-testowa",
+    "instagram": null,
+    "google_maps": "https://mapy.example/restauracja-testowa",
+    "linkedin": null,
+    "youtube": null,
+    "tiktok": null
+  },
+  "opinie_zbiorczo": {
+    "zrodlo": "Mapy (test)",
+    "ocena": 4.6,
+    "liczba": 128,
+    "data": "2026-09-15",
+    "url": "https://mapy.example/restauracja-testowa/opinie"
+  },
+  "funkcje": {
+    "hosting": "cloudflare",
+    "formularz": {
+      "tryb": "worker",
+      "adresat": null,
+      "zgoda_checkbox": false
+    },
+    "mapa": "po_kliknieciu",
+    "statystyki_cf_token": null,
+    "tytul_tryb": "fraza",
+    "telefon_w_naglowku": null,
+    "etykiety_sekcji": false,
+    "animacje": "brak",
+    "myslnik": "polpauza",
+    "boty_ai": "zezwol",
+    "hsts_subdomeny": false,
+    "hsts_preload": false,
+    "faq_schema": false,
+    "strona_dostepnosci": false,
+    "rss": true
+  },
+  "zrodla": {
+    "firma": "fikstura testowa (tools/testy/klienci/generuj.py) — dane wymyślone"
+  },
+  "do_potwierdzenia": [],
+  "przekierowania": null,
+  "dostepnosc": null
+}

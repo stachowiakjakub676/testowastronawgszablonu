@@ -1,0 +1,16 @@
+{# Tekst jednej realizacji (sekcje/realizacje.html): tytuł „{miejsce} – {typ}”, rok · parametr (· kategoria na /realizacje),
+   klient albo „Klient prywatny”; w pełnej wersji także opis i link do źródła. Zmienne: p (auto.realizacje.pozycje[…]),
+   pelny, hn. #}
+<h{{ hn }} class="realizacja__tytul">{{ p.tytul_pelny }}</h{{ hn }}>
+{% if p.rok or p.parametr or (pelny and p.kategoria_nazwa) %}
+<p class="realizacja__meta">{% if p.rok %}<span>{{ p.rok }}</span>{% endif %}{% if p.parametr %}<span>{{ p.parametr }}</span>{% endif %}{% if pelny and p.kategoria_nazwa %}<span>{{ p.kategoria_nazwa }}</span>{% endif %}</p>
+{% endif %}
+{% if p.klient_tekst %}
+<p class="realizacja__klient">{% if p.prywatna %}{{ p.klient_tekst }}{% else %}Klient: {{ p.klient_tekst }}{% endif %}</p>
+{% endif %}
+{% if pelny and p.opis %}
+<p class="realizacja__opis">{{ p.opis }}</p>
+{% endif %}
+{% if pelny and p.zrodlo_url %}
+<p class="realizacja__zrodlo"><a href="{{ p.zrodlo_url | url }}">Źródło: {{ p.zrodlo_host }}</a></p>
+{% endif %}

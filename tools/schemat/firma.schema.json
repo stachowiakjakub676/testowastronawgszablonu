@@ -1,0 +1,1361 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "firma.schema.json",
+  "title": "data/firma.json — kim jest firma (fakty i ustawienia)",
+  "description": "KONTRAKT §4.1. null = brak danych (element się nie pokazuje). Nieznane pole = błąd.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "$komentarz": {
+      "type": "string"
+    },
+    "wersja_danych": {
+      "const": 1
+    },
+    "przyklad": {
+      "type": "boolean"
+    },
+    "branza": {
+      "enum": [
+        "restauracja",
+        "budowlana",
+        "producent",
+        "uslugi",
+        "gabinet"
+      ]
+    },
+    "typ_schema": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "pattern": "^[A-Z][A-Za-z]+$",
+          "opis_formatu": "typ schema.org, np. RoofingContractor"
+        }
+      ]
+    },
+    "firma": {
+      "type": "object",
+      "properties": {
+        "nazwa": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 60
+            }
+          ]
+        },
+        "nazwa_prawna": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            }
+          ]
+        },
+        "opis": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 160
+            }
+          ]
+        },
+        "rok_zalozenia": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "integer",
+              "minimum": 1800,
+              "maximum": 2100
+            }
+          ]
+        },
+        "domena": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "pattern": "^https://[a-z0-9.-]+\\.[a-z]{2,}$",
+              "opis_formatu": "https://domena.pl bez „/” na końcu"
+            }
+          ]
+        },
+        "adres_roboczy": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "pattern": "^https://[a-z0-9.-]+\\.[a-z]{2,}$",
+              "opis_formatu": "https://nazwa.konto.workers.dev bez „/” na końcu"
+            }
+          ]
+        }
+      },
+      "required": [
+        "nazwa",
+        "nazwa_prawna",
+        "opis",
+        "rok_zalozenia",
+        "domena",
+        "adres_roboczy"
+      ],
+      "additionalProperties": false
+    },
+    "kontakt": {
+      "type": "object",
+      "properties": {
+        "telefon": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/telefon"
+            }
+          ]
+        },
+        "email": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/email"
+            }
+          ]
+        },
+        "adres": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "ulica": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  ]
+                },
+                "kod": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^\\d{2}-\\d{3}$",
+                      "opis_formatu": "NN-NNN"
+                    }
+                  ]
+                },
+                "miasto": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  ]
+                },
+                "wojewodztwo": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  ]
+                },
+                "kraj": {
+                  "type": "string",
+                  "pattern": "^[A-Z]{2}$"
+                }
+              },
+              "required": [
+                "ulica",
+                "kod",
+                "miasto",
+                "wojewodztwo",
+                "kraj"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "geo": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "lat": {
+                  "type": "number",
+                  "minimum": -90,
+                  "maximum": 90
+                },
+                "lng": {
+                  "type": "number",
+                  "minimum": -180,
+                  "maximum": 180
+                }
+              },
+              "required": [
+                "lat",
+                "lng"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "obszar_dzialania": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          ]
+        },
+        "dzialy": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "nazwa": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "do_czego": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    ]
+                  },
+                  "telefon": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "$ref": "#/$defs/telefon"
+                      }
+                    ]
+                  },
+                  "email": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "$ref": "#/$defs/email"
+                      }
+                    ]
+                  },
+                  "osoba": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "nazwa",
+                  "do_czego",
+                  "telefon",
+                  "email",
+                  "osoba"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            }
+          ]
+        },
+        "dojazd": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 400
+            }
+          ]
+        },
+        "dostepnosc_lokalu": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 400
+            }
+          ]
+        },
+        "czas_odpowiedzi": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            }
+          ]
+        }
+      },
+      "required": [
+        "telefon",
+        "email",
+        "adres",
+        "geo",
+        "obszar_dzialania",
+        "dzialy",
+        "dojazd",
+        "dostepnosc_lokalu",
+        "czas_odpowiedzi"
+      ],
+      "additionalProperties": false
+    },
+    "godziny": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "nazwa": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 40
+                }
+              ]
+            },
+            "tydzien": {
+              "$ref": "#/$defs/tydzien"
+            },
+            "dodatkowe": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "nazwa": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 40
+                      },
+                      "tydzien": {
+                        "$ref": "#/$defs/tydzien"
+                      }
+                    },
+                    "required": [
+                      "nazwa",
+                      "tydzien"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "minItems": 1
+                }
+              ]
+            },
+            "wyjatki": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/$defs/data"
+                  },
+                  "godziny": {
+                    "$ref": "#/$defs/dzien"
+                  },
+                  "opis": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 80
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "data",
+                  "godziny",
+                  "opis"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "uwagi": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                }
+              ]
+            },
+            "pokazuj_status": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "nazwa",
+            "tydzien",
+            "dodatkowe",
+            "wyjatki",
+            "uwagi",
+            "pokazuj_status"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "rejestr": {
+      "type": "object",
+      "properties": {
+        "forma_prawna": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "enum": [
+                "jdg",
+                "spolka_cywilna",
+                "sp_j",
+                "sp_k",
+                "sp_z_oo",
+                "sa",
+                "psa",
+                "inna",
+                "nieznana"
+              ]
+            }
+          ]
+        },
+        "nip": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "pattern": "^\\d{10}$",
+              "opis_formatu": "10 cyfr bez kresek"
+            }
+          ]
+        },
+        "regon": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "pattern": "^(\\d{9}|\\d{14})$",
+              "opis_formatu": "9 albo 14 cyfr"
+            }
+          ]
+        },
+        "krs": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "pattern": "^\\d{10}$",
+              "opis_formatu": "10 cyfr, np. 0000123456"
+            }
+          ]
+        },
+        "sad_rejestrowy": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "minLength": 1
+            }
+          ]
+        },
+        "kapital_zakladowy": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "number",
+              "minimum": 0
+            }
+          ]
+        },
+        "kapital_wplacony": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "number",
+              "minimum": 0
+            }
+          ],
+          "description": "tylko S.A.: kapitał wpłacony (art. 374 § 1 pkt 4 KSH) — z KRS"
+        },
+        "wlasciciel": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "minLength": 1
+            }
+          ]
+        },
+        "wspolnicy": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "minItems": 2
+            }
+          ]
+        },
+        "samorzad_zawodowy": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "minLength": 1
+            }
+          ]
+        },
+        "adres_siedziby": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "ulica": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "kod": {
+                  "type": "string",
+                  "pattern": "^\\d{2}-\\d{3}$",
+                  "opis_formatu": "NN-NNN"
+                },
+                "miasto": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "ulica",
+                "kod",
+                "miasto"
+              ],
+              "additionalProperties": false
+            }
+          ],
+          "description": "siedziba z KRS, gdy jest inna niż kontakt.adres (lokal) — stopka pokaże ją osobno"
+        }
+      },
+      "required": [
+        "forma_prawna",
+        "nip",
+        "regon",
+        "krs",
+        "sad_rejestrowy",
+        "kapital_zakladowy",
+        "wlasciciel",
+        "wspolnicy",
+        "samorzad_zawodowy"
+      ],
+      "additionalProperties": false
+    },
+    "marka": {
+      "type": "object",
+      "properties": {
+        "logo": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "minLength": 1
+            }
+          ]
+        },
+        "logo_na_ciemnym": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "minLength": 1
+            }
+          ]
+        },
+        "logo_szerokosc": {
+          "type": "integer",
+          "minimum": 40,
+          "maximum": 400
+        },
+        "kolor": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/kolor"
+            }
+          ]
+        },
+        "kolor_zrodlo": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "minLength": 1
+            }
+          ]
+        },
+        "kolor_dodatkowy": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/kolor"
+            }
+          ]
+        },
+        "tlo": {
+          "oneOf": [
+            {
+              "enum": [
+                "biale",
+                "cieple",
+                "chlodne"
+              ]
+            },
+            {
+              "$ref": "#/$defs/kolor"
+            }
+          ]
+        },
+        "font_naglowki": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/id_kroju"
+            }
+          ]
+        },
+        "font_tekst": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/id_kroju"
+            }
+          ]
+        },
+        "promien": {
+          "enum": [
+            0,
+            2,
+            4
+          ]
+        },
+        "sekcja_ciemna": {
+          "enum": [
+            "brak",
+            "stopka",
+            "kontakt"
+          ]
+        }
+      },
+      "required": [
+        "logo",
+        "logo_na_ciemnym",
+        "logo_szerokosc",
+        "kolor",
+        "kolor_zrodlo",
+        "kolor_dodatkowy",
+        "tlo",
+        "font_naglowki",
+        "font_tekst",
+        "promien",
+        "sekcja_ciemna"
+      ],
+      "additionalProperties": false
+    },
+    "seo": {
+      "type": "object",
+      "properties": {
+        "fraza": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 60
+            }
+          ]
+        },
+        "miasto": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 40
+            }
+          ]
+        },
+        "opis": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 170
+            }
+          ]
+        }
+      },
+      "required": [
+        "fraza",
+        "miasto",
+        "opis"
+      ],
+      "additionalProperties": false
+    },
+    "social": {
+      "type": "object",
+      "properties": {
+        "facebook": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/https"
+            }
+          ]
+        },
+        "instagram": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/https"
+            }
+          ]
+        },
+        "google_maps": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/https"
+            }
+          ]
+        },
+        "linkedin": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/https"
+            }
+          ]
+        },
+        "youtube": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/https"
+            }
+          ]
+        },
+        "tiktok": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/https"
+            }
+          ]
+        }
+      },
+      "required": [
+        "facebook",
+        "instagram",
+        "google_maps",
+        "linkedin",
+        "youtube",
+        "tiktok"
+      ],
+      "additionalProperties": false
+    },
+    "opinie_zbiorczo": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "zrodlo": {
+              "type": "string",
+              "minLength": 1
+            },
+            "ocena": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 5
+            },
+            "liczba": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "data": {
+              "$ref": "#/$defs/data"
+            },
+            "url": {
+              "$ref": "#/$defs/https"
+            }
+          },
+          "required": [
+            "zrodlo",
+            "ocena",
+            "liczba",
+            "data",
+            "url"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "funkcje": {
+      "type": "object",
+      "properties": {
+        "hosting": {
+          "enum": [
+            "cloudflare",
+            "github_pages"
+          ],
+          "description": "gdzie stoi strona: cloudflare (Workers, _headers, formularz worker) | github_pages (bez _headers i Workera); opisuje to polityka prywatności"
+        },
+        "formularz": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "tryb": {
+                  "enum": [
+                    "mailto",
+                    "worker"
+                  ]
+                },
+                "adresat": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#/$defs/email"
+                    }
+                  ]
+                },
+                "zgoda_checkbox": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "tryb",
+                "adresat",
+                "zgoda_checkbox"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "mapa": {
+          "enum": [
+            "link",
+            "po_kliknieciu"
+          ]
+        },
+        "statystyki_cf_token": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "pattern": "^[a-f0-9]{32}$"
+            }
+          ]
+        },
+        "tytul_tryb": {
+          "enum": [
+            "fraza",
+            "marka"
+          ]
+        },
+        "telefon_w_naglowku": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "etykiety_sekcji": {
+          "type": "boolean"
+        },
+        "animacje": {
+          "enum": [
+            "brak",
+            "wejscie"
+          ]
+        },
+        "myslnik": {
+          "enum": [
+            "polpauza",
+            "pauza"
+          ]
+        },
+        "boty_ai": {
+          "enum": [
+            "zezwol",
+            "blokuj_trening"
+          ]
+        },
+        "hsts_subdomeny": {
+          "type": "boolean"
+        },
+        "hsts_preload": {
+          "type": "boolean"
+        },
+        "faq_schema": {
+          "type": "boolean"
+        },
+        "strona_dostepnosci": {
+          "type": "boolean"
+        },
+        "rss": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "hosting",
+        "formularz",
+        "mapa",
+        "statystyki_cf_token",
+        "tytul_tryb",
+        "telefon_w_naglowku",
+        "etykiety_sekcji",
+        "animacje",
+        "myslnik",
+        "boty_ai",
+        "hsts_subdomeny",
+        "hsts_preload",
+        "faq_schema",
+        "strona_dostepnosci",
+        "rss"
+      ],
+      "additionalProperties": false
+    },
+    "zrodla": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "ścieżka pola → skąd wiemy (źródło + data), np. \"kontakt.telefon\": \"baner na Facebooku, 2026-09-29\""
+    },
+    "do_potwierdzenia": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "przekierowania": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "z": {
+                "type": "string",
+                "pattern": "^/[^\\s#?*]*$",
+                "opis_formatu": "stara ścieżka na tej domenie, np. /oferta.php albo /stara-strona/"
+              },
+              "do": {
+                "type": "string",
+                "pattern": "^(/[^\\s]*|https://[^\\s]+)$",
+                "opis_formatu": "nowa ścieżka (/kontakt) albo pełny adres https://…"
+              }
+            },
+            "required": [
+              "z",
+              "do"
+            ],
+            "additionalProperties": false
+          }
+        }
+      ],
+      "description": "przekierowania 301 ze starych adresów (dawna strona) → dist/_redirects; przekierowanie domeny (www) ustawia się w Cloudflare (docs/CLOUDFLARE.md)"
+    },
+    "dostepnosc": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data_oceny": {
+              "$ref": "#/$defs/data"
+            },
+            "metoda": {
+              "enum": [
+                "samoocena",
+                "audyt"
+              ]
+            },
+            "wykonawca": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                }
+              ]
+            },
+            "zgodnosc": {
+              "enum": [
+                "pelna",
+                "czesciowa"
+              ]
+            },
+            "niedostepne": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 400
+                  }
+                }
+              ]
+            }
+          },
+          "required": [
+            "data_oceny",
+            "metoda",
+            "wykonawca",
+            "zgodnosc",
+            "niedostepne"
+          ],
+          "additionalProperties": false
+        }
+      ],
+      "description": "wynik sprawdzenia dostępności strony (funkcje.strona_dostepnosci) — /dostepnosc; null = strona opisuje tylko rozwiązania i kontakt, bez deklaracji zgodności"
+    }
+  },
+  "$defs": {
+    "id_zdjecia": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "opis_formatu": "id z data/zdjecia.json: małe litery, cyfry, myślnik"
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "opis_formatu": "małe litery, cyfry, myślnik"
+    },
+    "data": {
+      "type": "string",
+      "format": "date"
+    },
+    "https": {
+      "type": "string",
+      "pattern": "^https://[^\\s]+$",
+      "opis_formatu": "pełny adres https://…"
+    },
+    "telefon": {
+      "type": "string",
+      "pattern": "^\\+[1-9]\\d{7,14}$",
+      "opis_formatu": "E.164 bez spacji, np. +48672683408"
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "cena": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "number",
+          "minimum": 0
+        },
+        {
+          "type": "object",
+          "properties": {
+            "od": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "number",
+                  "minimum": 0
+                }
+              ]
+            },
+            "do": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "number",
+                  "minimum": 0
+                }
+              ]
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "godzina": {
+      "type": "string",
+      "pattern": "^(([01]\\d|2[0-3]):[0-5]\\d|24:00)$",
+      "opis_formatu": "GG:MM, np. 07:00"
+    },
+    "przedzial": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/godzina"
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "dzien": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/przedzial"
+      },
+      "maxItems": 4
+    },
+    "tydzien": {
+      "type": "object",
+      "properties": {
+        "pn": {
+          "$ref": "#/$defs/dzien"
+        },
+        "wt": {
+          "$ref": "#/$defs/dzien"
+        },
+        "sr": {
+          "$ref": "#/$defs/dzien"
+        },
+        "cz": {
+          "$ref": "#/$defs/dzien"
+        },
+        "pt": {
+          "$ref": "#/$defs/dzien"
+        },
+        "sb": {
+          "$ref": "#/$defs/dzien"
+        },
+        "nd": {
+          "$ref": "#/$defs/dzien"
+        }
+      },
+      "required": [
+        "pn",
+        "wt",
+        "sr",
+        "cz",
+        "pt",
+        "sb",
+        "nd"
+      ],
+      "additionalProperties": false,
+      "description": "[] = zamknięte; kilka przedziałów: [[\"12:00\",\"15:00\"],[\"18:00\",\"22:00\"]]; koniec po północy, np. [\"18:00\",\"02:00\"]"
+    },
+    "kolor": {
+      "type": "string",
+      "pattern": "^#[0-9A-Fa-f]{6}$",
+      "opis_formatu": "#RRGGBB"
+    },
+    "id_kroju": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "opis_formatu": "id z assets/fonts/fonty.json"
+    }
+  },
+  "required": [
+    "wersja_danych",
+    "przyklad",
+    "branza",
+    "typ_schema",
+    "firma",
+    "kontakt",
+    "godziny",
+    "rejestr",
+    "marka",
+    "seo",
+    "social",
+    "opinie_zbiorczo",
+    "funkcje",
+    "zrodla",
+    "do_potwierdzenia",
+    "przekierowania",
+    "dostepnosc"
+  ]
+}

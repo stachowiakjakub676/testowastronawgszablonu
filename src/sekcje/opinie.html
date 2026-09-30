@@ -1,0 +1,46 @@
+{# wymaga: tresc.opinie.weryfikacja, auto.opinie|firma.opinie_zbiorczo #}
+{# Opinie (critic §4.7, §4.8, §5.1 p. 13): ocena zbiorcza z serwisu z datą i linkiem („4,8 na 5 w Google, 212 opinii,
+   stan na 29.09.2026”), do trzech cytatów dosłownie (imię, miejscowość, link do źródła) i zawsze zdanie o tym, czy i jak
+   firma sprawdza, że opinie pochodzą od klientów (Omnibus — tresc.opinie.weryfikacja, kontrola w dane.py).
+   Bez gwiazdek, karuzeli i aggregateRating w JSON-LD (Google nie pokazuje ocen wystawionych sobie). #}
+{% set oz = firma.opinie_zbiorczo %}
+<section class="section{% if sekcja.klasa %} {{ sekcja.klasa }}{% endif %} opinie" id="{{ sekcja.html_id }}" aria-labelledby="{% if bez_naglowka %}tytul-strony{% else %}opinie-h{% endif %}">
+  <div class="wrap">
+    {% if not bez_naglowka %}
+    <div class="section__head">
+      <h2 id="opinie-h">{{ sekcja.naglowek }}</h2>
+    </div>
+    {% endif %}
+    <div class="opinie__siatka{% if not oz %} opinie__siatka--bez-oceny{% endif %}">
+      {% if oz %}
+      <div class="opinie__zbiorczo">
+        <p class="opinie__ocena"><span class="opinie__liczba">{{ oz.ocena }}</span> <span class="opinie__skala">na 5</span></p>
+        <p class="opinie__opis">Średnia z {{ oz.liczba | liczba }} opinii w serwisie {{ oz.zrodlo }}, stan na {{ oz.data | data_krotka }}.</p>
+        <p class="opinie__link"><a href="{{ oz.url | url }}">Wszystkie opinie w serwisie {{ oz.zrodlo }}</a></p>
+      </div>
+      {% endif %}
+      {% if auto.opinie %}
+      <ul class="opinie__lista">
+        {% for o in auto.opinie %}
+        <li class="opinie__poz">
+          <figure>
+            <blockquote class="opinie__cytat"{% if o.url %} cite="{{ o.url | url }}"{% endif %}>
+              <p>„{{ o.tekst }}”</p>
+            </blockquote>
+            <figcaption class="opinie__autor">
+              <span class="opinie__kto">{{ o.autor }}{% if o.miejscowosc %}, {{ o.miejscowosc }}{% endif %}</span>
+              {% if o.url %}
+              <a href="{{ o.url | url }}">opinia w serwisie {{ o.serwis }}{% if o.data %}, {{ o.data | data_krotka }}{% endif %}</a>
+              {% elif o.data %}
+              <span>{{ o.data | data_krotka }}</span>
+              {% endif %}
+            </figcaption>
+          </figure>
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+    <p class="opinie__weryfikacja">{{ tresc.opinie.weryfikacja }}</p>
+  </div>
+</section>

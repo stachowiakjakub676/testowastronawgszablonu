@@ -1,0 +1,57 @@
+{
+  "warsztat": {
+    "szer": 1920,
+    "wys": 1280,
+    "szerokosci": [
+      480,
+      960,
+      1440,
+      1920
+    ],
+    "formaty": [
+      "avif",
+      "webp",
+      "jpg"
+    ]
+  },
+  "naprawa": {
+    "szer": 1440,
+    "wys": 960,
+    "szerokosci": [
+      480,
+      960,
+      1440
+    ],
+    "formaty": [
+      "avif",
+      "webp",
+      "jpg"
+    ]
+  },
+  "osoba-a": {
+    "szer": 960,
+    "wys": 1200,
+    "szerokosci": [
+      480,
+      960
+    ],
+    "formaty": [
+      "avif",
+      "webp",
+      "jpg"
+    ]
+  },
+  "osoba-b": {
+    "szer": 960,
+    "wys": 1200,
+    "szerokosci": [
+      480,
+      960
+    ],
+    "formaty": [
+      "avif",
+      "webp",
+      "jpg"
+    ]
+  }
+}

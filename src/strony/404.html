@@ -1,0 +1,14 @@
+{# strona: sciezka="/404" tytul="Nie ma takiej strony" indeksuj="nie" #}
+{# Serwer podaje tę stronę ze statusem 404 pod dowolnym adresem — linki muszą być od korzenia („/…”). #}
+<section class="section blad-404" aria-labelledby="tytul-strony">
+  <div class="wrap">
+    <h1 id="tytul-strony">Nie ma takiej strony</h1>
+    <p class="lead">Adres mógł się zmienić albo zawierać literówkę.{% if auto.tel_href %} Jeśli czegoś szukasz, zadzwoń: <a class="tel" href="{{ auto.tel_href | url }}">{{ auto.telefon_krajowy }}</a>.{% endif %}</p>
+    <ul class="lista-linkow">
+      <li><a href="{{ "/" | url }}">Strona główna</a></li>
+      {% for n in nav | pierwsze:3 %}
+      <li><a href="{{ n.href | url }}">{{ n.etykieta }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,23 @@
+/* 89 — dokumenty: polityka prywatności i informacja o dostępności. Tekst w kolumnie 65 znaków; od 960 px po lewej
+   spis treści (polityka) albo krótkie fakty w <dl> (dostępność), przyklejone przy przewijaniu. Bez ramek i tła —
+   tylko linia 1 px nad spisem, jak nad nagłówkami sekcji. */
+.dokument__siatka { display: grid; gap: var(--s-7); }
+.dokument__spis ul { list-style: none; padding: 0; display: grid; gap: var(--s-2); }
+.dokument__spis, .dokument__fakty { border-top: 1px solid var(--tekst); padding-top: var(--s-4); }
+.dokument__spis a { color: var(--tekst-2); text-decoration-color: var(--linia-mocna); }
+.dokument__spis a:hover { color: var(--tekst); }
+.dokument__fakty { display: grid; gap: var(--s-4); }
+.dokument__fakty dt { font-size: var(--fs-maly); color: var(--tekst-2); }
+.dokument__fakty dd { font-size: var(--fs-lead); font-weight: var(--fw-mocna); font-variant-numeric: tabular-nums; }
+.dokument__tresc h2 { scroll-margin-top: calc(var(--header-h) + var(--s-5)); }
+.dokument__tresc > h2:first-child { margin-top: 0; }
+.dokument__stan { margin-top: var(--s-7); padding-top: var(--s-4); border-top: 1px solid var(--linia); }
+@media (max-width: 959px) {
+  .dokument__spis ul { grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr)); gap: var(--s-2) var(--s-5); }
+  .dokument__siatka { gap: var(--s-6); }
+}
+@media (min-width: 960px) {
+  .dokument__siatka { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--s-6); align-items: start; }
+  .dokument__spis, .dokument__fakty { grid-column: 1 / 4; position: sticky; top: calc(var(--header-h) + var(--s-5)); }
+  .dokument__tresc { grid-column: 5 / 12; }
+}

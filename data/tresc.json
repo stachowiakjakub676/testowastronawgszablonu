@@ -1,0 +1,37 @@
+{
+  "$schema": "../tools/schemat/tresc.schema.json",
+  "$komentarz": "Sekcje strony głównej dla branży „uslugi” (kolejność z presetu): hero, ogloszenie, oferta, cennik, proces, zasady, zespol, opinie, aktualnosci, godziny, faq, kontakt. Blok null = sekcja się nie pokazuje. Wypełniaj tylko prawdziwą treścią od firmy. Struktura bloków: docs/KONTRAKT.md §4.2.",
+  "wersja_danych": 1,
+  "hero": {
+    "naglowek": null,
+    "lead": null,
+    "zdjecie": null,
+    "podpis": null,
+    "cta_glowne": null,
+    "cta_drugie": null
+  },
+  "ogloszenie": null,
+  "oferta": null,
+  "cennik": null,
+  "menu": null,
+  "produkty": null,
+  "realizacje": null,
+  "przetargi": null,
+  "proces": null,
+  "zasady": null,
+  "o_firmie": null,
+  "zespol": null,
+  "liczby": null,
+  "opinie": null,
+  "certyfikaty": null,
+  "faq": null,
+  "galeria": null,
+  "do_pobrania": null,
+  "kariera": null,
+  "wspolpraca": null,
+  "gdzie_kupic": null,
+  "kontakt": {
+    "naglowek": null,
+    "wstep": null
+  }
+}

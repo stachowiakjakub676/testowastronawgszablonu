@@ -1,0 +1,9 @@
+{# strona: sciezka="/blad" tytul="Nie udało się wysłać wiadomości" indeksuj="nie" #}
+{# Tu Worker przekierowuje (303), gdy wysyłka bez JavaScriptu się nie udała. #}
+<section class="section" aria-labelledby="tytul-strony">
+  <div class="wrap">
+    <h1 id="tytul-strony">Nie udało się wysłać wiadomości</h1>
+    <p class="lead">Spróbuj ponownie za chwilę{% if firma.kontakt.email %} albo napisz bezpośrednio na <a href="{{ auto.email_href | url }}">{{ firma.kontakt.email }}</a>{% endif %}{% if auto.tel_href %}. Telefon: <a class="tel" href="{{ auto.tel_href | url }}">{{ auto.telefon_krajowy }}</a>{% endif %}.</p>
+    <p><a class="btn btn--secondary" href="{{ "/kontakt" | url }}">Wróć do kontaktu</a></p>
+  </div>
+</section>

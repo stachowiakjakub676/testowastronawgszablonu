@@ -1,0 +1,71 @@
+{
+  "wytwornia": {
+    "szer": 1174,
+    "wys": 931,
+    "szerokosci": [
+      480,
+      960,
+      1174
+    ],
+    "formaty": [
+      "avif",
+      "webp",
+      "jpg"
+    ]
+  },
+  "walec": {
+    "szer": 1096,
+    "wys": 453,
+    "szerokosci": [
+      480,
+      960,
+      1096
+    ],
+    "formaty": [
+      "avif",
+      "webp",
+      "jpg"
+    ]
+  },
+  "betonomieszarka": {
+    "szer": 850,
+    "wys": 830,
+    "szerokosci": [
+      480,
+      850
+    ],
+    "formaty": [
+      "avif",
+      "webp",
+      "jpg"
+    ]
+  },
+  "droga": {
+    "szer": 1030,
+    "wys": 273,
+    "szerokosci": [
+      480,
+      960
+    ],
+    "formaty": [
+      "avif",
+      "webp",
+      "jpg"
+    ]
+  },
+  "wytwornia-panorama": {
+    "szer": 1800,
+    "wys": 387,
+    "szerokosci": [
+      480,
+      960,
+      1440,
+      1800
+    ],
+    "formaty": [
+      "avif",
+      "webp",
+      "jpg"
+    ]
+  }
+}

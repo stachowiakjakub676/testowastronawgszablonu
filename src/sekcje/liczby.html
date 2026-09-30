@@ -1,0 +1,22 @@
+{# wymaga: auto.liczby #}
+{# Liczby (critic §5.1 p. 12, ai-slop V-PASEK-STATYSTYK): fakty liczbowe jako <dl> w wierszach — wartość, co znaczy,
+   skąd jest i na kiedy („Źródło: BZP, stan na 29.09.2026”, widoczne, nie w dymku). Bez „500+”, bez animacji liczenia.
+   auto.liczby = null, gdy pozycji jest mniej niż dwie — wtedy sekcja nie powstaje. #}
+<section class="section{% if sekcja.klasa %} {{ sekcja.klasa }}{% endif %} liczby" id="{{ sekcja.html_id }}" aria-labelledby="{% if bez_naglowka %}tytul-strony{% else %}liczby-h{% endif %}">
+  <div class="wrap">
+    {% if not bez_naglowka %}
+    <div class="section__head">
+      <h2 id="liczby-h">{{ sekcja.naglowek }}</h2>
+    </div>
+    {% endif %}
+    <dl class="liczby__lista">
+      {% for p in auto.liczby %}
+      <div class="liczby__poz">
+        <dt class="liczby__opis">{{ p.opis }}</dt>
+        <dd class="liczby__wartosc">{{ p.wartosc_tekst }}{% if p.jednostka %} {{ p.jednostka }}{% endif %}</dd>
+        <dd class="liczby__zrodlo">Źródło: {{ p.zrodlo }}{% if p.data %}, stan na {{ p.data | data_krotka }}{% endif %}</dd>
+      </div>
+      {% endfor %}
+    </dl>
+  </div>
+</section>

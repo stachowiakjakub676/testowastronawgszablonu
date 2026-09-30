@@ -1,0 +1,33 @@
+/* 14 — proces: prawdziwa lista <ol>, numer to ::marker wiszący po lewej (jak w instrukcji), wiersze rozdziela
+   linia 1 px. Numer ma rozmiar nazwy kroku, nie nagłówka sekcji — to instrukcja, nie „jak to działa 1-2-3”.
+   Od 960 px: nazwa kroku po lewej, opis i czas obok; krok bez opisu ma dwie kolumny (bez pustego środka),
+   a przy ≤ 4 krokach opis stoi pod nazwą. Czas/rezultat pogrubiony — nie podkreślony, bo podkreślenie na tej
+   stronie znaczy „link” (i bez kolorowej kreski z boku: lint_slop V-PASEK-BOCZNY). */
+ol.proces__kroki { list-style: decimal outside; padding-left: 2.5rem; }
+.proces__krok { padding-block: var(--s-5); border-bottom: 1px solid var(--linia); }
+.proces__krok:first-child { padding-top: 0; }
+.proces__krok::marker {
+  font-family: var(--font-naglowki); font-weight: var(--fw-naglowki); font-size: var(--fs-h3);
+  font-variant-numeric: tabular-nums; color: var(--marka-tekst);
+}
+.proces__nazwa { max-width: 26ch; }
+.proces__opis { margin-top: var(--s-2); color: var(--tekst-2); max-width: 52ch; }
+.proces__czas {
+  justify-self: start; margin-top: var(--s-3);
+  font-weight: var(--fw-mocna); font-variant-numeric: tabular-nums; color: var(--tekst); text-decoration: none;
+}
+.proces__wstep { margin-bottom: var(--s-7); }
+@media (min-width: 960px) {
+  ol.proces__kroki { padding-left: 3rem; }
+  .proces__krok { padding-block: var(--s-6); }
+  .proces__tresc { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 4fr) minmax(0, 2fr); column-gap: var(--s-6); align-items: baseline; }
+  .proces__opis { grid-column: 2; margin-top: 0; }
+  .proces__czas { grid-column: 3; margin-top: 0; }
+  .proces__tresc:not(:has(.proces__opis)) { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+  .proces__nazwa + .proces__czas { grid-column: 2; }
+  /* krótki proces (≤ 4 kroki): opis pod nazwą, czas obok — wiersz czyta się od lewej do prawej */
+  .proces__kroki--krotkie .proces__tresc { grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); }
+  .proces__kroki--krotkie .proces__nazwa { grid-column: 1; }
+  .proces__kroki--krotkie .proces__opis { grid-column: 1; margin-top: var(--s-2); }
+  .proces__kroki--krotkie .proces__czas, .proces__kroki--krotkie .proces__nazwa + .proces__czas { grid-column: 2; grid-row: 1; }
+}

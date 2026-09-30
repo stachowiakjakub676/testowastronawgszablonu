@@ -1,0 +1,10 @@
+{# strona: sciezka="/oferta" sekcja="oferta cennik" wymaga="tresc.oferta.pozycje|tresc.cennik.grupy" tytul="{% if auto.oferta %}{{ auto.oferta.naglowek }}{% else %}{{ tresc.cennik.naglowek | domyslnie:auto.naglowki.cennik }}{% endif %}" opis="{% if auto.oferta %}{{ auto.oferta.naglowek }} – {{ firma.firma.nazwa }}, {{ firma.seo.miasto }}: {{ auto.oferta.nazwy }}.{% if auto.cennik %} Cennik{% if tresc.cennik.data %} z dnia {{ tresc.cennik.data | data }}{% endif %}.{% endif %}{% else %}Cennik {{ firma.firma.nazwa }}, {{ firma.seo.miasto }}{% if tresc.cennik.data %}, z dnia {{ tresc.cennik.data | data }}{% endif %}.{% endif %}" wstep="{% if auto.oferta and tresc.oferta.wstep %}{{ tresc.oferta.wstep }}{% endif %}" #}
+{# Pełna oferta i cennik (KONTRAKT §6.1: powstaje, gdy oferta ma ≥ 4 pozycje albo jest cennik). h1 = nagłówek oferty
+   (albo cennika, gdy oferty nie ma); wstęp oferty stoi pod h1, więc sekcja go nie powtarza. #}
+{% include "czesci/naglowek-strony.html" %}
+{% if auto.oferta %}
+{% include "sekcje/oferta.html" tryb="pelny" bez_naglowka=true %}
+{% include "sekcje/cennik.html" tryb="pelny" %}
+{% else %}
+{% include "sekcje/cennik.html" tryb="pelny" bez_naglowka=true %}
+{% endif %}

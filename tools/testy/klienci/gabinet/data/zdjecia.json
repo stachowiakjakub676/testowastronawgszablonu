@@ -1,0 +1,96 @@
+{
+  "$schema": "../../../../../tools/schemat/zdjecia.schema.json",
+  "wersja_danych": 1,
+  "zdjecia": [
+    {
+      "id": "gabinet",
+      "zrodlo_plik": "brief/zdjecia/gabinet.jpg",
+      "alt": "Zdjęcie zastępcze: jednolite tło z napisem „zdjęcie testowe: gabinet”",
+      "podpis": null,
+      "zrodlo": "zdjęcie zastępcze wygenerowane przez tools/testy/klienci/generuj.py",
+      "autor": null,
+      "zgoda": null,
+      "osoby": false,
+      "punkt": [
+        0.5,
+        0.5
+      ],
+      "kadr_mobilny": null
+    },
+    {
+      "id": "poczekalnia",
+      "zrodlo_plik": "brief/zdjecia/poczekalnia.jpg",
+      "alt": "Zdjęcie zastępcze: jednolite tło z napisem „zdjęcie testowe: poczekalnia”",
+      "podpis": null,
+      "zrodlo": "zdjęcie zastępcze wygenerowane przez tools/testy/klienci/generuj.py",
+      "autor": null,
+      "zgoda": null,
+      "osoby": false,
+      "punkt": [
+        0.5,
+        0.5
+      ],
+      "kadr_mobilny": null
+    },
+    {
+      "id": "portret-1",
+      "zrodlo_plik": "brief/zdjecia/portret-1.jpg",
+      "alt": "Zdjęcie zastępcze: jednolite tło z napisem „zdjęcie testowe: portret 1”",
+      "podpis": null,
+      "zrodlo": "zdjęcie zastępcze wygenerowane przez tools/testy/klienci/generuj.py",
+      "autor": null,
+      "zgoda": true,
+      "osoby": true,
+      "punkt": [
+        0.5,
+        0.5
+      ],
+      "kadr_mobilny": null
+    },
+    {
+      "id": "portret-2",
+      "zrodlo_plik": "brief/zdjecia/portret-2.jpg",
+      "alt": "Zdjęcie zastępcze: jednolite tło z napisem „zdjęcie testowe: portret 2”",
+      "podpis": null,
+      "zrodlo": "zdjęcie zastępcze wygenerowane przez tools/testy/klienci/generuj.py",
+      "autor": null,
+      "zgoda": true,
+      "osoby": true,
+      "punkt": [
+        0.5,
+        0.5
+      ],
+      "kadr_mobilny": null
+    },
+    {
+      "id": "portret-3",
+      "zrodlo_plik": "brief/zdjecia/portret-3.jpg",
+      "alt": "Zdjęcie zastępcze: jednolite tło z napisem „zdjęcie testowe: portret 3”",
+      "podpis": null,
+      "zrodlo": "zdjęcie zastępcze wygenerowane przez tools/testy/klienci/generuj.py",
+      "autor": null,
+      "zgoda": true,
+      "osoby": true,
+      "punkt": [
+        0.5,
+        0.5
+      ],
+      "kadr_mobilny": null
+    },
+    {
+      "id": "portret-4",
+      "zrodlo_plik": "brief/zdjecia/portret-4.jpg",
+      "alt": "Zdjęcie zastępcze: jednolite tło z napisem „zdjęcie testowe: portret 4”",
+      "podpis": null,
+      "zrodlo": "zdjęcie zastępcze wygenerowane przez tools/testy/klienci/generuj.py",
+      "autor": null,
+      "zgoda": true,
+      "osoby": true,
+      "punkt": [
+        0.5,
+        0.5
+      ],
+      "kadr_mobilny": null
+    }
+  ]
+}

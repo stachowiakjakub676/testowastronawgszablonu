@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "zdjecia.schema.json",
+  "title": "data/zdjecia.json — manifest zdjęć",
+  "description": "KONTRAKT §4.3. Każde zdjęcie: skąd jest, kto zrobił, alt napisany po obejrzeniu zdjęcia.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "$komentarz": {
+      "type": "string"
+    },
+    "wersja_danych": {
+      "const": 1
+    },
+    "zdjecia": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/id_zdjecia"
+          },
+          "zrodlo_plik": {
+            "type": "string",
+            "minLength": 1
+          },
+          "alt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "maxLength": 0
+              },
+              {
+                "type": "string",
+                "minLength": 5,
+                "maxLength": 150
+              }
+            ]
+          },
+          "podpis": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 120
+              }
+            ]
+          },
+          "zrodlo": {
+            "type": "string",
+            "minLength": 1
+          },
+          "autor": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "string",
+                "minLength": 1
+              }
+            ]
+          },
+          "zgoda": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "boolean"
+              }
+            ]
+          },
+          "osoby": {
+            "type": "boolean"
+          },
+          "punkt": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "kadr_mobilny": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/$defs/id_zdjecia"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "zrodlo_plik",
+          "alt",
+          "podpis",
+          "zrodlo",
+          "autor",
+          "zgoda",
+          "osoby",
+          "punkt",
+          "kadr_mobilny"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "wersja_danych",
+    "zdjecia"
+  ],
+  "$defs": {
+    "id_zdjecia": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "opis_formatu": "id z data/zdjecia.json: małe litery, cyfry, myślnik"
+    }
+  }
+}

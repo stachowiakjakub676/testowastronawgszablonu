@@ -1,0 +1,8 @@
+{# strona: sciezka="/o-firmie" sekcja="o_firmie zespol liczby certyfikaty" wymaga="tresc.o_firmie|tresc.zespol.osoby" tytul="{{ preset.nav_etykiety.o_firmie | domyslnie:\"O firmie\" }}" h1="{{ tresc.o_firmie.naglowek | domyslnie:auto.naglowki.o_firmie }}" wstep="{{ tresc.o_firmie.wstep | domyslnie:\"\" }}" opis="{% if tresc.o_firmie.wstep %}{{ tresc.o_firmie.wstep }}{% else %}{{ firma.firma.opis }}{% endif %}" #}
+{# O firmie (KONTRAKT §6.1): powstaje, gdy tekst o_firmie ma > 250 słów albo zespół ≥ 4 osoby (strony.progi).
+   Pełny tekst i fakty, zespół, liczby ze źródłami i certyfikaty — każda część znika bez danych. #}
+{% include "czesci/naglowek-strony.html" %}
+{% include "sekcje/o_firmie.html" tryb="pelny" bez_naglowka=true %}
+{% include "sekcje/zespol.html" tryb="pelny" %}
+{% include "sekcje/liczby.html" tryb="pelny" %}
+{% include "sekcje/certyfikaty.html" tryb="pelny" %}

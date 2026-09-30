@@ -1,0 +1,36 @@
+// Publikacja na Cloudflare Workers (Workers Builds buduje i wdraża przy każdym pushu) — docs/CLOUDFLARE.md.
+// Na serwer trafia tylko dist/ (bez src/, tools/, data/, docs/). Worker (worker/index.js) obsługuje tylko /api/*:
+// formularz zapytania (docs/FORMULARZ.md) i nocny build (cron niżej).
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // Zmień na nazwę strony klienta (małe litery, cyfry, myślniki) — musi być taka sama jak nazwa Workera w Cloudflare.
+  "name": "strona-firmy",
+  "main": "worker/index.js",
+  "compatibility_date": "2025-09-01",
+  // Cloudflare buduje stronę przed wdrożeniem. --produkcja: ostrzeżenia klas B/C zatrzymują publikację.
+  "build": {
+    "command": "python3 tools/build.py --produkcja"
+  },
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    // Worker uruchamia się tylko dla /api/* — resztę Cloudflare serwuje bezpośrednio (z _headers i _redirects).
+    "run_worker_first": ["/api/*"],
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  // Formularz: 5 wiadomości na minutę z jednego adresu IP. namespace_id — dowolna liczba, inna dla każdej strony na koncie.
+  "ratelimits": [
+    { "name": "LIMIT_KONTAKT", "namespace_id": "1101", "simple": { "limit": 5, "period": 60 } }
+  ],
+  // Nocny build (czas UTC: 2:17 = 4:17 latem, 3:17 zimą w Polsce), żeby daty na stronie były aktualne.
+  // Działa po dodaniu sekretu DEPLOY_HOOK_URL; bez niego Worker tylko zapisuje informację w dzienniku.
+  "triggers": {
+    "crons": ["17 2 * * *"]
+  },
+  // Nie nadpisuj zmiennych i sekretów ustawionych w panelu Cloudflare (ADRESAT, NADAWCA, RESEND_API_KEY…).
+  "keep_vars": true,
+  // Dzienniki: tylko to, co Worker sam wypisuje (kody błędów wysyłki, bez treści i adresów IP). Dziennik wywołań
+  // (adres, metoda, nagłówki każdego zapytania do /api/*) wyłączony — polityka prywatności mówi, że go nie prowadzimy.
+  "observability": { "enabled": true, "logs": { "invocation_logs": false } }
+}

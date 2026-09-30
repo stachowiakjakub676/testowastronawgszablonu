@@ -1,0 +1,66 @@
+{
+  "$schema": "../../../../../tools/schemat/zdjecia.schema.json",
+  "wersja_danych": 1,
+  "zdjecia": [
+    {
+      "id": "warsztat",
+      "zrodlo_plik": "brief/zdjecia/warsztat.jpg",
+      "alt": "Zdjęcie zastępcze: jednolite tło z napisem „zdjęcie testowe: warsztat”",
+      "podpis": null,
+      "zrodlo": "zdjęcie zastępcze wygenerowane przez tools/testy/klienci/generuj.py",
+      "autor": null,
+      "zgoda": null,
+      "osoby": false,
+      "punkt": [
+        0.5,
+        0.5
+      ],
+      "kadr_mobilny": null
+    },
+    {
+      "id": "naprawa",
+      "zrodlo_plik": "brief/zdjecia/naprawa.jpg",
+      "alt": "Zdjęcie zastępcze: jednolite tło z napisem „zdjęcie testowe: naprawa”",
+      "podpis": null,
+      "zrodlo": "zdjęcie zastępcze wygenerowane przez tools/testy/klienci/generuj.py",
+      "autor": null,
+      "zgoda": null,
+      "osoby": false,
+      "punkt": [
+        0.5,
+        0.5
+      ],
+      "kadr_mobilny": null
+    },
+    {
+      "id": "osoba-a",
+      "zrodlo_plik": "brief/zdjecia/osoba-a.jpg",
+      "alt": "Zdjęcie zastępcze: jednolite tło z napisem „zdjęcie testowe: właścicielka”",
+      "podpis": null,
+      "zrodlo": "zdjęcie zastępcze wygenerowane przez tools/testy/klienci/generuj.py",
+      "autor": null,
+      "zgoda": true,
+      "osoby": true,
+      "punkt": [
+        0.5,
+        0.5
+      ],
+      "kadr_mobilny": null
+    },
+    {
+      "id": "osoba-b",
+      "zrodlo_plik": "brief/zdjecia/osoba-b.jpg",
+      "alt": "Zdjęcie zastępcze: jednolite tło z napisem „zdjęcie testowe: pracownik”",
+      "podpis": null,
+      "zrodlo": "zdjęcie zastępcze wygenerowane przez tools/testy/klienci/generuj.py",
+      "autor": null,
+      "zgoda": true,
+      "osoby": true,
+      "punkt": [
+        0.5,
+        0.5
+      ],
+      "kadr_mobilny": null
+    }
+  ]
+}

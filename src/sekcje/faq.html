@@ -1,0 +1,31 @@
+{# wymaga: tresc.faq.pozycje #}
+{# Pytania i odpowiedzi (critic §5.1 p. 18, web-smb-best U14): prawdziwe pytania klientów jako <details>/<summary> —
+   działa bez JS i z klawiatury (Tab, Enter/Spacja). Odpowiedź to Markdown (linki tel:, mailto:, /kontakt).
+   Sekcja nie ma podstrony, więc na głównej pokazuje wszystkie pytania; `limit` tnie listę tylko wtedy, gdy powstanie
+   podstrona z pełną wersją. FAQPage w JSON-LD tylko przy funkcje.faq_schema = true (jsonld.py). #}
+{% set pytania = tresc.faq.pozycje %}
+{% if tryb == "skrot" and sekcja.strona and limit %}
+{% set pytania = pytania | pierwsze:limit %}
+{% endif %}
+<section class="section{% if sekcja.klasa %} {{ sekcja.klasa }}{% endif %} faq" id="{{ sekcja.html_id }}" aria-labelledby="{% if bez_naglowka %}tytul-strony{% else %}faq-h{% endif %}">
+  <div class="wrap faq__siatka">
+    {% if not bez_naglowka %}
+    <div class="section__head faq__head">
+      <h2 id="faq-h">{{ sekcja.naglowek }}</h2>
+    </div>
+    {% endif %}
+    <div class="faq__lista">
+      {% for p in pytania %}
+      <details class="faq__poz">
+        <summary class="faq__pytanie">{{ p.pytanie }}</summary>
+        <div class="faq__odpowiedz prose">
+          {{ p.odpowiedz | md:hn }}
+        </div>
+      </details>
+      {% endfor %}
+    </div>
+    {% if tryb == "skrot" and sekcja.strona and limit and tresc.faq.pozycje | dlugosc > limit %}
+    <p class="section__wiecej"><a href="{{ sekcja.strona | url }}">Wszystkie pytania ({{ tresc.faq.pozycje | dlugosc }})</a></p>
+    {% endif %}
+  </div>
+</section>

@@ -1,0 +1,229 @@
+{
+  "$komentarz": "Biblioteka krojów (KONTRAKT §7.4). Każdy krój: pliki woff2 łacina+PL, licencja, metryki zamiennika. Dodawanie: python3 tools/fonty.py dodaj … (wymaga fontTools). Nie domyślnie: Inter, Geist, Instrument Serif (D5).",
+  "archivo": {
+    "nazwa": "Archivo",
+    "styl": "sans",
+    "pochodzenie": "google/fonts ofl/archivo (zmienny wght 400–700, wdth przypięte na 100)",
+    "pliki": [
+      {
+        "plik": "archivo/archivo-pl.woff2",
+        "waga": "400 700",
+        "styl_kroju": "normal"
+      }
+    ],
+    "waga_tekstu": 400,
+    "waga_mocna": 600,
+    "waga_naglowkow": 650,
+    "licencja": "archivo/OFL.txt",
+    "zamiennik": {
+      "lokalny": [
+        "Arial",
+        "Helvetica",
+        "Liberation Sans"
+      ],
+      "size_adjust": "98.92%",
+      "ascent": "88.76%",
+      "descent": "21.23%",
+      "line_gap": "0.00%"
+    }
+  },
+  "public-sans": {
+    "nazwa": "Public Sans",
+    "styl": "sans",
+    "pochodzenie": "google/fonts ofl/publicsans (zmienny wght 400–700)",
+    "pliki": [
+      {
+        "plik": "public-sans/public-sans-pl.woff2",
+        "waga": "400 700",
+        "styl_kroju": "normal"
+      }
+    ],
+    "waga_tekstu": 400,
+    "waga_mocna": 600,
+    "waga_naglowkow": 650,
+    "licencja": "public-sans/OFL.txt",
+    "zamiennik": {
+      "lokalny": [
+        "Arial",
+        "Helvetica",
+        "Liberation Sans"
+      ],
+      "size_adjust": "104.71%",
+      "ascent": "90.73%",
+      "descent": "21.49%",
+      "line_gap": "0.00%"
+    }
+  },
+  "atkinson-next": {
+    "nazwa": "Atkinson Hyperlegible Next",
+    "styl": "sans",
+    "pochodzenie": "google/fonts ofl/atkinsonhyperlegiblenext (zmienny wght 400–700)",
+    "pliki": [
+      {
+        "plik": "atkinson-next/atkinson-next-pl.woff2",
+        "waga": "400 700",
+        "styl_kroju": "normal"
+      }
+    ],
+    "waga_tekstu": 400,
+    "waga_mocna": 600,
+    "waga_naglowkow": 700,
+    "licencja": "atkinson-next/OFL.txt",
+    "zamiennik": {
+      "lokalny": [
+        "Arial",
+        "Helvetica",
+        "Liberation Sans"
+      ],
+      "size_adjust": "98.96%",
+      "ascent": "99.43%",
+      "descent": "31.93%",
+      "line_gap": "0.00%"
+    }
+  },
+  "newsreader": {
+    "nazwa": "Newsreader",
+    "styl": "serif",
+    "pochodzenie": "google/fonts ofl/newsreader (zmienny wght 400–700, opsz przypięte)",
+    "pliki": [
+      {
+        "plik": "newsreader/newsreader-pl.woff2",
+        "waga": "400 700",
+        "styl_kroju": "normal"
+      }
+    ],
+    "waga_tekstu": 400,
+    "waga_mocna": 600,
+    "waga_naglowkow": 500,
+    "licencja": "newsreader/OFL.txt",
+    "zamiennik": {
+      "lokalny": [
+        "Times New Roman",
+        "Times",
+        "Liberation Serif"
+      ],
+      "size_adjust": "99.47%",
+      "ascent": "73.89%",
+      "descent": "26.64%",
+      "line_gap": "0.00%"
+    }
+  },
+  "source-serif-4": {
+    "nazwa": "Source Serif 4",
+    "styl": "serif",
+    "pochodzenie": "google/fonts ofl/sourceserif4 (zmienny wght 400–700, opsz przypięte)",
+    "pliki": [
+      {
+        "plik": "source-serif-4/source-serif-4-pl.woff2",
+        "waga": "400 700",
+        "styl_kroju": "normal"
+      }
+    ],
+    "waga_tekstu": 400,
+    "waga_mocna": 600,
+    "waga_naglowkow": 600,
+    "licencja": "source-serif-4/OFL.txt",
+    "zamiennik": {
+      "lokalny": [
+        "Times New Roman",
+        "Times",
+        "Liberation Serif"
+      ],
+      "size_adjust": "110.40%",
+      "ascent": "93.84%",
+      "descent": "30.34%",
+      "line_gap": "0.00%"
+    }
+  },
+  "literata": {
+    "nazwa": "Literata",
+    "styl": "serif",
+    "pochodzenie": "google/fonts ofl/literata (zmienny wght 400–700, opsz przypięte)",
+    "pliki": [
+      {
+        "plik": "literata/literata-pl.woff2",
+        "waga": "400 700",
+        "styl_kroju": "normal"
+      }
+    ],
+    "waga_tekstu": 400,
+    "waga_mocna": 600,
+    "waga_naglowkow": 600,
+    "licencja": "literata/OFL.txt",
+    "zamiennik": {
+      "lokalny": [
+        "Times New Roman",
+        "Times",
+        "Liberation Serif"
+      ],
+      "size_adjust": "117.77%",
+      "ascent": "99.94%",
+      "descent": "26.15%",
+      "line_gap": "0.00%"
+    }
+  },
+  "barlow": {
+    "nazwa": "Barlow",
+    "styl": "sans",
+    "pochodzenie": "google/fonts ofl/barlow (statyczny, wagi 400 i 600) — krój marki BIMEX",
+    "pliki": [
+      {
+        "plik": "barlow/barlow-400-pl.woff2",
+        "waga": "400",
+        "styl_kroju": "normal"
+      },
+      {
+        "plik": "barlow/barlow-600-pl.woff2",
+        "waga": "600",
+        "styl_kroju": "normal"
+      }
+    ],
+    "waga_tekstu": 400,
+    "waga_mocna": 600,
+    "waga_naglowkow": 600,
+    "licencja": "barlow/OFL.txt",
+    "zamiennik": {
+      "lokalny": [
+        "Arial",
+        "Helvetica",
+        "Liberation Sans"
+      ],
+      "size_adjust": "96.91%",
+      "ascent": "103.19%",
+      "descent": "20.64%",
+      "line_gap": "0.00%"
+    }
+  },
+  "barlow-condensed": {
+    "nazwa": "Barlow Condensed",
+    "styl": "sans",
+    "pochodzenie": "google/fonts ofl/barlowcondensed (statyczny, wagi 600 i 700) — krój marki BIMEX",
+    "pliki": [
+      {
+        "plik": "barlow-condensed/barlow-condensed-600-pl.woff2",
+        "waga": "600",
+        "styl_kroju": "normal"
+      },
+      {
+        "plik": "barlow-condensed/barlow-condensed-700-pl.woff2",
+        "waga": "700",
+        "styl_kroju": "normal"
+      }
+    ],
+    "waga_tekstu": 400,
+    "waga_mocna": 700,
+    "waga_naglowkow": 700,
+    "licencja": "barlow-condensed/OFL.txt",
+    "zamiennik": {
+      "lokalny": [
+        "Arial",
+        "Helvetica",
+        "Liberation Sans"
+      ],
+      "size_adjust": "80.85%",
+      "ascent": "123.69%",
+      "descent": "24.74%",
+      "line_gap": "0.00%"
+    }
+  }
+}

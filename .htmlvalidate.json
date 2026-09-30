@@ -1,0 +1,7 @@
+{
+  "extends": ["html-validate:recommended"],
+  "rules": {
+    "doctype-style": "off",
+    "tel-non-breaking": ["error", { "ignoreClasses": ["btn"] }]
+  }
+}

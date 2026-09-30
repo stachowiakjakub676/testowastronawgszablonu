@@ -1,0 +1,150 @@
+{
+  "$schema": "../../../tools/schemat/firma.schema.json",
+  "$komentarz": "Przykład na prawdziwej firmie (D8): wyłącznie dane publiczne — poprzednia strona i ulotka BIMEX, KRS, BZP, OpenStreetMap. Niepewne pozycje są w do_potwierdzenia.",
+  "wersja_danych": 1,
+  "przyklad": true,
+  "branza": "budowlana",
+  "typ_schema": null,
+  "firma": {
+    "nazwa": "BIMEX",
+    "nazwa_prawna": "BIMEX spółka z ograniczoną odpowiedzialnością spółka komandytowa",
+    "opis": "Roboty drogowe i wodno-kanalizacyjne oraz beton towarowy z własnej wytwórni w Rogoźnie.",
+    "rok_zalozenia": 1993,
+    "domena": "https://www.bimex-rogozno.pl",
+    "adres_roboczy": null
+  },
+  "kontakt": {
+    "telefon": "+48672683408",
+    "email": "biuro@bimex-rogozno.pl",
+    "adres": {
+      "ulica": "ul. Fabryczna 7",
+      "kod": "64-610",
+      "miasto": "Rogoźno",
+      "wojewodztwo": "wielkopolskie",
+      "kraj": "PL"
+    },
+    "geo": {
+      "lat": 52.75360,
+      "lng": 16.98759
+    },
+    "obszar_dzialania": [
+      "powiat obornicki",
+      "powiat wągrowiecki",
+      "powiat chodzieski",
+      "powiat czarnkowsko-trzcianecki"
+    ],
+    "dzialy": [
+      {
+        "nazwa": "Dział sprzedaży betonu",
+        "do_czego": "zamówienia betonu, oferty",
+        "telefon": "+48662046714",
+        "email": null,
+        "osoba": null
+      },
+      {
+        "nazwa": "Kierownik wytwórni betonu towarowego",
+        "do_czego": "dostawy, terminy, sprawy techniczne",
+        "telefon": "+48602574218",
+        "email": null,
+        "osoba": null
+      },
+      {
+        "nazwa": "Biuro",
+        "do_czego": "roboty drogowe, sprawy ogólne",
+        "telefon": "+48672683408",
+        "email": null,
+        "osoba": null
+      }
+    ],
+    "dojazd": null,
+    "dostepnosc_lokalu": null,
+    "czas_odpowiedzi": null
+  },
+  "godziny": null,
+  "rejestr": {
+    "forma_prawna": "sp_k",
+    "nip": "6060092256",
+    "regon": "302388186",
+    "krs": "0000455988",
+    "sad_rejestrowy": "Sąd Rejonowy Poznań – Nowe Miasto i Wilda w Poznaniu, IX Wydział Gospodarczy KRS",
+    "kapital_zakladowy": null,
+    "wlasciciel": null,
+    "wspolnicy": null,
+    "samorzad_zawodowy": null
+  },
+  "marka": {
+    "logo": "assets/img/logo.png",
+    "logo_na_ciemnym": "assets/img/logo.png",
+    "logo_szerokosc": 112,
+    "kolor": "#FFD100",
+    "kolor_zrodlo": "żółte tło tablicy w logo BIMEX (poprzednia strona: assets/css/style.css, --yellow)",
+    "kolor_dodatkowy": "#D12A1E",
+    "tlo": "biale",
+    "font_naglowki": "barlow-condensed",
+    "font_tekst": "barlow",
+    "promien": 0,
+    "sekcja_ciemna": "stopka"
+  },
+  "seo": {
+    "fraza": "Roboty drogowe i beton towarowy",
+    "miasto": "Rogoźno",
+    "opis": "BIMEX z Rogoźna, firma rodzinna od 1993 r.: budowa i remonty dróg, roboty wodno-kanalizacyjne, beton towarowy i prefabrykaty z własnej wytwórni."
+  },
+  "social": {
+    "facebook": "https://www.facebook.com/profile.php?id=100064015176507",
+    "instagram": null,
+    "google_maps": null,
+    "linkedin": null,
+    "youtube": null,
+    "tiktok": null
+  },
+  "opinie_zbiorczo": null,
+  "przekierowania": null,
+  "dostepnosc": null,
+  "funkcje": {
+    "hosting": "cloudflare",
+    "formularz": {
+      "tryb": "mailto",
+      "adresat": null,
+      "zgoda_checkbox": false
+    },
+    "mapa": "link",
+    "statystyki_cf_token": null,
+    "tytul_tryb": "fraza",
+    "telefon_w_naglowku": null,
+    "etykiety_sekcji": false,
+    "animacje": "brak",
+    "myslnik": "polpauza",
+    "boty_ai": "zezwol",
+    "hsts_subdomeny": false,
+    "hsts_preload": false,
+    "faq_schema": false,
+    "strona_dostepnosci": false,
+    "rss": false
+  },
+  "zrodla": {
+    "firma.opis": "ulotka firmy na bimex-rogozno.pl (opis działalności), 2026-09-29",
+    "firma.rok_zalozenia": "ulotka firmy na bimex-rogozno.pl („od 1993 roku”), 2026-09-29",
+    "firma.nazwa_prawna": "KRS 0000455988, odpis aktualny z api-krs.ms.gov.pl, 2026-09-29",
+    "kontakt.telefon": "baner firmy na Facebooku (biuro), 2026-09-29",
+    "kontakt.email": "KRS 0000553091 (BIMEX Sp. z o.o., ten sam adres i strona www), api-krs.ms.gov.pl, 2026-09-29",
+    "kontakt.adres": "KRS 0000455988 (siedziba i adres), 2026-09-29",
+    "kontakt.geo": "OpenStreetMap (Nominatim), punkt adresowy Fabryczna 7, Rogoźno, 2026-09-29",
+    "kontakt.dzialy": "ulotka firmy na bimex-rogozno.pl (Dział sprzedaży, Kierownik WBT) i baner na Facebooku (biuro), 2026-09-29",
+    "kontakt.obszar_dzialania": "Biuletyn Zamówień Publicznych — zamawiający z tych powiatów (przetargi.egospodarka.pl), 2026-09-29",
+    "rejestr": "KRS 0000455988: NIP, REGON, forma prawna, sąd rejestrowy (sygnatury PO.IX NS-REJ.KRS), 2026-09-29",
+    "marka.kolor": "logo firmy (żółta tablica), poprzednia strona bimex-rogozno.pl",
+    "marka.kolor_dodatkowy": "czerwone belki z ulotki firmy",
+    "marka.font_naglowki": "poprzednia strona BIMEX (Barlow Condensed + Barlow)",
+    "social.facebook": "profil firmy na Facebooku, 2026-09-29"
+  },
+  "do_potwierdzenia": [
+    "rejestr — pod adresem Fabryczna 7 działają dwa podmioty: BIMEX Sp. z o.o. Sp. k. (KRS 0000455988, wykonawca w przetargach) i BIMEX Sp. z o.o. (KRS 0000553091); który jest właścicielem strony",
+    "kontakt.email — biuro@bimex-rogozno.pl jest wpisany w KRS spółki z o.o.; w KRS spółki komandytowej: bimex1@vp.pl",
+    "kontakt.geo — punkt adresowy z OpenStreetMap; czy wjazd do wytwórni jest w tym miejscu (poprzednia strona: 52.7527, 16.9951)",
+    "kontakt.dzialy — czy biuro (67 268 34 08) to właściwy numer w sprawie robót drogowych",
+    "godziny — godziny pracy biura i wytwórni (sezon/zima)",
+    "tresc.oferta — rodzaje betonu i prefabrykatów (jakie dokładnie elementy), czy firma ma pompę do betonu",
+    "zdjecia — zdjęcia z ulotki mają niską rozdzielczość; potrzebne nowe: wytwórnia, betonomieszarki na budowie, gotowe drogi z realizacji, sprzęt"
+  ]
+}

@@ -1,0 +1,20 @@
+{# wymaga: tresc.do_pobrania.pozycje #}
+{# Do pobrania (KONTRAKT §4.2): lista plików z assets/img/pliki/. Typ, rozmiar i liczbę stron PDF liczy build
+   (tools/silnik/pliki.py) — nazwa linku niesie je w całości („Katalog 2026 (PDF, 8,4 MB, 48 stron)”), więc wiadomo,
+   co się pobiera, zanim się kliknie. Brak pliku zatrzymuje build (dane.kontrole_modulow), martwego linku nie ma. #}
+<section class="section{% if sekcja.klasa %} {{ sekcja.klasa }}{% endif %} do-pobrania" id="{{ sekcja.html_id }}" aria-labelledby="{% if bez_naglowka %}tytul-strony{% else %}do-pobrania-h{% endif %}">
+  <div class="wrap{% if not bez_naglowka %} bok{% endif %}">
+    {% if not bez_naglowka %}
+    <div class="section__head">
+      <h2 id="do-pobrania-h">{{ sekcja.naglowek }}</h2>
+    </div>
+    {% endif %}
+    <ul class="pliki">
+      {% for p in auto.do_pobrania %}
+      <li class="pliki__poz">
+        <a class="pliki__link" href="{{ p.plik | zasob }}"{% if p.mime %} type="{{ p.mime }}"{% endif %}><span class="pliki__nazwa">{{ p.opis }}</span> <span class="pliki__meta"><span class="wizualnie-ukryte">(</span>{{ p.meta }}<span class="wizualnie-ukryte">)</span></span></a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>

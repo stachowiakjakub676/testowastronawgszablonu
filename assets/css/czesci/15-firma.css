@@ -1,0 +1,144 @@
+/* 15 — sekcje o firmie: zasady, pytania, o firmie, zespół, liczby, opinie, certyfikaty.
+   Każda ma inny układ pod swoją treść (lista definicji, rozwijane pytania, zdjęcie na całą szerokość, portrety,
+   wiersze liczb, cytaty, wpisy z danymi) — wspólne są tylko linie 1 px zamiast pudełek. */
+
+/* ---------- zasady: <dl>, nazwa po lewej, treść po prawej ---------- */
+.zasady__poz { display: grid; gap: var(--s-2); padding-block: var(--s-5); border-bottom: 1px solid var(--linia); }
+.zasady__poz:first-child { padding-top: 0; }
+.zasady__nazwa { font-family: var(--font-naglowki); font-weight: var(--fw-naglowki); font-size: var(--fs-h3); line-height: 1.2; }
+.zasady__opis { max-width: 62ch; }
+.zasady__wstep, .zespol__wstep, .certyfikaty__wstep { margin-bottom: var(--s-7); }
+@media (min-width: 600px) {
+  .zasady__poz { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); column-gap: var(--s-6); align-items: baseline; }
+}
+@media (min-width: 960px) {
+  .zasady__poz { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  .zasady__nazwa { grid-column: 1 / 5; }
+  .zasady__opis { grid-column: 5 / 12; }
+  .bok .zasady__opis { grid-column: 5 / 13; }
+}
+
+/* ---------- pytania: <details>, strzałka z obramowania (widoczna w trybie wymuszonych kolorów) ---------- */
+.faq__poz { border-bottom: 1px solid var(--linia); }
+.faq__pytanie {
+  display: flex; justify-content: space-between; align-items: flex-start; gap: var(--s-5);
+  padding-block: var(--s-5); cursor: pointer; list-style: none;
+  font-size: var(--fs-lead); font-weight: var(--fw-mocna); line-height: 1.35;
+}
+.faq__pytanie::-webkit-details-marker { display: none; }
+.faq__pytanie::after {
+  content: ""; flex: none; width: .55em; height: .55em; margin: .3em .25em 0 0;
+  border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  transform: rotate(45deg); transition: transform var(--dur) var(--ease);
+}
+.faq__poz[open] > .faq__pytanie::after { transform: translateY(.3em) rotate(-135deg); }
+.faq__pytanie:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; }
+.faq__odpowiedz { padding-bottom: var(--s-6); }
+@media (min-width: 960px) {
+  .faq__siatka { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--s-6); align-items: start; }
+  .faq__siatka > .section__head { display: block; grid-column: 1 / 5; margin-bottom: 0; }
+  .faq__lista, .faq__siatka > .section__wiecej { grid-column: 5 / 13; }
+  .faq__lista { border-top: 1px solid var(--tekst); }
+  .faq__pytanie { padding-block: var(--s-4); }
+}
+
+/* ---------- o firmie: zdjęcie na całą szerokość, tekst i fakty obok siebie ---------- */
+.o-firmie__foto { margin: 0 calc(var(--gutter) * -1) var(--s-7); }
+.o-firmie__foto img { width: 100%; min-height: 12rem; max-height: 36rem; object-fit: cover; border-radius: 0; }
+.o-firmie__foto figcaption { margin-top: var(--s-3); padding-inline: var(--gutter); }
+.o-firmie__siatka { display: grid; gap: var(--s-7); }
+.o-firmie__tekst > p:first-child { font-size: var(--fs-lead); line-height: 1.5; }
+.o-firmie__fakty { border-top: 1px solid var(--tekst); }
+.o-firmie__fakt { display: grid; gap: var(--s-1); padding-block: var(--s-4); border-bottom: 1px solid var(--linia); }
+.o-firmie__fakt dt { color: var(--tekst-2); }
+.o-firmie__fakt dd { font-family: var(--font-naglowki); font-weight: var(--fw-naglowki); font-size: var(--fs-h3); line-height: 1.2; }
+@media (min-width: 600px) {
+  .o-firmie__foto { margin-inline: 0; }
+  .o-firmie__foto img { border-radius: var(--radius-img); }
+  .o-firmie__foto figcaption { padding-inline: 0; }
+}
+@media (min-width: 960px) {
+  .o-firmie__siatka { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--s-6); align-items: start; }
+  .o-firmie__tekst { grid-column: 1 / 8; }
+  .o-firmie__fakty { grid-column: 9 / 13; position: sticky; top: calc(var(--header-h) + var(--s-5)); }
+  .o-firmie__siatka > .o-firmie__fakty:only-child { grid-column: 1 / 7; position: static; }
+}
+
+/* ---------- zespół: portrety 4:5 albo wiersze (gdy nie każda osoba ma zdjęcie) ---------- */
+.zespol__lista { display: grid; }
+.zespol__osoba .foto img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.zespol__imie { font-size: var(--fs-h3); }
+.zespol__rola { margin-top: var(--s-1); color: var(--tekst-2); }
+.zespol__fakt { margin-top: var(--s-3); max-width: 46ch; }
+.zespol__lista--portrety { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-6) var(--s-4); }
+.zespol__lista--portrety .zespol__tekst { padding-top: var(--s-3); }
+.zespol__lista--wiersze .zespol__osoba {
+  display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); gap: var(--s-5);
+  padding-block: var(--s-5); border-bottom: 1px solid var(--linia);
+}
+.zespol__lista--wiersze .zespol__osoba:first-child { padding-top: 0; }
+.zespol__lista--wiersze .zespol__osoba:not(.zespol__osoba--foto) .zespol__tekst { grid-column: 1 / -1; }
+@media (min-width: 600px) {
+  .zespol__lista--portrety { gap: var(--s-7) var(--s-6); }
+}
+@media (min-width: 960px) {
+  .zespol__lista--portrety { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .zespol__lista--wiersze .zespol__osoba { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--s-6); }
+  .zespol__lista--wiersze .foto { grid-column: 1 / 3; }
+  .zespol__lista--wiersze .zespol__osoba .zespol__tekst,
+  .zespol__lista--wiersze .zespol__osoba:not(.zespol__osoba--foto) .zespol__tekst {
+    grid-column: 3 / 13; display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); column-gap: var(--s-6); align-content: start;
+  }
+  .zespol__lista--wiersze .zespol__imie, .zespol__lista--wiersze .zespol__rola { grid-column: 1; }
+  .zespol__lista--wiersze .zespol__fakt { grid-column: 2; grid-row: 1 / span 2; margin-top: 0; }
+}
+@media (min-width: 1280px) {
+  .zespol__lista--portrety { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* ---------- liczby: wiersze — wartość, znaczenie, źródło z datą ---------- */
+.liczby__poz { display: grid; gap: var(--s-1); padding-block: var(--s-5); border-bottom: 1px solid var(--linia); }
+.liczby__poz:first-child { padding-top: 0; }
+.liczby__wartosc {
+  order: -1; font-family: var(--font-naglowki); font-weight: var(--fw-naglowki); font-size: var(--fs-h2);
+  line-height: 1.05; letter-spacing: -.015em; font-variant-numeric: tabular-nums;
+}
+.liczby__opis { font-size: var(--fs-lead); line-height: 1.4; max-width: 40ch; }
+.liczby__zrodlo { color: var(--tekst-2); font-size: var(--fs-meta); }
+@media (min-width: 960px) {
+  .liczby__poz { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--s-6); align-items: baseline; }
+  .liczby__wartosc { grid-column: 1 / 5; grid-row: 1; }
+  .liczby__opis { grid-column: 5 / 10; grid-row: 1; }
+  .liczby__zrodlo { grid-column: 10 / 13; grid-row: 1; }
+}
+
+/* ---------- opinie: ocena zbiorcza po lewej, cytaty po prawej, zdanie o weryfikacji pod spodem ---------- */
+.opinie__siatka { display: grid; gap: var(--s-7); }
+.opinie__ocena { font-family: var(--font-naglowki); font-weight: var(--fw-naglowki); line-height: 1; }
+.opinie__liczba { font-size: clamp(3.5rem, 2.4rem + 4.5vw, 6.5rem); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.opinie__skala { font-size: var(--fs-h3); color: var(--tekst-2); }
+.opinie__opis { margin-top: var(--s-4); color: var(--tekst-2); max-width: 32ch; }
+.opinie__link { margin-top: var(--s-4); }
+.opinie__lista { display: grid; gap: var(--s-6); }
+.opinie__poz { padding-top: var(--s-5); border-top: 1px solid var(--linia); }
+.opinie__cytat p { font-size: var(--fs-lead); line-height: 1.5; max-width: 56ch; }
+.opinie__autor { display: flex; flex-wrap: wrap; gap: var(--s-1) var(--s-4); margin-top: var(--s-4); font-size: var(--fs-maly); color: var(--tekst-2); }
+.opinie__kto { color: var(--tekst); font-weight: var(--fw-mocna); }
+.opinie__weryfikacja { margin-top: var(--s-7); color: var(--tekst-2); max-width: 72ch; }
+@media (min-width: 960px) {
+  .opinie__siatka { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--s-6); align-items: start; }
+  .opinie__zbiorczo { grid-column: 1 / 5; }
+  .opinie__lista { grid-column: 5 / 13; }
+  .opinie__siatka--bez-oceny .opinie__lista { grid-column: 1 / 11; }
+  .opinie__poz:first-child { padding-top: 0; border-top: 0; }
+}
+
+/* ---------- certyfikaty: wpisy z danymi w dwóch–trzech kolumnach ---------- */
+.certyfikaty__lista { display: grid; column-gap: var(--s-6); }
+.certyfikaty__poz { padding-block: var(--s-5) var(--s-6); border-top: 1px solid var(--linia); }
+.certyfikaty__nazwa { font-size: var(--fs-h3); max-width: 28ch; }
+.certyfikaty__dane { display: grid; grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr)); gap: var(--s-3) var(--s-5); margin-top: var(--s-4); }
+.certyfikaty__dane dt { color: var(--tekst-2); font-size: var(--fs-meta); }
+.certyfikaty__plik { margin-top: var(--s-4); }
+@media (min-width: 600px) { .certyfikaty__lista { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1280px) { .certyfikaty__lista { grid-template-columns: repeat(3, minmax(0, 1fr)); } }

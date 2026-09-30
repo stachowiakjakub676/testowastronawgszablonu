@@ -1,0 +1,87 @@
+{# wymaga: tresc.przetargi.pozycje #}
+{# Zamówienia publiczne (KONTRAKT §4.2, §6.2; CLAUDE.md §10): prawdziwa tabela — rok, zadanie (nagłówek wiersza),
+   zamawiający, opcjonalnie wartość i źródło (kolumny tylko, gdy jakiś wiersz je ma). Wiersze od najnowszych,
+   pogrupowane latami: rok widać w pierwszym wierszu grupy, w pozostałych jest tylko dla czytników ekranu
+   (auto.przetargi z dane.py: nowy_rok, liczniki, lata).
+   - tryb="skrot" (główna): `limit` najnowszych i link do pełnej listy na /realizacje, gdy podstrona powstała;
+     bez podstrony — wszystkie, a ponad limit chowa „Pokaż więcej” (50-filtr.js; bez JS widać wszystko);
+   - tryb="pelny" (/realizacje): wszystkie; ponad 12 wierszy — 10 widocznych i „Pokaż więcej”.
+   Na telefonie wiersze układają się w stos (13-realizacje.css); role ARIA tabeli dopisuje 50-filtr.js ([data-stos]). #}
+{% set w = auto.przetargi %}
+{% set pelny = tryb == "pelny" %}
+{% set do_podstrony = not pelny and sekcja.strona and limit and w.liczba > limit %}
+{% if do_podstrony %}
+{% set wiersze = w.pozycje | pierwsze:limit %}
+{% else %}
+{% set wiersze = w.pozycje %}
+{% endif %}
+{% if pelny %}
+{% set pokaz = 10 %}
+{% set zwijaj = w.liczba > 12 %}
+{% else %}
+{% set pokaz = limit %}
+{% set zwijaj = not do_podstrony and limit and w.liczba > limit %}
+{% endif %}
+<section class="section{% if sekcja.klasa %} {{ sekcja.klasa }}{% endif %} przetargi" id="{{ sekcja.html_id }}" aria-labelledby="{% if bez_naglowka %}tytul-strony{% else %}przetargi-h{% endif %}">
+  <div class="wrap">
+    {% if not bez_naglowka %}
+    <div class="section__head">
+      <h2 id="przetargi-h">{{ sekcja.naglowek }}</h2>
+      {% if tresc.przetargi.wstep %}
+      <p class="section__lead">{{ tresc.przetargi.wstep }}</p>
+      {% endif %}
+    </div>
+    {% endif %}
+    <table class="tabela przetargi__tabela" data-stos>
+      {% if do_podstrony %}
+      <caption class="wizualnie-ukryte">Najnowsze zamówienia publiczne: rok, zadanie i zamawiający</caption>
+      {% else %}
+      <caption class="przetargi__podsumowanie">{{ w.liczba }}&nbsp;{{ w.liczba | liczba_mnoga:"zamówienie,zamówienia,zamówień" }} {% if w.rok_od == w.rok_do %}z&nbsp;{{ w.rok_od }}&nbsp;r.{% else %}z&nbsp;lat {{ w.rok_od }}–{{ w.rok_do }}{% endif %}, {{ w.zamawiajacych }}&nbsp;{{ w.zamawiajacych | liczba_mnoga:"zamawiający,zamawiających,zamawiających" }}</caption>
+      {% endif %}
+      <thead>
+        <tr>
+          <th scope="col" class="przetargi__rok">Rok</th>
+          <th scope="col" class="przetargi__zadanie">Zadanie</th>
+          <th scope="col" class="przetargi__zamawiajacy">Zamawiający</th>
+          {% if w.z_wartoscia %}
+          <th scope="col" class="przetargi__wartosc">Wartość</th>
+          {% endif %}
+          {% if w.z_linkami %}
+          <th scope="col" class="przetargi__zrodlo">Źródło</th>
+          {% endif %}
+        </tr>
+      </thead>
+      <tbody id="przetargi-wiersze"{% if zwijaj %} data-wiecej{% endif %}>
+        {% for p in wiersze %}
+        <tr{% if p.nowy_rok %} class="is-nowy-rok"{% endif %}{% if zwijaj and petla.indeks > pokaz %} data-wiecej-reszta{% endif %}>
+          <td class="przetargi__rok">{% if p.nowy_rok %}{{ p.rok }}{% else %}<span class="wizualnie-ukryte">{{ p.rok }}</span>{% endif %}</td>
+          <th scope="row" class="przetargi__zadanie">{{ p.zadanie }}</th>
+          <td class="przetargi__zamawiajacy">{{ p.zamawiajacy }}</td>
+          {% if w.z_wartoscia %}
+          <td class="przetargi__wartosc">{% if p.wartosc != null %}{{ p.wartosc | cena }}{% endif %}</td>
+          {% endif %}
+          {% if w.z_linkami %}
+          <td class="przetargi__zrodlo">{% if p.zrodlo_url %}<a href="{{ p.zrodlo_url | url }}">{{ p.zrodlo_host }}</a>{% elif p.zrodlo_tekst %}{{ p.zrodlo_tekst }}{% endif %}</td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% if zwijaj %}
+    <p class="wiecej"><button class="btn btn--secondary" type="button" data-wiecej-przycisk aria-controls="przetargi-wiersze" hidden>Pokaż wszystkie zamówienia ({{ w.liczba }})</button></p>
+    {% endif %}
+    {% if tresc.przetargi.zrodlo_opis or w.bzp_url %}
+    <div class="przetargi__stopka">
+      {% if tresc.przetargi.zrodlo_opis %}
+      <p>Źródło: {{ tresc.przetargi.zrodlo_opis }}</p>
+      {% endif %}
+      {% if w.bzp_url %}
+      <p><a href="{{ w.bzp_url | url }}">Sprawdź w wyszukiwarce ogłoszeń BZP (ezamowienia.gov.pl)</a></p>
+      {% endif %}
+    </div>
+    {% endif %}
+    {% if do_podstrony %}
+    <p class="section__wiecej"><a href="{{ sekcja.strona | url }}#{{ sekcja.html_id }}">Wszystkie zamówienia publiczne ({{ w.liczba }})</a></p>
+    {% endif %}
+  </div>
+</section>

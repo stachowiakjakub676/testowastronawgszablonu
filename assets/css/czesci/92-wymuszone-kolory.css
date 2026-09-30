@@ -1,0 +1,17 @@
+/* 92 — tryb wymuszonych kolorów (Windows, wysoki kontrast): obramowania i fokus muszą zostać widoczne. */
+@media (forced-colors: active) {
+  .btn, .nav-toggle, .callbar .btn { border-color: ButtonText; }
+  :focus-visible { outline-color: Highlight; }
+  .status.is-otwarte::before, .status.is-zamkniete::before { forced-color-adjust: none; background: CanvasText; }
+  .dzialy__tel { text-decoration-color: LinkText; }
+  .nav__lista a[aria-current="page"] { text-decoration: underline; }
+  /* przezroczyste ramki robią się tu widoczne: ikona „zamknij” bez kresek z góry i z dołu */
+  .nav-toggle[aria-expanded="true"] .nav-toggle__ikona { border-color: Canvas; }
+}
+/* ≥ 960 linki menu mają przezroczyste ramki 2 px (miejsce na podkreślenie bieżącej strony) — bez tego
+   w trybie wysokiego kontrastu każdy link wyglądałby jak bieżący */
+@media (forced-colors: active) and (min-width: 960px) {
+  .nav__lista a { border-top-color: Canvas; border-bottom-color: Canvas; }
+  .nav__lista a:hover { border-bottom-color: CanvasText; }
+  .nav__lista a[aria-current="page"] { border-bottom-color: LinkText; }
+}

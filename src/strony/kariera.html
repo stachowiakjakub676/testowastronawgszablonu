@@ -1,0 +1,5 @@
+{# strona: sciezka="/kariera" sekcja="kariera" wymaga="auto.kariera" nav="Praca" tytul="Praca" h1="{{ tresc.kariera.naglowek | domyslnie:auto.naglowki.kariera }}" opis="Praca w firmie {{ firma.firma.nazwa }}, {{ firma.kontakt.adres.miasto }}: {{ auto.kariera_stanowiska | polacz:\", \" }}. Zgłoszenia telefonicznie{% if auto.kariera_kontakt.email %} i e-mailem{% endif %}." wstep="{% if tresc.kariera.wstep %}{{ tresc.kariera.wstep }}{% endif %}" #}
+{# Oferty pracy (sekcje/kariera.html w wersji pełnej). Strona powstaje, gdy jest choć jedna aktualna oferta
+   (strony.progi → _kariera); JobPosting w JSON-LD tylko tutaj (jsonld.wezly_modulow). #}
+{% include "czesci/naglowek-strony.html" %}
+{% include "sekcje/kariera.html" tryb="pelny" bez_naglowka=true %}

@@ -1,0 +1,27 @@
+# wynik buildu i raporty — build uruchamia Cloudflare (python3 tools/build.py --produkcja)
+dist/
+dist-*/
+raport/
+
+# oryginały zdjęć klienta są poza gitem (commituje się wynik tools/zdjecia.py w assets/img/foto/)
+brief/zdjecia/*
+!brief/zdjecia/README.md
+# … ale oryginały przykładów są w repozytorium jako dane testowe
+!przyklady/*/brief/zdjecia/
+
+# Python, Node, sekrety lokalne
+__pycache__/
+*.pyc
+node_modules/
+.dev.vars
+.wrangler/
+.DS_Store
+
+# robocze kopie repozytorium tworzone przez agentów
+.claude/worktrees/
+
+# zrzuty ekranu źródeł i notatki AI tylko dla tej firmy (poza gitem)
+brief/zrzuty/
+CLAUDE.local.md
+# wersja pliku z nowszego SZABLONU do ręcznego porównania (tools/aktualizuj.py)
+*.szablon

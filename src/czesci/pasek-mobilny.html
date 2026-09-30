@@ -1,0 +1,11 @@
+{# Pasek na telefonie (< 960 px): akcje z presetu (pasek_mobilny), bez przycisku do strony, na której jesteśmy
+   („Kontakt” na /kontakt). Chowa się, gdy na ekranie są te same akcje ([data-ukryj-pasek]: hero, telefony, stopka). #}
+{% if auto.pasek_mobilny %}
+<aside class="callbar" aria-label="Szybki kontakt">
+  {% for p in auto.pasek_mobilny %}
+  {% if p.href != strona.sciezka %}
+  <a class="btn {% if petla.pierwszy %}btn--primary{% else %}btn--secondary{% endif %}" href="{{ p.href | url }}">{{ p.tekst }}</a>
+  {% endif %}
+  {% endfor %}
+</aside>
+{% endif %}

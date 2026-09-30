@@ -1,0 +1,50 @@
+{# strona: sciezka="/oferta/{slug}" kolekcja="oferta" rodzic="/oferta" tytul="{{ element.nazwa }}" opis="{% if element.opis %}{{ element.opis }}{% else %}{{ element.nazwa }} – {{ firma.firma.nazwa }}, {{ firma.seo.miasto }}.{% endif %}" wstep="{% if element.opis %}{{ element.opis }}{% endif %}" #}
+{# Podstrona usługi (KONTRAKT §6.1, critic §4.5). Powstaje tylko nad progiem treści: plik .md ≥ 150 słów, własne zdjęcie
+   i jedno z: cena, zakres, czas (strony.py → _uslugi); inaczej UKRYTO. Własny tytuł i h1 (nazwa usługi), okruszki
+   (BreadcrumbList), obrazek podglądu linku ze zdjęcia usługi (assets/img/og/<id>.jpg), jedno wezwanie do działania
+   (z presetu — nie z hero), link z powrotem do oferty. Zdjęcie jest u góry strony: bez lazy (wariant „hero”). #}
+{% include "czesci/naglowek-strony.html" %}
+{# poz = ta sama pozycja z auto.oferta.pozycje (z podpisem zdjęcia i adresem) — element to surowe dane z tresc.json #}
+{% for poz in auto.oferta.pozycje %}
+{% if poz.url == strona.sciezka %}
+<section class="section usluga" aria-labelledby="tytul-strony">
+  <div class="wrap usluga__siatka">
+    <figure class="usluga__foto">
+      {{ element.zdjecie | obraz:"hero" }}
+      {% if poz.podpis %}
+      <figcaption>{{ poz.podpis }}</figcaption>
+      {% endif %}
+    </figure>
+    <div class="usluga__tresc prose">
+      {{ element.tresc | md_plik:2 }}
+    </div>
+    <aside class="usluga__bok" aria-label="{{ element.nazwa }}: najważniejsze informacje">
+      {% if element.cena != null or element.czas %}
+      <dl class="usluga__fakty">
+        {% if element.cena != null %}
+        <div><dt>Cena brutto</dt><dd>{% include "czesci/cena.html" cena=element.cena jednostka=element.jednostka %}</dd></div>
+        {% endif %}
+        {% if element.czas %}
+        <div><dt>Czas realizacji</dt><dd>{{ element.czas }}</dd></div>
+        {% endif %}
+      </dl>
+      {% endif %}
+      {% if element.zakres %}
+      <h2 class="usluga__h">Zakres</h2>
+      <ul class="usluga__zakres">
+        {% for z in element.zakres %}
+        <li>{{ z | wersaliki_pierwsza }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% if auto.oferta.cta %}
+      <p class="usluga__akcja"{% if auto.oferta.cta.typ == "tel" %} data-ukryj-pasek{% endif %}><a class="btn btn--primary" href="{{ auto.oferta.cta.href | url }}">{{ auto.oferta.cta.tekst }}</a></p>
+      {% endif %}
+    </aside>
+  </div>
+  <div class="wrap">
+    <p class="usluga__powrot"><a href="{{ auto.oferta.powrot | url }}">{{ auto.oferta.naglowek }}: wszystkie pozycje</a></p>
+  </div>
+</section>
+{% endif %}
+{% endfor %}

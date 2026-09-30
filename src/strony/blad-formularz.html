@@ -1,0 +1,11 @@
+{# strona: sciezka="/blad-formularz" tytul="Formularz nie został wysłany" indeksuj="nie" #}
+{# Tu Worker przekierowuje (303) bez JavaScriptu, gdy w formularzu brakuje pola albo tekst jest za długi
+   (kody brak_pol, kontakt, za_dlugie, za_duze, zle_dane). Strona powstaje tylko przy funkcje.formularz.tryb = "worker". #}
+<section class="section" aria-labelledby="tytul-strony">
+  <div class="wrap prose">
+    <h1 id="tytul-strony">Formularz nie został wysłany</h1>
+    <p class="lead">Brakowało imienia, telefonu albo adresu e-mail lub treści zapytania, albo wiadomość miała więcej niż 3000 znaków.</p>
+    <p>Wróć przyciskiem „Wstecz” w przeglądarce – zwykle wpisany tekst zostaje w polach – popraw i wyślij jeszcze raz.{% if auto.tel_href %} Możesz też zadzwonić: <a class="tel" href="{{ auto.tel_href | url }}">{{ auto.telefon_krajowy }}</a>.{% endif %}</p>
+    <p><a class="btn btn--secondary" href="{{ "/kontakt" | url }}">Wróć do kontaktu</a></p>
+  </div>
+</section>

@@ -1,0 +1,13 @@
+/* 90 — druk: godziny, adres, telefony i treść bez nawigacji i przycisków ekranowych. */
+@media print {
+  .skip, .nav, .nav-toggle, .callbar, .site-header__akcja, .hero__akcje, .kontakt__trasa, .mapa, .formularz { display: none !important; }
+  body { padding: 0 !important; font-size: 11pt; line-height: 1.45; color: #000; background: #fff; }
+  .site-header { position: static; border: 0; }
+  .section, .hero { padding-block: 12pt; }
+  .section--dark, .site-footer--ciemna { background: #fff !important; color: #000 !important; --tekst: #000; --tekst-2: #333; --linia: #999; }
+  a { color: #000; text-decoration: none; }
+  .prose a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 9pt; }
+  .hero__foto img { max-height: 8cm; width: auto; }
+  h1, h2, h3 { break-after: avoid; }
+  tr, li, .dzialy__poz { break-inside: avoid; }
+}

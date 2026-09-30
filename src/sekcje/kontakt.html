@@ -1,0 +1,119 @@
+{# wymaga: firma.kontakt.adres #}
+{# Kontakt (KONTRAKT §6.2, §9.1). Dwie wersje — nic nie powtarzamy dwa razy w jednej sekcji:
+   - tryb="skrot" (strona główna): adres i „Wyznacz trasę”, główny telefon i e-mail, godziny (gdy nie ma osobnej sekcji
+     godzin) i link do /kontakt z tym, czego tu nie ma (auto.kontakt_wiecej: działy, zapytanie, mapa, dojazd);
+   - tryb="pelny" (/kontakt, bez_naglowka=true — h1 strony jest tytułem, nagłówki wewnątrz = h2): wszystko, także działy,
+     dojazd, mapa po kliknięciu (funkcje.mapa) i zapytanie (funkcje.formularz).
+   Blok telefonów ma data-ukryj-pasek: gdy numery są na ekranie, pasek „Zadzwoń” na telefonie się chowa. #}
+{% set pelny = tryb == "pelny" %}
+{% set z_godzinami = firma.godziny and (pelny or not auto.godziny_osobno) %}
+{% set z_formularzem = pelny and auto.formularz %}
+{# e-mail stoi raz: w bloku telefonów; zapytanie e-mailem na ten sam adres pokazuje już tylko przycisk #}
+<section class="section{% if sekcja.klasa %} {{ sekcja.klasa }}{% endif %} kontakt{% if firma.marka.sekcja_ciemna == "kontakt" %} section--dark{% endif %}" id="{{ sekcja.html_id }}" aria-labelledby="{% if bez_naglowka %}tytul-strony{% else %}kontakt-h{% endif %}">
+  <div class="wrap">
+    {% if not bez_naglowka %}
+    <div class="section__head">
+      <h2 id="kontakt-h">{{ sekcja.naglowek }}</h2>
+      {% if tresc.kontakt.wstep %}
+      <p class="section__lead">{{ tresc.kontakt.wstep }}</p>
+      {% endif %}
+    </div>
+    {% elif tresc.kontakt.wstep %}
+    <p class="section__lead kontakt__wstep">{{ tresc.kontakt.wstep }}</p>
+    {% endif %}
+    <div class="kontakt__siatka{% if z_godzinami and z_formularzem %} kontakt__siatka--pelna{% endif %}">
+      <div class="kontakt__adres">
+        <h{{ hn }} class="kontakt__h">Adres</h{{ hn }}>
+        <address class="kontakt__nap">
+          <strong>{{ firma.firma.nazwa }}</strong><br>
+          {{ auto.adres_html }}
+        </address>
+        {% if auto.trasa_url %}
+        <p class="kontakt__trasa"><a class="btn btn--secondary" href="{{ auto.trasa_url | url }}">Wyznacz trasę</a></p>
+        {% endif %}
+        {% if pelny and firma.kontakt.dojazd %}
+        <p class="kontakt__opis">{{ firma.kontakt.dojazd }}</p>
+        {% endif %}
+        {% if pelny and firma.kontakt.dostepnosc_lokalu %}
+        <p class="kontakt__opis">{{ firma.kontakt.dostepnosc_lokalu }}</p>
+        {% endif %}
+        {% if pelny and funkcje.mapa == "po_kliknieciu" and auto.osm_embed %}
+        <div class="mapa" data-mapa data-src="{{ auto.osm_embed | url }}" data-tytul="Mapa dojazdu: {{ auto.adres_linia }}">
+          <p class="mapa__opis">Mapa z serwisu OpenStreetMap wczyta się dopiero po kliknięciu. Wtedy przeglądarka połączy się z openstreetmap.org.</p>
+          <p class="mapa__akcje"><button class="btn btn--secondary" type="button" hidden>Pokaż mapę</button> <a class="mapa__link" href="{{ auto.osm_url | url }}">Otwórz mapę w OpenStreetMap</a></p>
+        </div>
+        {% endif %}
+      </div>
+      <div class="kontakt__telefony" data-ukryj-pasek>
+        {% if pelny and firma.kontakt.dzialy %}
+        <h{{ hn }} class="kontakt__h">Telefony</h{{ hn }}>
+        <ul class="dzialy">
+          {% for dz in firma.kontakt.dzialy %}
+          <li class="dzialy__poz">
+            <p class="dzialy__nazwa">{{ dz.nazwa }}</p>
+            {% if dz.do_czego or dz.osoba %}
+            <p class="dzialy__opis">{% if dz.osoba %}{{ dz.osoba }}{% if dz.do_czego %} – {% endif %}{% endif %}{{ dz.do_czego | domyslnie:"" }}</p>
+            {% endif %}
+            {% if dz.telefon %}
+            <a class="dzialy__tel" href="{{ dz.telefon | tel_href }}">{{ dz.telefon | tel:"krajowy" }}</a>
+            {% endif %}
+            {% if dz.email %}
+            <a class="dzialy__email" href="{{ dz.email | mailto }}">{{ dz.email }}</a>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+        {% if firma.kontakt.email %}
+        <p class="kontakt__email">E-mail: <a href="{{ auto.email_href | url }}">{{ firma.kontakt.email }}</a></p>
+        {% endif %}
+        {% else %}
+        <h{{ hn }} class="kontakt__h">Telefon{% if firma.kontakt.email %} i e-mail{% endif %}</h{{ hn }}>
+        <p><a class="dzialy__tel" href="{{ auto.tel_href | url }}">{{ auto.telefon_krajowy }}</a></p>
+        {% if firma.kontakt.email %}
+        <p class="kontakt__email"><a href="{{ auto.email_href | url }}">{{ firma.kontakt.email }}</a></p>
+        {% endif %}
+        {% endif %}
+        {% if firma.kontakt.czas_odpowiedzi and not z_formularzem %}
+        <p class="kontakt__meta">{{ firma.kontakt.czas_odpowiedzi | wersaliki_pierwsza }}.</p>
+        {% endif %}
+      </div>
+      {% if z_godzinami %}
+      <div class="kontakt__godziny">
+        <h{{ hn }} class="kontakt__h">{{ firma.godziny.nazwa | domyslnie:"Godziny otwarcia" }}</h{{ hn }}>
+        {% if auto.pokaz_status %}
+        <p class="status" data-status aria-live="polite" hidden></p>
+        {% endif %}
+        <table class="godziny">
+          <caption class="wizualnie-ukryte">{{ firma.godziny.nazwa | domyslnie:"Godziny otwarcia" }} w kolejnych dniach tygodnia</caption>
+          <tbody>
+            {% for w in auto.godziny_tabela %}
+            <tr data-dzien="{{ w.kod }}"{% if w.zamkniete %} class="is-zamkniete"{% endif %}><th scope="row">{{ w.dzien | wersaliki_pierwsza }}</th><td>{{ w.przedzialy_tekst }}</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% for dod in auto.godziny_dodatkowe %}
+        <p class="godziny__dodatkowe"><strong>{{ dod.nazwa }}:</strong> {{ dod.skrot }}</p>
+        {% endfor %}
+        {% if auto.godziny_wyjatki %}
+        <ul class="godziny__wyjatki">
+          {% for w in auto.godziny_wyjatki %}
+          <li>{{ w.data_tekst }}{% if w.opis %} ({{ w.opis }}){% endif %}: {{ w.tekst }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        {% if firma.godziny.uwagi %}
+        <p class="kontakt__meta">{{ firma.godziny.uwagi }}</p>
+        {% endif %}
+      </div>
+      {% endif %}
+      {% if z_formularzem %}
+      <div class="kontakt__formularz">
+        {% include "czesci/formularz.html" %}
+      </div>
+      {% endif %}
+    </div>
+    {% if not pelny and auto.kontakt_wiecej %}
+    <p class="section__wiecej"><a href="{{ "/kontakt" | url }}">{{ auto.kontakt_wiecej }}</a></p>
+    {% endif %}
+  </div>
+</section>

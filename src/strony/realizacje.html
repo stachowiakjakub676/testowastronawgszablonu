@@ -1,0 +1,10 @@
+{# strona: sciezka="/realizacje" sekcja="realizacje przetargi" wymaga="tresc.realizacje.pozycje|tresc.przetargi.pozycje" tytul="{% if auto.realizacje %}{{ tresc.realizacje.naglowek | domyslnie:auto.naglowki.realizacje }}{% else %}{{ tresc.przetargi.naglowek | domyslnie:auto.naglowki.przetargi }}{% endif %}" wstep="{% if auto.realizacje %}{{ tresc.realizacje.wstep | domyslnie:\"\" }}{% else %}{{ tresc.przetargi.wstep | domyslnie:\"\" }}{% endif %}" opis="{% if auto.realizacje %}{{ auto.realizacje.liczba }} {{ auto.realizacje.liczba | liczba_mnoga:\"realizacja,realizacje,realizacji\" }} ze zdjęciami{% if auto.przetargi %} i {% endif %}{% endif %}{% if auto.przetargi %}{{ auto.przetargi.liczba }} {{ auto.przetargi.liczba | liczba_mnoga:\"zamówienie publiczne,zamówienia publiczne,zamówień publicznych\" }} {% if auto.przetargi.rok_od == auto.przetargi.rok_do %}z {{ auto.przetargi.rok_od }} r.{% else %}z lat {{ auto.przetargi.rok_od }}–{{ auto.przetargi.rok_do }}{% endif %} dla {{ auto.przetargi.zamawiajacych }} {{ auto.przetargi.zamawiajacych | liczba_mnoga:\"zamawiającego,zamawiających,zamawiających\" }}{% endif %} – {{ firma.firma.nazwa }}{% if firma.kontakt.adres.miasto %}, {{ firma.kontakt.adres.miasto }}{% endif %}." #}
+{# Podstrona /realizacje (KONTRAKT §6.1): powstaje, gdy realizacji > 6 albo przetargów > 8 (strony.progi) — pełne wersje
+   obu sekcji, na głównej zostają skróty z linkiem tutaj. h1 = nagłówek realizacji, a gdy są tylko przetargi — nagłówek
+   przetargów (ten sam co h2 na głównej i etykieta w menu: jedna rzecz, jedna nazwa).
+   - są realizacje: realizacje bez własnego h2 (tytułem jest h1, filtr kategorii), przetargi pod nimi z własnym h2;
+   - są tylko przetargi: tabela bez drugiego nagłówka — h1 jest jej tytułem.
+   Wstęp sekcji bez własnego nagłówka stoi pod h1 (nagłówek strony: wstep), nie w sekcji. #}
+{% include "czesci/naglowek-strony.html" %}
+{% include "sekcje/realizacje.html" tryb="pelny" bez_naglowka=true %}
+{% include "sekcje/przetargi.html" tryb="pelny" bez_naglowka=not auto.realizacje %}

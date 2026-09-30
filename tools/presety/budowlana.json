@@ -1,0 +1,123 @@
+{
+  "$komentarz": "Reguły branży (nie wygląd). KONTRAKT §5. Klucze naglowki i nav_etykiety to domyślne teksty — klient zmienia je w data/tresc.json (pole naglowek sekcji), nie tutaj.",
+  "branza": "budowlana",
+  "typ_schema": "GeneralContractor",
+  "wymagane": [
+    "tresc.oferta.pozycje"
+  ],
+  "zalecane": [
+    "tresc.realizacje|tresc.przetargi",
+    "kontakt.email",
+    "rejestr.regon",
+    "tresc.hero.zdjecie"
+  ],
+  "sekcje_glowna": [
+    "hero",
+    "ogloszenie",
+    "oferta",
+    "realizacje",
+    "przetargi",
+    "proces",
+    "zasady",
+    "o_firmie",
+    "liczby",
+    "certyfikaty",
+    "faq",
+    "aktualnosci",
+    "kontakt"
+  ],
+  "warianty": {
+    "proces": "tint",
+    "zasady": "sm",
+    "aktualnosci": "sm"
+  },
+  "strony": [
+    "oferta",
+    "usluga",
+    "realizacje",
+    "o-firmie",
+    "aktualnosci",
+    "wpis",
+    "kariera",
+    "kontakt",
+    "polityka-prywatnosci",
+    "dostepnosc"
+  ],
+  "nav": [
+    "oferta",
+    "realizacje",
+    "przetargi",
+    "o_firmie",
+    "kariera",
+    "kontakt"
+  ],
+  "cta_glowne": {
+    "tekst": "Zadzwoń: {tel}",
+    "href": "tel"
+  },
+  "cta_drugie": {
+    "tekst": "Zapytaj o wycenę",
+    "href": "kontakt"
+  },
+  "pasek_mobilny": [
+    "tel",
+    "kontakt"
+  ],
+  "telefon_w_naglowku": true,
+  "pokazuj_status_w_hero": false,
+  "naglowki": {
+    "oferta": "Zakres prac",
+    "cennik": "Cennik",
+    "menu": "Karta",
+    "produkty": "Produkty",
+    "realizacje": "Realizacje",
+    "przetargi": "Zamówienia publiczne",
+    "proces": "Przebieg zlecenia",
+    "zasady": "Warunki współpracy",
+    "o_firmie": "O firmie",
+    "zespol": "Zespół",
+    "liczby": "Firma w liczbach",
+    "opinie": "Opinie",
+    "certyfikaty": "Uprawnienia i certyfikaty",
+    "faq": "Pytania i odpowiedzi",
+    "galeria": "Zdjęcia",
+    "do_pobrania": "Do pobrania",
+    "kariera": "Praca",
+    "wspolpraca": "Współpraca",
+    "gdzie_kupic": "Gdzie kupić",
+    "aktualnosci": "Aktualności",
+    "godziny": "Godziny otwarcia",
+    "kontakt": "Kontakt"
+  },
+  "nav_etykiety": {
+    "oferta": "Zakres prac",
+    "menu": "Karta",
+    "produkty": "Produkty",
+    "realizacje": "Realizacje",
+    "przetargi": "Zamówienia publiczne",
+    "o_firmie": "O firmie",
+    "zespol": "Zespół",
+    "cennik": "Cennik",
+    "galeria": "Zdjęcia",
+    "godziny": "Godziny",
+    "wspolpraca": "Współpraca",
+    "gdzie_kupic": "Gdzie kupić",
+    "aktualnosci": "Aktualności",
+    "kariera": "Praca",
+    "kontakt": "Kontakt"
+  },
+  "limity": {
+    "oferta": 6,
+    "realizacje": 6,
+    "przetargi": 8,
+    "produkty": 6,
+    "galeria": 6,
+    "cennik": 8,
+    "aktualnosci": 3,
+    "menu": 12,
+    "certyfikaty": 6,
+    "faq": 6,
+    "zespol": 4
+  },
+  "cennik_netto": true
+}

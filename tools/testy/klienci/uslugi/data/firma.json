@@ -1,0 +1,158 @@
+{
+  "$schema": "../../../../../tools/schemat/firma.schema.json",
+  "$komentarz": "FIKSTURA TESTOWA — dane wymyślone (tools/testy/klienci/README.md). Nie kopiuj ich do strony klienta. Plik generuje tools/testy/klienci/generuj.py — zmiany wprowadzaj tam.",
+  "wersja_danych": 1,
+  "przyklad": true,
+  "branza": "uslugi",
+  "typ_schema": null,
+  "firma": {
+    "nazwa": "Serwis Próbny",
+    "nazwa_prawna": "Serwis Próbny Kowalska i Wspólnik sp.j.",
+    "opis": "Fikcyjny serwis rowerowy do testów szablonu: naprawy, przeglądy i dopasowanie roweru.",
+    "rok_zalozenia": 2018,
+    "domena": "https://serwis-probny.example",
+    "adres_roboczy": null
+  },
+  "kontakt": {
+    "telefon": "+48500000003",
+    "email": "serwis@serwis-probny.example",
+    "adres": {
+      "ulica": "ul. Testowa 3",
+      "kod": "00-003",
+      "miasto": "Testowo",
+      "wojewodztwo": "mazowieckie",
+      "kraj": "PL"
+    },
+    "geo": {
+      "lat": 52.23518,
+      "lng": 21.00562
+    },
+    "obszar_dzialania": null,
+    "dzialy": null,
+    "dojazd": null,
+    "dostepnosc_lokalu": null,
+    "czas_odpowiedzi": "oddzwaniamy tego samego dnia"
+  },
+  "godziny": {
+    "nazwa": null,
+    "tydzien": {
+      "pn": [
+        [
+          "08:00",
+          "18:00"
+        ]
+      ],
+      "wt": [
+        [
+          "08:00",
+          "18:00"
+        ]
+      ],
+      "sr": [
+        [
+          "08:00",
+          "18:00"
+        ]
+      ],
+      "cz": [
+        [
+          "08:00",
+          "18:00"
+        ]
+      ],
+      "pt": [
+        [
+          "08:00",
+          "18:00"
+        ]
+      ],
+      "sb": [
+        [
+          "09:00",
+          "13:00"
+        ]
+      ],
+      "nd": []
+    },
+    "dodatkowe": null,
+    "wyjatki": [
+      {
+        "data": "2026-10-11",
+        "godziny": [
+          [
+            "08:00",
+            "12:00"
+          ]
+        ],
+        "opis": "Inwentaryzacja"
+      }
+    ],
+    "uwagi": null,
+    "pokazuj_status": true
+  },
+  "rejestr": {
+    "forma_prawna": "sp_j",
+    "nip": "0000000336",
+    "regon": "000000030",
+    "krs": "0000900003",
+    "sad_rejestrowy": "Sąd Rejonowy Testowo, II Wydział Gospodarczy KRS (dane testowe)",
+    "kapital_zakladowy": null,
+    "wlasciciel": null,
+    "wspolnicy": null,
+    "samorzad_zawodowy": null
+  },
+  "marka": {
+    "logo": "assets/img/logo.png",
+    "logo_na_ciemnym": null,
+    "logo_szerokosc": 140,
+    "kolor": "#2F6B3A",
+    "kolor_zrodlo": "fikstura testowa (tools/testy/klienci/generuj.py) — dane wymyślone",
+    "kolor_dodatkowy": null,
+    "tlo": "biale",
+    "font_naglowki": "barlow-condensed",
+    "font_tekst": "barlow",
+    "promien": 4,
+    "sekcja_ciemna": "stopka"
+  },
+  "seo": {
+    "fraza": "Serwis rowerowy",
+    "miasto": "Testowo",
+    "opis": "Serwis Próbny w Testowie (dane fikcyjne): naprawy i przeglądy rowerów, cennik usług, termin zwykle w 2 dni robocze."
+  },
+  "social": {
+    "facebook": null,
+    "instagram": null,
+    "google_maps": "https://mapy.example/serwis-probny",
+    "linkedin": null,
+    "youtube": null,
+    "tiktok": null
+  },
+  "funkcje": {
+    "hosting": "cloudflare",
+    "formularz": {
+      "tryb": "mailto",
+      "adresat": null,
+      "zgoda_checkbox": true
+    },
+    "mapa": "link",
+    "statystyki_cf_token": null,
+    "tytul_tryb": "fraza",
+    "telefon_w_naglowku": null,
+    "etykiety_sekcji": false,
+    "animacje": "brak",
+    "myslnik": "pauza",
+    "boty_ai": "zezwol",
+    "hsts_subdomeny": false,
+    "hsts_preload": false,
+    "faq_schema": true,
+    "strona_dostepnosci": false,
+    "rss": false
+  },
+  "opinie_zbiorczo": null,
+  "zrodla": {
+    "firma": "fikstura testowa (tools/testy/klienci/generuj.py) — dane wymyślone"
+  },
+  "do_potwierdzenia": [],
+  "przekierowania": null,
+  "dostepnosc": null
+}

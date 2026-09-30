@@ -1,0 +1,10 @@
+{# Okruszki podstrony (BreadcrumbList w JSON-LD powstaje z tych samych danych). #}
+{% if strona.okruszki %}
+<nav class="okruszki" aria-label="Okruszki">
+  <ol>
+    {% for o in strona.okruszki %}
+    <li>{% if o.url %}<a href="{{ o.url | url }}">{{ o.nazwa }}</a>{% else %}<span aria-current="page">{{ o.nazwa }}</span>{% endif %}</li>
+    {% endfor %}
+  </ol>
+</nav>
+{% endif %}

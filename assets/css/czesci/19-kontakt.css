@@ -1,0 +1,62 @@
+/* 19 — kontakt: adres i trasa, działy z telefonami, tabela godzin (dzisiejszy wiersz podświetla 20-godziny.js),
+   mapa po kliknięciu, zapytanie. */
+.kontakt__siatka { display: grid; gap: var(--s-7); }
+.kontakt__h { font-size: var(--fs-h3); margin-bottom: var(--s-4); }
+.kontakt__wstep { margin-bottom: var(--s-7); }
+.kontakt__nap { font-size: var(--fs-lead); line-height: 1.5; }
+.kontakt__nap strong { font-weight: var(--fw-mocna); }
+.kontakt__trasa { margin-top: var(--s-5); }
+.kontakt__opis { margin-top: var(--s-4); color: var(--tekst-2); max-width: 46ch; }
+.kontakt__meta { margin-top: var(--s-4); color: var(--tekst-2); }
+.kontakt__email { margin-top: var(--s-5); }
+.kontakt__formularz > p + p { margin-top: var(--s-4); }
+
+/* każdy blok kontaktu zaczyna się tą samą linią nad nagłówkiem — „Adres” i „Telefony” w jednym rzędzie */
+.kontakt__adres, .kontakt__telefony, .kontakt__godziny, .kontakt__formularz { border-top: 1px solid var(--tekst); padding-top: var(--s-4); }
+.dzialy__poz { display: grid; gap: var(--s-1); padding-block: var(--s-5); border-bottom: 1px solid var(--linia); }
+.dzialy__nazwa { font-weight: var(--fw-mocna); }
+.dzialy__opis { color: var(--tekst-2); }
+.dzialy__tel {
+  justify-self: start; margin-top: var(--s-2);
+  font-family: var(--font-naglowki); font-weight: var(--fw-naglowki); font-size: var(--fs-h3); line-height: 1.2;
+  color: var(--tekst); text-decoration-color: var(--marka); text-decoration-thickness: 3px; text-underline-offset: .22em;
+}
+.dzialy__tel:hover { text-decoration-color: var(--tekst); }
+.dzialy__email { justify-self: start; }
+@media (min-width: 600px) {
+  .dzialy__poz { grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--s-6); align-items: baseline; }
+  .dzialy__nazwa, .dzialy__opis, .dzialy__email { grid-column: 1; }
+  .dzialy__tel { grid-column: 2; grid-row: 1 / span 2; margin-top: 0; }
+}
+
+.godziny { width: 100%; max-width: 30rem; font-variant-numeric: tabular-nums; border-top: 1px solid var(--tekst); }
+.godziny th, .godziny td { padding: var(--s-2) 0; text-align: left; border-bottom: 1px solid var(--linia); font-weight: var(--fw-tekst); }
+.godziny td { text-align: right; }
+.godziny tr.is-zamkniete td { color: var(--tekst-2); }
+.godziny tr.is-dzis th, .godziny tr.is-dzis td { font-weight: var(--fw-mocna); color: var(--tekst); }
+.godziny tr.is-dzis th::after { content: " – dziś"; font-weight: var(--fw-tekst); color: var(--tekst-2); }
+.kontakt__godziny .status { margin-bottom: var(--s-4); }
+.godziny__dodatkowe, .godziny__wyjatki { margin-top: var(--s-4); }
+.godziny__wyjatki { display: grid; gap: var(--s-1); }
+
+/* mapa bez pudełka (jedyne szare, zaokrąglone pole na stronie czytało się jak karta) — linia nad nią, jak w reszcie */
+.mapa { margin-top: var(--s-6); padding: var(--s-4) 0 0; border-top: 1px solid var(--linia); }
+.mapa__opis { color: var(--tekst-2); margin-bottom: var(--s-4); }
+.mapa__akcje { display: flex; flex-wrap: wrap; gap: var(--s-4); align-items: center; }
+.mapa__ramka { width: 100%; height: 360px; border: 0; }
+/* po kliknięciu: ramka na całą szerokość, link do OpenStreetMap zostaje pod nią */
+.mapa:has(.mapa__ramka) .mapa__akcje { padding-top: var(--s-3); }
+
+/* ≥ 960: lewa kolumna — adres, pod nim godziny albo zapytanie; prawa — telefony (na dwa wiersze, gdy trzeci blok
+   jest jeden). Wszystkie cztery bloki (--pelna): godziny pod adresem, zapytanie pod telefonami. */
+@media (min-width: 960px) {
+  .kontakt__siatka { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--s-6); row-gap: var(--s-8); align-items: start; }
+  .kontakt__adres, .kontakt__godziny, .kontakt__formularz { grid-column: 1 / 6; }
+  .kontakt__telefony { grid-column: 7 / 13; grid-row: 1 / span 2; }
+  .kontakt__siatka--pelna .kontakt__telefony { grid-row: auto; }
+  /* trzy bloki z godzinami (salon producenta, lokal): godziny pod telefonami, nie pod adresem — prawa kolumna nie
+     jest wtedy trzema wierszami tekstu rozciągniętymi na dwa rzędy */
+  .kontakt__siatka:not(.kontakt__siatka--pelna):has(.kontakt__godziny) .kontakt__telefony { grid-row: auto; }
+  .kontakt__siatka:not(.kontakt__siatka--pelna) .kontakt__godziny { grid-column: 7 / 13; }
+  .kontakt__siatka--pelna .kontakt__formularz { grid-column: 7 / 13; }
+}

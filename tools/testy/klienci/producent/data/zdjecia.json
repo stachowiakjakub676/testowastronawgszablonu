@@ -1,0 +1,126 @@
+{
+  "$schema": "../../../../../tools/schemat/zdjecia.schema.json",
+  "wersja_danych": 1,
+  "zdjecia": [
+    {
+      "id": "hala",
+      "zrodlo_plik": "brief/zdjecia/hala.jpg",
+      "alt": "Zdjęcie zastępcze: jednolite tło z napisem „zdjęcie testowe: hala produkcyjna”",
+      "podpis": null,
+      "zrodlo": "zdjęcie zastępcze wygenerowane przez tools/testy/klienci/generuj.py",
+      "autor": null,
+      "zgoda": null,
+      "osoby": false,
+      "punkt": [
+        0.5,
+        0.5
+      ],
+      "kadr_mobilny": null
+    },
+    {
+      "id": "salon",
+      "zrodlo_plik": "brief/zdjecia/salon.jpg",
+      "alt": "Zdjęcie zastępcze: jednolite tło z napisem „zdjęcie testowe: salon firmowy”",
+      "podpis": "Salon firmowy (zdjęcie testowe)",
+      "zrodlo": "zdjęcie zastępcze wygenerowane przez tools/testy/klienci/generuj.py",
+      "autor": null,
+      "zgoda": null,
+      "osoby": false,
+      "punkt": [
+        0.5,
+        0.5
+      ],
+      "kadr_mobilny": null
+    },
+    {
+      "id": "produkt-1",
+      "zrodlo_plik": "brief/zdjecia/produkt-1.jpg",
+      "alt": "Zdjęcie zastępcze: jednolite tło z napisem „zdjęcie testowe: stół dębowy 160”",
+      "podpis": null,
+      "zrodlo": "zdjęcie zastępcze wygenerowane przez tools/testy/klienci/generuj.py",
+      "autor": null,
+      "zgoda": null,
+      "osoby": false,
+      "punkt": [
+        0.5,
+        0.5
+      ],
+      "kadr_mobilny": null
+    },
+    {
+      "id": "produkt-2",
+      "zrodlo_plik": "brief/zdjecia/produkt-2.jpg",
+      "alt": "Zdjęcie zastępcze: jednolite tło z napisem „zdjęcie testowe: stół rozkładany 120–200”",
+      "podpis": null,
+      "zrodlo": "zdjęcie zastępcze wygenerowane przez tools/testy/klienci/generuj.py",
+      "autor": null,
+      "zgoda": null,
+      "osoby": false,
+      "punkt": [
+        0.5,
+        0.5
+      ],
+      "kadr_mobilny": null
+    },
+    {
+      "id": "produkt-4",
+      "zrodlo_plik": "brief/zdjecia/produkt-4.jpg",
+      "alt": "Zdjęcie zastępcze: jednolite tło z napisem „zdjęcie testowe: krzesło tapicerowane”",
+      "podpis": null,
+      "zrodlo": "zdjęcie zastępcze wygenerowane przez tools/testy/klienci/generuj.py",
+      "autor": null,
+      "zgoda": null,
+      "osoby": false,
+      "punkt": [
+        0.5,
+        0.5
+      ],
+      "kadr_mobilny": null
+    },
+    {
+      "id": "produkt-5",
+      "zrodlo_plik": "brief/zdjecia/produkt-5.jpg",
+      "alt": "Zdjęcie zastępcze: jednolite tło z napisem „zdjęcie testowe: krzesło barowe”",
+      "podpis": null,
+      "zrodlo": "zdjęcie zastępcze wygenerowane przez tools/testy/klienci/generuj.py",
+      "autor": null,
+      "zgoda": null,
+      "osoby": false,
+      "punkt": [
+        0.5,
+        0.5
+      ],
+      "kadr_mobilny": null
+    },
+    {
+      "id": "produkt-7",
+      "zrodlo_plik": "brief/zdjecia/produkt-7.jpg",
+      "alt": "Zdjęcie zastępcze: jednolite tło z napisem „zdjęcie testowe: szafa dwudrzwiowa”",
+      "podpis": null,
+      "zrodlo": "zdjęcie zastępcze wygenerowane przez tools/testy/klienci/generuj.py",
+      "autor": null,
+      "zgoda": null,
+      "osoby": false,
+      "punkt": [
+        0.5,
+        0.5
+      ],
+      "kadr_mobilny": null
+    },
+    {
+      "id": "produkt-8",
+      "zrodlo_plik": "brief/zdjecia/produkt-8.jpg",
+      "alt": "Zdjęcie zastępcze: jednolite tło z napisem „zdjęcie testowe: komoda czterodrzwiowa”",
+      "podpis": null,
+      "zrodlo": "zdjęcie zastępcze wygenerowane przez tools/testy/klienci/generuj.py",
+      "autor": null,
+      "zgoda": null,
+      "osoby": false,
+      "punkt": [
+        0.5,
+        0.5
+      ],
+      "kadr_mobilny": null
+    }
+  ]
+}

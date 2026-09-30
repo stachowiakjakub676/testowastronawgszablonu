@@ -1,0 +1,98 @@
+{# wymaga: tresc.realizacje.pozycje #}
+{# Realizacje (KONTRAKT §4.2, §6.2; web-smb-best U5): tytuł „{miejsce} – {typ}”, rok, jeden parametr, klient
+   (prywatna: true → „Klient prywatny”, miejsce bez ulicy pilnuje dane.py), własne zdjęcia — pierwsze duże.
+   Nazwę kategorii, podpisy zdjęć i liczniki wylicza auto.realizacje (dane.py); tekst pozycji: czesci/realizacja-tekst.html.
+   - tryb="skrot" (główna): pierwsze `limit` pozycji — ze zdjęciem w rozkładówce (szeroka 3:2 + wąska 5:6, na przemian),
+     bez zdjęcia w liście pod nią; link do /realizacje, gdy powstała; bez podstrony — wszystkie, a ponad limit
+     „Pokaż więcej” (50-filtr.js; bez JS widać wszystko);
+   - tryb="pelny" (/realizacje): filtr kategorii (linki ?kategoria=, 50-filtr.js; bez JS filtra nie ma, widać wszystko),
+     każda realizacja w wierszu: zdjęcia obok tekstu (co druga odbita), opis, źródło. #}
+{% set r = auto.realizacje %}
+{% set pelny = tryb == "pelny" %}
+{% set do_podstrony = not pelny and sekcja.strona and limit and r.liczba > limit %}
+{% if do_podstrony %}
+{% set pozycje = r.pozycje | pierwsze:limit %}
+{% else %}
+{% set pozycje = r.pozycje %}
+{% endif %}
+{% set zwijaj = not pelny and not do_podstrony and limit and r.liczba > limit %}
+{% set z_filtrem = pelny and r.filtr %}
+<section class="section{% if sekcja.klasa %} {{ sekcja.klasa }}{% endif %} realizacje{% if pelny %} realizacje--pelna{% endif %}" id="{{ sekcja.html_id }}" aria-labelledby="{% if bez_naglowka %}tytul-strony{% else %}realizacje-h{% endif %}">
+  <div class="wrap"{% if z_filtrem %} data-filtr{% endif %}>
+    {% if not bez_naglowka %}
+    <div class="section__head">
+      <h2 id="realizacje-h">{{ sekcja.naglowek }}</h2>
+      {% if tresc.realizacje.wstep %}
+      <p class="section__lead">{{ tresc.realizacje.wstep }}</p>
+      {% endif %}
+    </div>
+    {% endif %}
+    {% if z_filtrem %}
+    <div class="filtr">
+      <nav class="filtr__nav" aria-label="Rodzaj realizacji">
+        <ul class="filtr__lista">
+          <li><a class="filtr__link" href="{{ strona.sciezka | url }}" data-kategoria="" aria-current="true">Wszystkie <span class="filtr__n">{{ r.liczba }}</span></a></li>
+          {% for k in r.kategorie %}
+          <li><a class="filtr__link" href="{{ strona.sciezka | url }}?kategoria={{ k.slug }}" data-kategoria="{{ k.slug }}">{{ k.nazwa }} <span class="filtr__n">{{ k.liczba }}</span></a></li>
+          {% endfor %}
+        </ul>
+      </nav>
+      {# liczba widocznych jest już w zakładce — komunikat tylko dla czytnika ekranu #}
+      <p class="wizualnie-ukryte" data-filtr-status aria-live="polite"></p>
+    </div>
+    {% endif %}
+    <div class="realizacje__listy" id="realizacje-lista"{% if zwijaj %} data-wiecej{% endif %}>
+      {% if pelny %}
+      <ul class="realizacje__lista realizacje__lista--wiersze">
+        {% for p in pozycje %}
+        <li class="realizacja{% if not p.zdjecia %} realizacja--bez-zdjec{% endif %}"{% if z_filtrem %} data-filtr-element="{{ p.kategoria | domyslnie:"" }}"{% endif %}>
+          <div class="realizacja__tekst">
+            {% include "czesci/realizacja-tekst.html" %}
+          </div>
+          {% if p.zdjecia %}
+          <div class="realizacja__zdjecia">
+            {% for z in p.zdjecia %}
+            <figure class="realizacja__foto{% if petla.pierwszy %} realizacja__foto--glowne{% endif %}">
+              {% if petla.pierwszy %}{{ z.id | obraz:"pol" }}{% else %}{{ z.id | obraz:"tercja" }}{% endif %}
+              {% if z.podpis %}
+              <figcaption>{{ z.podpis }}</figcaption>
+              {% endif %}
+            </figure>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <ul class="realizacje__lista realizacje__lista--siatka">
+        {% for p in pozycje %}
+        {% if p.zdjecia %}
+        <li class="realizacja"{% if zwijaj and petla.indeks > limit %} data-wiecej-reszta{% endif %}>
+          <div class="realizacja__tekst">
+            {% include "czesci/realizacja-tekst.html" %}
+          </div>
+          <div class="realizacja__foto">{{ p.zdjecia.0.id | obraz:"pol" }}</div>
+        </li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+      <ul class="realizacje__lista realizacje__lista--tekst">
+        {% for p in pozycje %}
+        {% if not p.zdjecia %}
+        <li class="realizacja realizacja--bez-zdjec"{% if zwijaj and petla.indeks > limit %} data-wiecej-reszta{% endif %}>
+          {% include "czesci/realizacja-tekst.html" %}
+        </li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+    {% if zwijaj %}
+    <p class="wiecej"><button class="btn btn--secondary" type="button" data-wiecej-przycisk aria-controls="realizacje-lista" hidden>Pokaż wszystkie realizacje ({{ r.liczba }})</button></p>
+    {% endif %}
+    {% if do_podstrony %}
+    <p class="section__wiecej"><a href="{{ sekcja.strona | url }}">Wszystkie realizacje ({{ r.liczba }})</a></p>
+    {% endif %}
+  </div>
+</section>

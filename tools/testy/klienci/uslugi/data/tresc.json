@@ -1,0 +1,256 @@
+{
+  "$schema": "../../../../../tools/schemat/tresc.schema.json",
+  "$komentarz": "FIKSTURA TESTOWA — treść wymyślona do sprawdzenia modułów szablonu (generuj.py).",
+  "wersja_danych": 1,
+  "hero": {
+    "naglowek": "Serwis rowerowy w Testowie",
+    "lead": "Przegląd od 120 zł, większość napraw w 2 dni robocze. Dane i zdjęcia na tej stronie są testowe.",
+    "zdjecie": "warsztat",
+    "podpis": null,
+    "cta_glowne": null,
+    "cta_drugie": {
+      "tekst": "Zobacz cennik",
+      "href": "/oferta"
+    }
+  },
+  "ogloszenie": null,
+  "oferta": {
+    "naglowek": null,
+    "wstep": null,
+    "pozycje": [
+      {
+        "slug": "przeglad",
+        "nazwa": "Przegląd roweru",
+        "opis": "Regulacja hamulców i przerzutek, smarowanie.",
+        "zakres": [
+          "hamulce",
+          "przerzutki",
+          "łożyska",
+          "koła"
+        ],
+        "cena": 120,
+        "jednostka": null,
+        "czas": "1–2 dni",
+        "zdjecie": "naprawa",
+        "tresc": "tresc/uslugi/przeglad.md"
+      },
+      {
+        "slug": "naprawy",
+        "nazwa": "Naprawy",
+        "opis": "Wymiana części, centrowanie kół.",
+        "zakres": null,
+        "cena": {
+          "od": 40
+        },
+        "jednostka": null,
+        "czas": null,
+        "zdjecie": null,
+        "tresc": null
+      },
+      {
+        "slug": "dopasowanie",
+        "nazwa": "Dopasowanie roweru",
+        "opis": "Ustawienie siodła i kierownicy.",
+        "zakres": null,
+        "cena": 200,
+        "jednostka": null,
+        "czas": "1 h",
+        "zdjecie": null,
+        "tresc": null
+      },
+      {
+        "slug": "przechowanie",
+        "nazwa": "Przechowanie na zimę",
+        "opis": null,
+        "zakres": null,
+        "cena": 25,
+        "jednostka": "mies.",
+        "czas": null,
+        "zdjecie": null,
+        "tresc": null
+      }
+    ]
+  },
+  "cennik": {
+    "naglowek": null,
+    "dla": "konsumenci",
+    "data": "2026-09-11",
+    "uwagi": "Ceny brutto (dane testowe).",
+    "pdf": null,
+    "grupy": [
+      {
+        "nazwa": "Hamulce",
+        "pozycje": [
+          {
+            "nazwa": "Regulacja hamulca",
+            "opis": null,
+            "cena": 20,
+            "jednostka": null,
+            "czas": "15 min"
+          },
+          {
+            "nazwa": "Odpowietrzenie hydrauliki",
+            "opis": "jedno koło",
+            "cena": 70,
+            "jednostka": null,
+            "czas": "45 min"
+          }
+        ]
+      },
+      {
+        "nazwa": "Koła",
+        "pozycje": [
+          {
+            "nazwa": "Centrowanie",
+            "opis": null,
+            "cena": {
+              "od": 30,
+              "do": 60
+            },
+            "jednostka": null
+          },
+          {
+            "nazwa": "Wymiana dętki",
+            "opis": "bez części",
+            "cena": 15,
+            "jednostka": null
+          },
+          {
+            "nazwa": "Wymiana szprychy",
+            "opis": null,
+            "cena": 12.5,
+            "jednostka": "szt."
+          }
+        ]
+      },
+      {
+        "nazwa": "Napęd",
+        "pozycje": [
+          {
+            "nazwa": "Wymiana łańcucha",
+            "opis": null,
+            "cena": 25,
+            "jednostka": null
+          },
+          {
+            "nazwa": "Diagnoza",
+            "opis": null,
+            "cena": 0,
+            "jednostka": null
+          }
+        ]
+      }
+    ]
+  },
+  "menu": null,
+  "produkty": null,
+  "realizacje": null,
+  "przetargi": null,
+  "proces": {
+    "naglowek": null,
+    "wstep": null,
+    "kroki": [
+      {
+        "nazwa": "Zadzwoń i umów termin",
+        "opis": null,
+        "czas": null
+      },
+      {
+        "nazwa": "Zostaw rower",
+        "opis": "Wycena przed naprawą — bez zgody nic nie wymieniamy.",
+        "czas": "wycena w 1 dzień"
+      },
+      {
+        "nazwa": "Odbierz",
+        "opis": null,
+        "czas": "zwykle w 2 dni robocze"
+      }
+    ]
+  },
+  "zasady": {
+    "naglowek": null,
+    "wstep": null,
+    "pozycje": [
+      {
+        "nazwa": "Gwarancja",
+        "opis": "3 miesiące na robociznę."
+      },
+      {
+        "nazwa": "Rower nieodebrany",
+        "opis": "Po 30 dniach naliczamy przechowanie 25 zł miesięcznie."
+      }
+    ]
+  },
+  "o_firmie": null,
+  "zespol": {
+    "naglowek": null,
+    "wstep": null,
+    "osoby": [
+      {
+        "imie": "Ewa Testowa",
+        "rola": "właścicielka, mechanik",
+        "fakt": "serwisuje rowery od 2010 r.",
+        "zdjecie": "osoba-a",
+        "zgoda": true
+      },
+      {
+        "imie": "Tomasz",
+        "rola": "mechanik",
+        "fakt": null,
+        "zdjecie": "osoba-b",
+        "zgoda": false
+      },
+      {
+        "imie": "Kasia",
+        "rola": "przyjęcia i wydania",
+        "fakt": null,
+        "zdjecie": null,
+        "zgoda": false
+      }
+    ]
+  },
+  "liczby": null,
+  "opinie": {
+    "naglowek": null,
+    "weryfikacja": "Cytujemy opinie z serwisu opinie.example (test); nie sprawdzamy, czy autor był klientem.",
+    "pozycje": [
+      {
+        "tekst": "Testowa opinia: rower gotowy następnego dnia, cena zgodna z wyceną.",
+        "autor": "Ola",
+        "miejscowosc": "Testowo",
+        "data": "2026-09-19",
+        "url": "https://opinie.example/serwis-probny/1"
+      },
+      {
+        "tekst": "Testowa opinia bez linku — build ostrzega, że cytatu nie da się sprawdzić.",
+        "autor": "Michał",
+        "miejscowosc": null,
+        "data": null,
+        "url": null
+      }
+    ]
+  },
+  "certyfikaty": null,
+  "faq": {
+    "naglowek": null,
+    "pozycje": [
+      {
+        "pytanie": "Czy trzeba się umawiać?",
+        "odpowiedz": "Na przegląd tak, drobne naprawy od ręki."
+      },
+      {
+        "pytanie": "Czy naprawiacie rowery elektryczne?",
+        "odpowiedz": "Tak, poza silnikiem i baterią."
+      }
+    ]
+  },
+  "galeria": null,
+  "do_pobrania": null,
+  "kariera": null,
+  "wspolpraca": null,
+  "gdzie_kupic": null,
+  "kontakt": {
+    "naglowek": null,
+    "wstep": null
+  }
+}

@@ -1,0 +1,36 @@
+{# wymaga: tresc.hero.naglowek #}
+{# Hero: h1 = co + gdzie, jedno zdanie konkretu, status godzin (miejsca otwarte dla klientów), dwie akcje, własne zdjęcie.
+   Zdjęcie: <picture> z fetchpriority="high" — nigdy tło CSS ani lazy (LCP). #}
+<section class="hero" id="{{ sekcja.html_id }}" aria-labelledby="hero-h">
+  <div class="wrap hero__siatka{% if not tresc.hero.zdjecie %} hero__siatka--typo{% endif %}">
+    <div class="hero__tekst">
+      <h1 id="hero-h">{{ tresc.hero.naglowek }}</h1>
+      {% if tresc.hero.lead %}
+      <p class="hero__lead">{{ tresc.hero.lead }}</p>
+      {% endif %}
+      <p class="hero__info">
+        {% if auto.status_w_hero %}
+        <span class="status" data-status{% if firma.godziny.nazwa %} data-nazwa="{{ firma.godziny.nazwa }}"{% endif %} aria-live="polite">{{ auto.godziny_skrot }}</span>
+        {% endif %}
+        <span>{{ auto.adres_linia_html }}</span>
+      </p>
+      {% if auto.cta_glowne or auto.cta_drugie %}
+      <div class="hero__akcje" data-ukryj-pasek>
+        {% if auto.cta_glowne %}
+        <a class="btn btn--primary" href="{{ auto.cta_glowne.href | url }}">{{ auto.cta_glowne.tekst }}</a>
+        {% endif %}
+        {% if auto.cta_drugie %}
+        <a class="btn btn--secondary" href="{{ auto.cta_drugie.href | url }}">{{ auto.cta_drugie.tekst }}</a>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+    {% if tresc.hero.zdjecie %}
+    {# bez podpisu pod zdjęciem: h1 obok mówi już, co to za miejsce (tresc.hero.podpis zostaje w danych, ale na stronie
+       go nie ma — opis zdjęcia jest w alt) #}
+    <figure class="hero__foto">
+      {{ tresc.hero.zdjecie | obraz:"hero" }}
+    </figure>
+    {% endif %}
+  </div>
+</section>

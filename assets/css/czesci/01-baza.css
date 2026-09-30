@@ -1,0 +1,221 @@
+/* 01 — baza: stałe (KONTRAKT §7.2), typografia, linki, fokus, .wrap, .section, .prose, przyciski, formularze, tabele.
+   Kolory i kroje (--tlo, --tekst, --marka…, --font-*) wstawia build na początku pliku z data/firma.json → marka. */
+:root {
+  --fs-body: clamp(1.0625rem, 1rem + .25vw, 1.125rem);
+  --lh-body: 1.6;
+  --fs-lead: clamp(1.125rem, 1.05rem + .4vw, 1.3125rem);
+  --fs-h1: clamp(2.25rem, 1.2rem + 4.5vw, 4.5rem);
+  --fs-h2: clamp(1.75rem, 1.2rem + 2.2vw, 3rem);
+  --fs-h3: clamp(1.25rem, 1.1rem + .6vw, 1.625rem);
+  --fs-maly: 1rem;
+  --fs-meta: 1rem;             /* podpisy i metryczki: ≥ 16 px, cisza przez kolor (--tekst-2), nie przez rozmiar */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px;
+  --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px; --s-10: 128px;
+  --max: 1440px;
+  --gutter: clamp(16px, 4vw, 56px);
+  --prose: 65ch;
+  --section-y-sm: clamp(48px, 6vw, 80px);
+  --section-y: clamp(56px, 6vw, 96px);
+  --section-y-lg: clamp(96px, 12vw, 176px);
+  --header-h: 64px;
+  --callbar-h: 56px;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --dur: 180ms;
+  color-scheme: light;
+}
+@media (min-width: 960px) { :root { --header-h: 72px; } }
+
+html { scroll-padding-top: calc(var(--header-h) + 8px); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0s !important; animation-duration: 0s !important; }
+}
+
+body {
+  background: var(--tlo);
+  color: var(--tekst);
+  font-family: var(--font-tekst);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-tekst);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---------- typografia ---------- */
+h1, h2, h3, h4 {
+  font-family: var(--font-naglowki);
+  font-weight: var(--fw-naglowki);
+  color: var(--tekst);
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  hyphens: manual;
+}
+h1 { font-size: var(--fs-h1); line-height: 1.04; letter-spacing: -.02em; }
+h2 { font-size: var(--fs-h2); line-height: 1.08; letter-spacing: -.015em; }
+h3 { font-size: var(--fs-h3); line-height: 1.2; letter-spacing: -.01em; }
+h4 { font-size: var(--fs-body); line-height: 1.35; }
+p, li, dd { text-wrap: pretty; }
+strong, b { font-weight: var(--fw-mocna); }
+small { font-size: var(--fs-meta); }
+
+a { color: var(--marka-tekst); text-decoration-line: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; }
+a:hover { text-decoration-thickness: 2px; }
+.tel, a[href^="tel:"] { white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+main:focus { outline: none; }
+::selection { background: var(--marka-jasna); color: var(--tekst); }
+
+.lead { font-size: var(--fs-lead); line-height: 1.5; color: var(--tekst-2); max-width: 52ch; }
+h1 + .lead { margin-top: var(--s-4); }
+.nowrap { white-space: nowrap; }
+.meta { font-size: var(--fs-meta); color: var(--tekst-2); }
+.num { font-variant-numeric: tabular-nums; }
+.wizualnie-ukryte {
+  position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.skip {
+  position: absolute; left: var(--s-4); top: var(--s-2); z-index: 100;
+  padding: var(--s-3) var(--s-5); background: var(--tekst); color: var(--tlo);
+  font-weight: var(--fw-mocna); text-decoration: none; transform: translateY(-200%);
+}
+.skip:focus { transform: none; }
+
+/* ---------- siatka i sekcje ---------- */
+.wrap { width: 100%; max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
+
+/* więcej powietrza nad nagłówkiem niż pod ostatnim wierszem — sekcje nie „pływają” w równych pasach */
+.section { padding-block: var(--section-y) var(--section-y-sm); }
+.section--sm { padding-block: var(--section-y-sm); }
+.section--lg { padding-block: var(--section-y-lg); }
+.section--tint { background: var(--tlo-2); }
+/* ciemna sekcja: te same komponenty, podmienione tokeny */
+.section--dark, .site-footer--ciemna {
+  --tlo: var(--ciemne);
+  --tlo-2: var(--ciemne);
+  --tekst: var(--na-ciemnym);
+  --tekst-2: var(--na-ciemnym-2);
+  --linia: var(--linia-na-ciemnym);
+  --linia-mocna: var(--na-ciemnym-2);
+  --marka-tekst: var(--akcent-na-ciemnym);
+  --focus: var(--focus-na-ciemnym);
+  background: var(--ciemne);
+  color: var(--tekst);
+  color-scheme: dark;
+}
+
+/* nagłówek sekcji: mocna linia na górze, h2 po lewej, wstęp po prawej (≥ 960) */
+.section__head {
+  display: grid; gap: var(--s-4) var(--s-6);
+  padding-top: var(--s-5); margin-bottom: var(--s-7);
+  border-top: 1px solid var(--tekst);
+}
+.section__head h2 { max-width: 20ch; }
+.section__lead { font-size: var(--fs-lead); line-height: 1.5; color: var(--tekst-2); max-width: 48ch; }
+@media (min-width: 960px) {
+  .section__head { grid-template-columns: repeat(12, minmax(0, 1fr)); margin-bottom: var(--s-8); }
+  .section__head h2 { grid-column: 1 / 8; }
+  /* wstęp zaczyna się na wysokości pierwszego wiersza nagłówka (przy align-self: end trzywierszowy wstęp wystawał
+     ponad h2) */
+  .section__head .section__lead { grid-column: 8 / 13; align-self: start; padding-top: .35em; }
+}
+/* link „więcej” pod listą (do podstrony): jeden styl w każdej sekcji; przycisk z obrysem tylko dla rozwinięcia
+   w miejscu (.wiecej button, 50-filtr.js) */
+.section__wiecej { margin-top: var(--s-5); }
+.section__wiecej a { font-weight: var(--fw-mocna); }
+.section__wiecej a::after { content: " →" / ""; }
+
+/* nagłówek z boku (krótkie sekcje: zasady, do pobrania, aktualności, współpraca, gdzie kupić — jak pytania):
+   od 960 px h2 w kolumnach 1–4, treść w 5–12, a górna linia nagłówka i treści czyta się jak jedna.
+   Niżej: pod nagłówkiem sekcji (czarna linia) pierwsza linia treści jest cienka — bez dwóch czarnych linii nad
+   samotnym h2. */
+.section__head + .wpisy, .section__head + .pliki, .section__head + .zasady__lista,
+.section__head + .otwarcie__siatka .otwarcie__tabela, .section__head + .wspolpraca__siatka .warunki {
+  border-top-color: var(--linia);
+}
+@media (min-width: 960px) {
+  .bok { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--s-6); align-items: start; }
+  .bok > .section__head { display: block; grid-column: 1 / 5; margin-bottom: 0; }
+  .bok > .section__head .section__lead { margin-top: var(--s-4); padding-top: 0; }
+  .bok > :not(.section__head) { grid-column: 5 / 13; }
+  .bok > .wpisy, .bok > .pliki, .bok > .zasady__lista, .bok > .wspolpraca__siatka {
+    border-top: 1px solid var(--tekst); padding-top: var(--s-5);
+  }
+  .bok > .wpisy, .bok > .pliki { padding-top: 0; }
+  .bok > .punkty:not(.punkty--grupy) .punkty__lista { border-top-color: var(--tekst); }
+}
+
+.siatka-12 { display: grid; gap: var(--s-6); }
+@media (min-width: 960px) { .siatka-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); } }
+
+/* ---------- tekst długi ---------- */
+.prose { max-width: var(--prose); }
+.prose > * + * { margin-top: 1em; }
+.prose h2 { font-size: var(--fs-h3); margin-top: 2em; }
+.prose h3 { font-size: 1.1875rem; margin-top: 1.6em; }
+.prose h2 + *, .prose h3 + * { margin-top: .6em; }
+.prose > :first-child { margin-top: 0; }
+.prose ul, .prose ol { padding-left: 1.25em; }
+.prose li + li { margin-top: .35em; }
+
+/* ---------- przyciski ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--s-3);
+  min-height: 48px; padding: 10px var(--s-5);
+  border: 1px solid transparent; border-radius: var(--radius-ctl);
+  font-family: var(--font-tekst); font-size: 1rem; font-weight: var(--fw-mocna); line-height: 1.2;
+  text-align: center; text-decoration: none;
+  transition: background-color var(--dur) var(--ease), border-color var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+/* --przycisk-ramka = --przycisk, a gdy kolor marki ma < 3:1 z tłem (żółty, jasny) — ciemna ramka (kolory.py) */
+.btn--primary { background: var(--przycisk); border-color: var(--przycisk-ramka); color: var(--na-przycisku); }
+.btn--primary:hover { background: var(--przycisk-hover); border-color: var(--przycisk-ramka-hover); text-decoration: none; }
+.btn--secondary { background: transparent; border-color: var(--linia-mocna); color: var(--tekst); }
+.btn--secondary:hover { border-color: var(--tekst); background: var(--tlo-2); text-decoration: none; }
+.btn:disabled { opacity: .6; cursor: progress; }
+
+.lista-linkow { display: grid; gap: var(--s-2); margin-top: var(--s-6); }
+.lista-linkow a { font-size: var(--fs-lead); }
+
+/* ---------- status godzin (wypełnia 20-godziny.js) ---------- */
+.status { display: inline-flex; align-items: baseline; gap: var(--s-2); font-variant-numeric: tabular-nums; }
+.status.is-otwarte::before, .status.is-zamkniete::before {
+  content: ""; flex: none; width: .55em; height: .55em; border-radius: 50%; transform: translateY(-.05em);
+}
+.status.is-otwarte::before { background: var(--ok); }
+.status.is-zamkniete::before { background: var(--blad); }
+.status.is-otwarte { color: var(--tekst); font-weight: var(--fw-mocna); }
+
+/* ---------- tabele ---------- */
+.tabela { width: 100%; font-variant-numeric: tabular-nums; }
+.tabela th, .tabela td { padding: var(--s-3) var(--s-4) var(--s-3) 0; text-align: left; vertical-align: top; border-bottom: 1px solid var(--linia); }
+.tabela thead th { font-weight: var(--fw-mocna); color: var(--tekst-2); border-bottom-color: var(--tekst); }
+.tabela th:last-child, .tabela td:last-child { padding-right: 0; }
+
+/* ---------- formularze ---------- */
+.pole { display: grid; gap: var(--s-2); margin-bottom: var(--s-5); }
+.pole label { font-weight: var(--fw-mocna); }
+.pole input:not([type="checkbox"]), .pole textarea, .pole select {
+  width: 100%; min-height: 48px; padding: 10px 12px;
+  background: var(--tlo); color: var(--tekst);
+  border: 1px solid var(--linia-mocna); border-radius: var(--radius-ctl);
+  font-size: 1rem; line-height: 1.4;
+}
+.pole textarea { min-height: 160px; resize: vertical; }
+.pole input:hover, .pole textarea:hover { border-color: var(--tekst-2); }
+.pole [aria-invalid="true"] { border-color: var(--blad); border-width: 2px; }
+.pole__blad { color: var(--blad); font-size: var(--fs-maly); }
+.pole--zgoda { grid-template-columns: auto 1fr; align-items: start; gap: var(--s-3); }
+.pole--zgoda input { width: 24px; height: 24px; margin: 2px 0 0; accent-color: var(--przycisk); }
+.pole--zgoda label { font-weight: var(--fw-tekst); }
+.pole--pulapka { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.formularz__status:empty { display: none; }
+.formularz__status { margin-top: var(--s-4); font-weight: var(--fw-mocna); }
+.formularz__klauzula { margin-top: var(--s-5); font-size: var(--fs-maly); color: var(--tekst-2); max-width: 60ch; }
+
+/* ---------- zdjęcia ---------- */
+.foto img, img.foto { border-radius: var(--radius-img); }
+figcaption { font-size: var(--fs-meta); line-height: 1.4; color: var(--tekst-2); }

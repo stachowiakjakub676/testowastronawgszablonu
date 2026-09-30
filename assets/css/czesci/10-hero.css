@@ -1,0 +1,43 @@
+/* 10 — hero: na telefonie tekst, status i akcje w pierwszym ekranie (375 × 667), zdjęcie pod spodem na całą szerokość;
+   od 960 px układ dzielony 6/6 kolumn, zdjęcie z podpisem obok tekstu. */
+.hero { padding-block: var(--s-6) var(--section-y-sm); }
+.hero__siatka { display: grid; gap: var(--s-7); }
+.hero h1 { max-width: 17ch; }
+.hero__lead { margin-top: var(--s-5); font-size: var(--fs-lead); line-height: 1.5; color: var(--tekst-2); max-width: 44ch; }
+.hero__info {
+  display: flex; flex-wrap: wrap; gap: var(--s-1) var(--s-5);
+  margin-top: var(--s-5); padding-top: var(--s-4); border-top: 1px solid var(--linia);
+  font-size: var(--fs-maly); color: var(--tekst-2); max-width: 44ch;
+}
+.hero__akcje { display: flex; flex-wrap: wrap; gap: var(--s-3); margin-top: var(--s-6); }
+.hero__foto { margin-inline: calc(var(--gutter) * -1); }
+.hero__foto img { width: 100%; }
+.hero__foto figcaption { margin-top: var(--s-3); padding-inline: var(--gutter); }
+
+@media (max-width: 599px) {
+  .hero__akcje .btn { flex: 1 1 100%; }
+}
+@media (min-width: 600px) {
+  .hero__foto { margin-inline: 0; }
+  .hero__foto figcaption { padding-inline: 0; }
+}
+@media (min-width: 960px) {
+  .hero { padding-block: var(--s-9) var(--section-y-sm); }
+  .hero__siatka { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--s-6); align-items: center; }
+  .hero__tekst { grid-column: 1 / 7; }
+  .hero__foto { grid-column: 7 / 13; }
+  .hero__siatka--typo .hero__tekst { grid-column: 1 / 11; }
+  .hero__siatka--typo h1 { max-width: 22ch; }
+}
+@media (min-width: 1280px) {
+  .hero__tekst { grid-column: 1 / 6; }
+  .hero__foto { grid-column: 6 / 13; }
+}
+/* wysoki ekran: zdjęcie może urosnąć, ale nie wypycha tekstu poza pierwszy ekran */
+@media (min-width: 960px) and (min-height: 800px) {
+  .hero__foto img { max-height: calc(100vh - var(--header-h) - 200px); object-fit: cover; }
+}
+/* pod hero mniejszy odstęp niż między sekcjami (dół hero ma już --section-y-sm, razem było ok. 210 px pustego);
+   po ogłoszeniu pod hero — jeszcze mniejszy, ogłoszenie samo oddziela */
+.hero + .section { padding-top: var(--section-y-sm); }
+.hero + .ogloszenie + .section { padding-top: var(--s-7); }

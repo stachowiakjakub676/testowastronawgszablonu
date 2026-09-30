@@ -1,0 +1,293 @@
+{
+  "$schema": "../../../tools/schemat/tresc.schema.json",
+  "$komentarz": "Treść z poprzedniej strony BIMEX (/home/user/bimex/index.html) i jej źródeł. realizacje = null: firma nie dała opisów ani zdjęć konkretnych budów, a lista z BZP jest w przetargi (jedna informacja w jednym miejscu).",
+  "wersja_danych": 1,
+  "hero": {
+    "naglowek": "Roboty drogowe i beton towarowy w Rogoźnie",
+    "lead": "Rodzinna firma z Rogoźna, działamy od 1993 roku. Budujemy i remontujemy drogi, wykonujemy roboty wodno-kanalizacyjne, a w wytwórni przy ul. Fabrycznej produkujemy beton i prefabrykaty.",
+    "zdjecie": "wytwornia",
+    "podpis": "Wytwórnia betonu towarowego BIMEX w Rogoźnie",
+    "cta_glowne": {
+      "tekst": "Zamów beton: {tel}",
+      "href": "tel:+48662046714"
+    },
+    "cta_drugie": {
+      "tekst": "Zapytaj o roboty drogowe",
+      "href": "kontakt"
+    }
+  },
+  "ogloszenie": null,
+  "oferta": {
+    "naglowek": null,
+    "wstep": "Specjalizujemy się w budowach i remontach dróg o różnych typach nawierzchni oraz w kompleksowym wykonywaniu robót wodno-kanalizacyjnych.",
+    "pozycje": [
+      {
+        "slug": "roboty-drogowe",
+        "nazwa": "Roboty drogowe",
+        "opis": "Budowa, przebudowa i remonty dróg dla gmin, powiatów i zarządców dróg, najczęściej w powiatach obornickim, wągrowieckim, chodzieskim i czarnkowsko-trzcianeckim.",
+        "zakres": [
+          "budowa, przebudowa i remonty dróg",
+          "ulice z odwodnieniem",
+          "chodniki i przejścia dla pieszych",
+          "ścieżki pieszo-rowerowe",
+          "parkingi, pętle i perony autobusowe",
+          "profilowanie i utwardzanie dróg gruntowych",
+          "drogi dojazdowe po scaleniu gruntów",
+          "zimowe utrzymanie dróg"
+        ],
+        "cena": null,
+        "jednostka": null,
+        "czas": null,
+        "zdjecie": "walec",
+        "tresc": null
+      },
+      {
+        "slug": "roboty-wodno-kanalizacyjne",
+        "nazwa": "Roboty wodno-kanalizacyjne",
+        "opis": "Kompleksowe wykonawstwo robót wodno-kanalizacyjnych, także jako część budowy i przebudowy ulic.",
+        "zakres": null,
+        "cena": null,
+        "jednostka": null,
+        "czas": null,
+        "zdjecie": null,
+        "tresc": null
+      },
+      {
+        "slug": "beton-towarowy",
+        "nazwa": "Beton towarowy",
+        "opis": "Beton z własnej wytwórni, dowożony na budowę naszymi betonomieszarkami. Zamówienia przyjmuje dział sprzedaży.",
+        "zakres": [
+          "betony towarowe",
+          "betony drogowe",
+          "betony szczelne",
+          "betony dla rolnictwa",
+          "zaprawy murarskie"
+        ],
+        "cena": null,
+        "jednostka": null,
+        "czas": null,
+        "zdjecie": "betonomieszarka",
+        "tresc": null
+      },
+      {
+        "slug": "prefabrykaty",
+        "nazwa": "Prefabrykaty",
+        "opis": "Elementy betonowe z naszej wytwórni.",
+        "zakres": null,
+        "cena": null,
+        "jednostka": null,
+        "czas": null,
+        "zdjecie": null,
+        "tresc": null
+      }
+    ]
+  },
+  "cennik": null,
+  "menu": null,
+  "produkty": null,
+  "realizacje": null,
+  "przetargi": {
+    "naglowek": null,
+    "wstep": "Wybrane zamówienia publiczne: drogi, ulice, chodniki i ścieżki dla samorządów i zarządców dróg w Wielkopolsce. Rok oznacza udzielenie zamówienia.",
+    "zrodlo_opis": "Biuletyn Zamówień Publicznych (zestawienie: przetargi.egospodarka.pl), wykonawca BIMEX Sp. z o.o. Sp. k.",
+    "pozycje": [
+      {
+        "zadanie": "Budowa drogi w miejscowości Tarnowo",
+        "zamawiajacy": "Gmina Rogoźno",
+        "rok": 2026,
+        "wartosc": null,
+        "zrodlo": "BZP"
+      },
+      {
+        "zadanie": "Przebudowa układu komunikacyjnego przy przystanku kolejowym w Bogdanowie – miejsca postojowe, peron autobusowy, ciągi piesze",
+        "zamawiajacy": "Gmina Oborniki",
+        "rok": 2026,
+        "wartosc": null,
+        "zrodlo": "BZP"
+      },
+      {
+        "zadanie": "Budowa ścieżki pieszo-rowerowej wzdłuż DK11 w Tarnowie",
+        "zamawiajacy": "GDDKiA Oddział w Poznaniu",
+        "rok": 2025,
+        "wartosc": null,
+        "zrodlo": "BZP"
+      },
+      {
+        "zadanie": "Budowa pętli autobusowej w Kicinie",
+        "zamawiajacy": "Gmina Czerwonak",
+        "rok": 2025,
+        "wartosc": null,
+        "zrodlo": "BZP"
+      },
+      {
+        "zadanie": "Budowa drogi gminnej łączącej ul. Kowanowską z DK11 w Obornikach",
+        "zamawiajacy": "Gmina Oborniki",
+        "rok": 2025,
+        "wartosc": null,
+        "zrodlo": "BZP"
+      },
+      {
+        "zadanie": "Zagospodarowanie poscaleniowe obiektu Krosin, gm. Połajewo",
+        "zamawiajacy": "Powiat Czarnkowsko-Trzcianecki",
+        "rok": 2024,
+        "wartosc": null,
+        "zrodlo": "BZP"
+      },
+      {
+        "zadanie": "Budowa ul. Piaskowej w Wągrowcu",
+        "zamawiajacy": "Gmina Miejska Wągrowiec",
+        "rok": 2024,
+        "wartosc": null,
+        "zrodlo": "BZP"
+      },
+      {
+        "zadanie": "Budowa chodnika w ciągu drogi wojewódzkiej nr 241 w Pruścach",
+        "zamawiajacy": "Wielkopolski Zarząd Dróg Wojewódzkich",
+        "rok": 2024,
+        "wartosc": null,
+        "zrodlo": "BZP"
+      },
+      {
+        "zadanie": "Przejścia dla pieszych na drogach powiatowych",
+        "zamawiajacy": "Zarząd Dróg Powiatowych w Obornikach",
+        "rok": 2024,
+        "wartosc": null,
+        "zrodlo": "BZP"
+      },
+      {
+        "zadanie": "Projekt i budowa parkingu publicznego przy ul. Kościelnej w Chludowie",
+        "zamawiajacy": "Gmina Suchy Las",
+        "rok": 2024,
+        "wartosc": null,
+        "zrodlo": "BZP"
+      },
+      {
+        "zadanie": "Przebudowa drogi gminnej w Sokołowie Budzyńskim, etapy III i IV",
+        "zamawiajacy": "Gmina Budzyń",
+        "rok": 2024,
+        "wartosc": null,
+        "zrodlo": "BZP"
+      },
+      {
+        "zadanie": "Budowa dróg gminnych na terenach popegeerowskich",
+        "zamawiajacy": "Gmina Damasławek",
+        "rok": 2024,
+        "wartosc": null,
+        "zrodlo": "BZP"
+      },
+      {
+        "zadanie": "Przebudowa ulic Szkolnej, Lipowej, Nowej i Słonecznej w Połajewie",
+        "zamawiajacy": "Gmina Połajewo",
+        "rok": 2023,
+        "wartosc": null,
+        "zrodlo": "BZP"
+      },
+      {
+        "zadanie": "Budowa ciągu komunikacyjnego między ul. Parkową a Turystyczną w Skokach",
+        "zamawiajacy": "Gmina Skoki",
+        "rok": 2023,
+        "wartosc": null,
+        "zrodlo": "BZP"
+      },
+      {
+        "zadanie": "Budowa ul. Nad Wełną w Obornikach z odwodnieniem i przebudowa drogi w Objezierzu",
+        "zamawiajacy": "Gmina Oborniki",
+        "rok": 2023,
+        "wartosc": null,
+        "zrodlo": "BZP"
+      },
+      {
+        "zadanie": "Przebudowa dróg powiatowych nr 1177P i 1487P w Bukowcu",
+        "zamawiajacy": "Powiat Chodzieski",
+        "rok": 2023,
+        "wartosc": null,
+        "zrodlo": "BZP"
+      },
+      {
+        "zadanie": "Przebudowa drogi gminnej Budziejewo – Podlesie Kościelne",
+        "zamawiajacy": "Gmina Mieścisko",
+        "rok": 2023,
+        "wartosc": null,
+        "zrodlo": "BZP"
+      },
+      {
+        "zadanie": "Przebudowa drogi powiatowej nr 1341P w Wyszynach",
+        "zamawiajacy": "Powiat Chodzieski",
+        "rok": 2022,
+        "wartosc": null,
+        "zrodlo": "BZP"
+      },
+      {
+        "zadanie": "Budowa drogi gminnej Tłukawy – Zawady",
+        "zamawiajacy": "Gmina Ryczywół",
+        "rok": 2022,
+        "wartosc": null,
+        "zrodlo": "BZP"
+      },
+      {
+        "zadanie": "Przebudowa drogi gminnej Mirkowice – Mirkowiczki",
+        "zamawiajacy": "Gmina Mieścisko",
+        "rok": 2022,
+        "wartosc": null,
+        "zrodlo": "BZP"
+      }
+    ]
+  },
+  "proces": {
+    "naglowek": "Jak zamówić beton",
+    "wstep": null,
+    "kroki": [
+      {
+        "nazwa": "Zadzwoń do działu sprzedaży",
+        "opis": null,
+        "czas": null
+      },
+      {
+        "nazwa": "Podaj adres budowy, ilość w m³ i przeznaczenie betonu",
+        "opis": "Na tej podstawie dobieramy klasę betonu.",
+        "czas": null
+      },
+      {
+        "nazwa": "Ustal cenę, dzień i godzinę dostawy",
+        "opis": null,
+        "czas": null
+      },
+      {
+        "nazwa": "Przygotuj dojazd",
+        "opis": "Ciężki samochód musi podjechać jak najbliżej miejsca betonowania.",
+        "czas": null
+      }
+    ]
+  },
+  "zasady": null,
+  "o_firmie": {
+    "naglowek": "Firma rodzinna z Rogoźna",
+    "wstep": null,
+    "tresc": "tresc/o-firmie.md",
+    "zdjecie": "wytwornia-panorama",
+    "fakty": [
+      {
+        "nazwa": "Na rynku od",
+        "wartosc": "1993 r."
+      },
+      {
+        "nazwa": "Zamówienia publiczne",
+        "wartosc": "107 w latach 2013–2026 (BZP)"
+      }
+    ]
+  },
+  "zespol": null,
+  "liczby": null,
+  "opinie": null,
+  "certyfikaty": null,
+  "faq": null,
+  "galeria": null,
+  "do_pobrania": null,
+  "kariera": null,
+  "wspolpraca": null,
+  "gdzie_kupic": null,
+  "kontakt": {
+    "naglowek": null,
+    "wstep": null
+  }
+}

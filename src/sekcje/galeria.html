@@ -1,0 +1,31 @@
+{# wymaga: tresc.galeria.zdjecia #}
+{# Galeria (KONTRAKT §4.2): własne zdjęcia firmy w równej siatce, z podpisem (zdjecia.json → podpis), wszystkie lazy.
+   Bez powiększania w JS — zdjęcia są od razu duże (na telefonie na całą szerokość, w naturalnych proporcjach).
+   tryb="skrot": galeria nie ma podstrony, więc powyżej `limit` zdjęć reszta chowa się pod „Pokaż więcej”
+   (50-filtr.js; bez JS widać wszystkie). #}
+{% set zdj = auto.galeria %}
+{% set zwijaj = tryb == "skrot" and limit and zdj | dlugosc > limit %}
+<section class="section{% if sekcja.klasa %} {{ sekcja.klasa }}{% endif %} galeria" id="{{ sekcja.html_id }}" aria-labelledby="{% if bez_naglowka %}tytul-strony{% else %}galeria-h{% endif %}">
+  <div class="wrap">
+    {% if not bez_naglowka %}
+    <div class="section__head">
+      <h2 id="galeria-h">{{ sekcja.naglowek }}</h2>
+    </div>
+    {% endif %}
+    <ul class="galeria__siatka" id="galeria-lista"{% if zwijaj %} data-wiecej{% endif %}>
+      {% for z in zdj %}
+      <li class="galeria__poz"{% if zwijaj and petla.indeks > limit %} data-wiecej-reszta{% endif %}>
+        <figure class="galeria__foto">
+          {{ z.id | obraz:"tercja" }}
+          {% if z.podpis %}
+          <figcaption>{{ z.podpis }}</figcaption>
+          {% endif %}
+        </figure>
+      </li>
+      {% endfor %}
+    </ul>
+    {% if zwijaj %}
+    <p class="wiecej"><button class="btn btn--secondary" type="button" data-wiecej-przycisk aria-controls="galeria-lista" hidden>Pokaż wszystkie zdjęcia ({{ zdj | dlugosc }})</button></p>
+    {% endif %}
+  </div>
+</section>

@@ -1,0 +1,63 @@
+{# Stopka: dane kontaktowe (NAP — adres siedziby stoi tylko tutaj), strony, dane rejestrowe wg formy prawnej
+   (art. 206 KSH / art. 20 ust. 3 Prawa przedsiębiorców; bez powtórzenia adresu) pod nazwą firmy, polityka prywatności, © rok.
+   Na stronie, która ma sekcję kontaktu (główna z sekcją „kontakt”, /kontakt), kolumny „Dane kontaktowe” nie ma — adres,
+   telefon, e-mail i godziny stoją kilkaset pikseli wyżej (CLAUDE.md §2). Nazwa stoi raz na górze i raz przy ©;
+   linia rejestru z samą nazwą (nazwa_prawna = nazwa) znika (dane.rejestr_linie).
+   Adresy z danych zawsze przez filtr url — typografia nie może zmienić „2019-2020” w linku na półpauzę. #}
+{% set kontakt_na_stronie = strona.sciezka == "/kontakt" or (strona.glowna and "kontakt" in auto.sekcje_widoczne) %}
+<footer class="site-footer{% if firma.marka.sekcja_ciemna == "stopka" %} site-footer--ciemna{% endif %}" data-ukryj-pasek>
+  <div class="wrap">
+    <div class="site-footer__siatka{% if kontakt_na_stronie %} site-footer__siatka--bez-kontaktu{% endif %}">
+      <div class="site-footer__marka">
+        {% if firma.marka.sekcja_ciemna == "stopka" and auto.logo_na_ciemnym %}
+        <img src="{{ auto.logo_na_ciemnym.src | zasob }}" width="{{ auto.logo_na_ciemnym.szer }}" height="{{ auto.logo_na_ciemnym.wys }}" alt="{{ firma.firma.nazwa }}" loading="lazy">
+        {% else %}
+        <p class="site-footer__nazwa">{{ firma.firma.nazwa }}</p>
+        {% endif %}
+        {% if auto.rejestr_linie %}
+        <p class="site-footer__rejestr">{% for linia in auto.rejestr_linie %}<span>{{ linia }}</span>{% endfor %}</p>
+        {% endif %}
+      </div>
+      {% if not kontakt_na_stronie %}
+      <div class="site-footer__kontakt">
+        <h2 class="site-footer__h">Dane kontaktowe</h2>
+        <address>
+          {{ auto.adres_html }}
+        </address>
+        <ul class="site-footer__lista">
+          {% if auto.tel_href %}
+          <li><a class="tel" href="{{ auto.tel_href | url }}">{{ auto.telefon_krajowy }}</a></li>
+          {% endif %}
+          {% if auto.email_href %}
+          <li><a href="{{ auto.email_href | url }}">{{ firma.kontakt.email }}</a></li>
+          {% endif %}
+          {% if auto.godziny_skrot %}
+          <li>{{ firma.godziny.nazwa | domyslnie:"Godziny" }}: {{ auto.godziny_skrot }}</li>
+          {% endif %}
+        </ul>
+      </div>
+      {% endif %}
+      <nav class="site-footer__nav" aria-label="Stopka">
+        <h2 class="site-footer__h">Na stronie</h2>
+        <ul class="site-footer__lista">
+          {% for n in nav %}
+          <li><a href="{{ n.href | url }}">{{ n.etykieta }}</a></li>
+          {% endfor %}
+          <li><a href="{{ "/polityka-prywatnosci" | url }}">Polityka prywatności</a></li>
+          {% if "/dostepnosc" in auto.podstrony %}
+          <li><a href="{{ "/dostepnosc" | url }}">Dostępność</a></li>
+          {% endif %}
+          {% for s in auto.social %}
+          <li><a href="{{ s.url | url }}" rel="me">{{ s.nazwa }}</a></li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+    <div class="site-footer__prawne">
+      {% if auto.zdjecia_autorzy %}
+      <p class="site-footer__meta">Zdjęcia: {{ auto.zdjecia_autorzy | polacz:", " }}</p>
+      {% endif %}
+      <p>© {{ auto.rok }} {{ firma.firma.nazwa }}</p>
+    </div>
+  </div>
+</footer>

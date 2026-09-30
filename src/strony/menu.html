@@ -1,0 +1,5 @@
+{# strona: sciezka="/menu" sekcja="menu" wymaga="tresc.menu.kategorie" tytul="{{ tresc.menu.naglowek | domyslnie:auto.naglowki.menu }}" opis="{{ tresc.menu.naglowek | domyslnie:auto.naglowki.menu }} – {{ firma.firma.nazwa }}, {{ firma.seo.miasto }}: {{ auto.menu.nazwy }}. Ceny{% if auto.menu.alergeny %} i alergeny{% endif %}{% if tresc.menu.data %}, karta z dnia {{ tresc.menu.data | data }}{% endif %}." #}
+{# Pełna karta (KONTRAKT §6.1: /menu, gdy jest tresc.menu) — do druku: 12-menu.css ma reguły @media print
+   (bez nagłówka strony, nawigacji i stopki poza danymi lokalu; działy nie rwą się między stronami). #}
+{% include "czesci/naglowek-strony.html" %}
+{% include "sekcje/menu.html" tryb="pelny" bez_naglowka=true %}

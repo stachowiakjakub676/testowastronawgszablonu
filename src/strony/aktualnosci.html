@@ -1,0 +1,5 @@
+{# strona: sciezka="/aktualnosci" sekcja="aktualnosci" wymaga="aktualnosci" nav="Aktualności" tytul="Aktualności" h1="{{ auto.naglowki.aktualnosci | domyslnie:\"Aktualności\" }}" opis="{{ firma.firma.nazwa }}: {{ aktualnosci | dlugosc }} {{ aktualnosci | dlugosc | liczba_mnoga:\"wpis,wpisy,wpisów\" }}, najnowszy z {{ aktualnosci.0.data | data }} – {{ aktualnosci.0.tytul }}." #}
+{# Lista wszystkich wpisów (data/aktualnosci/*.md); wpis ma własną stronę (strony/wpis.html). Strona powstaje, gdy jest
+   choć jeden wpis (strony.progi); zapowiedź na głównej może zniknąć (wpisy starsze niż 12 miesięcy), ta strona zostaje. #}
+{% include "czesci/naglowek-strony.html" %}
+{% include "sekcje/aktualnosci.html" tryb="pelny" bez_naglowka=true %}

@@ -1,0 +1,46 @@
+{# wymaga: auto.zespol.osoby #}
+{# Zespół (critic §5.1 p. 11, web-smb-best U9): imię i nazwisko, rola, jeden fakt (uprawnienia, specjalizacja, od kiedy).
+   Kolejność z danych — właściciel pierwszy. Zdjęcie tylko przy "zgoda": true (auto.zespol.osoby[].pokaz_zdjecie);
+   bez zdjęcia sam tekst — nigdy awatar ani inicjały. Gdy każda osoba ma zdjęcie: siatka portretów 4:5;
+   inaczej lista (zdjęcia, które są, stoją małe przy nazwisku). Skrót na głównej tnie listę do `limit` tylko wtedy,
+   gdy jest podstrona /o-firmie z pełną listą. #}
+{% set osoby = auto.zespol.osoby %}
+{% set wszystkie = osoby | dlugosc %}
+{% if tryb == "skrot" and sekcja.strona and limit %}
+{% set osoby = osoby | pierwsze:limit %}
+{% endif %}
+<section class="section{% if sekcja.klasa %} {{ sekcja.klasa }}{% endif %} zespol" id="{{ sekcja.html_id }}" aria-labelledby="{% if bez_naglowka %}tytul-strony{% else %}zespol-h{% endif %}">
+  <div class="wrap">
+    {% if not bez_naglowka %}
+    <div class="section__head">
+      <h2 id="zespol-h">{{ sekcja.naglowek }}</h2>
+      {% if tresc.zespol.wstep %}
+      <p class="section__lead">{{ tresc.zespol.wstep }}</p>
+      {% endif %}
+    </div>
+    {% elif tresc.zespol.wstep %}
+    <p class="section__lead zespol__wstep">{{ tresc.zespol.wstep }}</p>
+    {% endif %}
+    <ul class="zespol__lista zespol__lista--{% if auto.zespol.portrety %}portrety{% else %}wiersze{% endif %}">
+      {% for o in osoby %}
+      <li class="zespol__osoba{% if o.pokaz_zdjecie %} zespol__osoba--foto{% endif %}">
+        {% if o.pokaz_zdjecie %}
+        {{ o.zdjecie | obraz:"tercja" }}
+        {% endif %}
+        <div class="zespol__tekst">
+          <h{{ hn }} class="zespol__imie">{{ o.imie }}</h{{ hn }}>
+          {% if o.rola %}
+          <p class="zespol__rola">{{ o.rola }}</p>
+          {% endif %}
+          {% if o.fakt %}
+          <p class="zespol__fakt">{{ o.fakt }}</p>
+          {% endif %}
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+    {% if tryb == "skrot" and sekcja.strona and limit and wszystkie > limit %}
+    <p class="section__wiecej"><a href="{{ sekcja.strona | url }}#{{ sekcja.html_id }}">{{ sekcja.naglowek }}: wszystkie osoby ({{ wszystkie }})</a></p>
+    {% endif %}
+  </div>
+</section>

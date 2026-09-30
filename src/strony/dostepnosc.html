@@ -1,0 +1,64 @@
+{# strona: sciezka="/dostepnosc" tytul="Informacja o dostępności" h1="Informacja o dostępności" opis="Jak strona {{ firma.firma.nazwa }} działa z czytnikiem ekranu, klawiaturą i powiększeniem, co jeszcze nie jest dostępne i gdzie zgłosić problem." wstep="Chcemy, żeby z tej strony mogła korzystać każda osoba – także używająca czytnika ekranu, samej klawiatury albo powiększenia." #}
+{# Powstaje przy funkcje.strona_dostepnosci. To „informacja”, nie „deklaracja dostępności” — deklarację w urzędowym wzorze
+   publikują podmioty publiczne (ustawa o dostępności cyfrowej). Zgodność z WCAG podajemy tylko z danych
+   (firma.dostepnosc: data, metoda, wynik); bez nich strona opisuje rozwiązania, które szablon zapewnia zawsze,
+   i sposób zgłaszania problemów. #}
+{% set dos = firma.dostepnosc %}
+{% include "czesci/naglowek-strony.html" %}
+<div class="section section--sm dokument">
+  <div class="wrap dokument__siatka">
+    {% if dos %}
+    <dl class="dokument__fakty">
+      <div>
+        <dt>Zgodność z WCAG 2.1 AA</dt>
+        <dd>{% if dos.zgodnosc == "pelna" %}pełna{% else %}częściowa{% endif %}</dd>
+      </div>
+      <div>
+        <dt>Sposób oceny</dt>
+        <dd>{% if dos.metoda == "audyt" %}audyt: {{ dos.wykonawca }}{% else %}samoocena{% endif %}</dd>
+      </div>
+      <div>
+        <dt>Data oceny</dt>
+        <dd><time datetime="{{ dos.data_oceny | data_iso }}">{{ dos.data_oceny | data }}</time></dd>
+      </div>
+    </dl>
+    {% endif %}
+    <div class="prose dokument__tresc">
+      {% if dos %}
+      <p>Strona jest {% if dos.zgodnosc == "pelna" %}zgodna{% else %}częściowo zgodna{% endif %} z wytycznymi WCAG 2.1 na poziomie AA{% if dos.metoda == "audyt" %} według audytu, który przeprowadził {{ dos.wykonawca }}{% else %} według naszej własnej oceny{% endif %}.</p>
+      {% endif %}
+      {% if dos.niedostepne %}
+      <h2 id="niedostepne">Co nie jest jeszcze dostępne</h2>
+      <ul>
+        {% for p in dos.niedostepne %}
+        <li>{{ p }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      <h2 id="rozwiazania">Jak zbudowana jest strona</h2>
+      <ul>
+        <li>Całą stronę obsłużysz klawiaturą; element, na którym jesteś, ma wyraźną obwódkę. Pierwszy klawisz Tab pokazuje link „Przejdź do treści”.</li>
+        <li>Każda podstrona ma jeden główny nagłówek i nagłówki w kolejności, więc czytnik ekranu pokaże jej spis.</li>
+        <li>Kontrast tekstu i tła ma co najmniej 4,5:1 – sprawdza go program, który buduje stronę, i nie opublikuje jej, jeśli kolor jest za jasny. Najmniejszy tekst do czytania ma 16 px.</li>
+        <li>Stronę można powiększyć do 200% i więcej; na wąskim ekranie tekst się zawija i nie trzeba przewijać w bok.</li>
+        <li>Zdjęcia, które niosą treść, mają opisy po polsku{% if auto.formularz and auto.formularz.tryb == "worker" %}, pola formularza – widoczne etykiety, a błędy są opisane słowami przy polu{% endif %}.</li>
+        <li>Strona działa także bez JavaScriptu i w trybie wysokiego kontrastu systemu Windows.</li>
+        {% if funkcje.animacje == "wejscie" %}
+        <li>Jedyna animacja (pojawienie się tekstu na górze strony głównej) wyłącza się, gdy w systemie ustawisz ograniczenie ruchu.</li>
+        {% else %}
+        <li>Na stronie nic się nie porusza ani nie odtwarza samo.</li>
+        {% endif %}
+        {% if funkcje.mapa == "po_kliknieciu" and auto.osm_embed %}
+        <li>Mapa jest dodatkiem: adres jest podany tekstem, a obok jest link do wyznaczenia trasy.</li>
+        {% endif %}
+      </ul>
+      {% if firma.kontakt.dostepnosc_lokalu %}
+      <h2 id="budynek">Dostępność budynku</h2>
+      <p>{{ firma.kontakt.dostepnosc_lokalu }}</p>
+      {% endif %}
+      <h2 id="zglos">Zgłoś problem</h2>
+      <p>Jeśli czegoś na stronie nie da się przeczytać albo użyć, napisz{% if firma.kontakt.email %} na <a href="{{ auto.email_href | url }}">{{ firma.kontakt.email }}</a>{% endif %}{% if auto.tel_href %}{% if firma.kontakt.email %} albo{% endif %} zadzwoń: <a class="tel" href="{{ auto.tel_href | url }}">{{ auto.telefon_krajowy }}</a>{% endif %}. Podaj adres podstrony i opisz, co nie działa – przekażemy Ci potrzebną informację w inny sposób i poprawimy stronę.</p>
+      <p class="meta dokument__stan">Stan na {% if dos %}{{ dos.data_oceny | data }}{% else %}{{ auto.dostepnosc_data | data }}{% endif %}.</p>
+    </div>
+  </div>
+</div>

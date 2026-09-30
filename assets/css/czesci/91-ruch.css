@@ -1,0 +1,23 @@
+/* 91 — ruch (D6, funkcje.animacje = "wejscie" → <html class="ruch">). Tylko dla osób, które nie wyłączyły animacji
+   w systemie, i tylko z JS (klasa „js”) — bez JS wszystko widać od razu.
+   Jedno wejście: akapit pod h1, adres/status i przyciski hero podnoszą się o 8 px i pojawiają w 0,42 s, kolejno co 70 ms.
+   Nigdy h1 ani zdjęcie hero — to największe elementy pierwszego ekranu (LCP); przy hero bez zdjęcia akapit bywa
+   największym tekstem na telefonie, więc wtedy wchodzą tylko adres i przyciski. */
+@media (prefers-reduced-motion: no-preference) {
+  .ruch.js .hero__siatka:not(.hero__siatka--typo) .hero__lead,
+  .ruch.js .hero__info,
+  .ruch.js .hero__akcje {
+    animation: ruch-wejscie 420ms var(--ease) both;
+  }
+  .ruch.js .hero__info { animation-delay: 70ms; }
+  .ruch.js .hero__akcje { animation-delay: 140ms; }
+
+  @keyframes ruch-wejscie {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  /* przejście między podstronami: krótkie przenikanie całej strony zamiast białego mignięcia (Chrome, Safari 18.2+) */
+  @view-transition { navigation: auto; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 160ms; }
+}

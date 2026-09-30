@@ -1,0 +1,10 @@
+/* wlasne.css — style tylko tej strony (plik klienta; aktualizacja SZABLONU go nie nadpisuje).
+
+   Tu trafia jeden element-podpis z świata firmy (docs/PROCEDURA.md, faza 6) i drobne różnice wyglądu.
+   Zasady: tylko tokeny z :root (var(--marka), var(--linia), var(--tekst)…), bez gradientów i cieni, animacje tylko
+   w @media (prefers-reduced-motion: no-preference). Build dokleja ten plik na końcu strona.css — komentarze
+   usuwa, więc pusty plik (same komentarze) nic nie dodaje.
+
+   Przykład (restauracja — pasek statusu w hero w kolorze marki):
+   .hero .status { display: flex; padding: var(--s-3) var(--s-4); background: var(--przycisk); color: var(--na-przycisku); }
+*/

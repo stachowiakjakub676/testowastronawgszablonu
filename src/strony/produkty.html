@@ -1,0 +1,4 @@
+{# strona: sciezka="/produkty" sekcja="produkty" wymaga="tresc.produkty.pozycje" tytul="{{ tresc.produkty.naglowek | domyslnie:auto.naglowki.produkty }}" opis="{{ tresc.produkty.naglowek | domyslnie:auto.naglowki.produkty }} – {{ firma.firma.nazwa }}, {{ firma.seo.miasto }}: {{ auto.produkty.nazwy }}.{% if auto.produkty.ma_ceny %} Parametry i ceny.{% else %} Parametry techniczne.{% endif %}" wstep="{% if tresc.produkty.wstep %}{{ tresc.produkty.wstep }}{% endif %}" #}
+{# Katalog produktów (KONTRAKT §6.1: /produkty, gdy produktów jest > 6) z filtrem kategorii ?kategoria= (§11, 50-filtr.js). #}
+{% include "czesci/naglowek-strony.html" %}
+{% include "sekcje/produkty.html" tryb="pelny" bez_naglowka=true %}

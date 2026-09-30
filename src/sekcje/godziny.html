@@ -1,0 +1,64 @@
+{# wymaga: firma.godziny #}
+{# Godziny (KONTRAKT §6.2, §9.1): jedna tabela — wiersz na dzień, kolumna na zestaw godzin (główne + godziny.dodatkowe:
+   kuchnia, telefon), z tych samych danych co JSON-LD i status. Dzisiejszy wiersz podświetla 20-godziny.js
+   (tr[data-dzien] → .is-dzis, aria-current="date"); bez JS tabela jest pełna, tylko bez podświetlenia.
+   Status „Otwarte do 22:00” stoi na stronie raz: tutaj tylko wtedy, gdy nie ma go już w hero (auto.status_w_hero).
+   Sekcja kontaktu na tej samej stronie nie powtarza tabeli (auto.godziny_osobno w sekcje/kontakt.html).
+   Klasa korzenia to „otwarcie”, nie „godziny” — .godziny to tabela godzin sekcji kontaktu (19-kontakt.css). #}
+{% set kilka = auto.godziny_zestawy | dlugosc > 1 %}
+{% set ze_statusem = auto.pokaz_status and not (tryb == "skrot" and auto.status_w_hero) %}
+<section class="section{% if sekcja.klasa %} {{ sekcja.klasa }}{% endif %} section--sm otwarcie" id="{{ sekcja.html_id }}" aria-labelledby="{% if bez_naglowka %}tytul-strony{% else %}godziny-h{% endif %}">
+  <div class="wrap">
+    {% if not bez_naglowka %}
+    <div class="section__head">
+      <h2 id="godziny-h">{{ sekcja.naglowek }}</h2>
+      {% if ze_statusem %}
+      <p class="section__lead otwarcie__status status" data-status{% if kilka and firma.godziny.nazwa %} data-nazwa="{{ firma.godziny.nazwa }}"{% endif %} aria-live="polite" hidden></p>
+      {% endif %}
+    </div>
+    {% endif %}
+    <div class="otwarcie__siatka{% if kilka %} otwarcie__siatka--kilka{% endif %}">
+      <table class="otwarcie__tabela{% if kilka %} otwarcie__tabela--kilka{% endif %}">
+        <caption class="wizualnie-ukryte">{{ sekcja.naglowek }} w kolejnych dniach tygodnia</caption>
+        {% if kilka %}
+        <thead>
+          <tr>
+            <th scope="col"><span class="wizualnie-ukryte">Dzień</span></th>
+            {% for n in auto.godziny_zestawy %}
+            <th scope="col">{{ n | domyslnie:"Otwarte" }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        {% endif %}
+        <tbody>
+          {% for w in auto.godziny_wiersze %}
+          <tr data-dzien="{{ w.kod }}"{% if w.zamkniete %} class="is-zamkniete"{% endif %}>
+            <th scope="row"><span class="otwarcie__dzien">{{ w.dzien | wersaliki_pierwsza }}</span>{% if kilka %}<span class="otwarcie__dzien-krotki" aria-hidden="true">{{ w.dzien_krotki | wersaliki_pierwsza }}</span>{% endif %}</th>
+            {% for c in w.komorki %}
+            <td{% if c.zamkniete %} class="is-zamkniete"{% endif %}>{{ c.html }}</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% if auto.godziny_wyjatki or firma.godziny.uwagi %}
+      <div class="otwarcie__dodatek">
+        {% if auto.godziny_wyjatki %}
+        <h{{ hn }} class="otwarcie__h">Zmiany godzin</h{{ hn }}>
+        <ul class="otwarcie__wyjatki">
+          {% for w in auto.godziny_wyjatki %}
+          <li class="otwarcie__wyjatek">
+            <span class="otwarcie__kiedy"><time datetime="{{ w.data | data_iso }}">{{ w.kiedy | wersaliki_pierwsza }}</time>{% if w.opis %}<span class="otwarcie__opis">{{ w.opis }}</span>{% endif %}</span>
+            <span class="otwarcie__godz{% if w.tekst == "zamknięte" %} is-zamkniete{% endif %}">{{ w.tekst }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        {% if firma.godziny.uwagi %}
+        <p class="otwarcie__uwagi">{{ firma.godziny.uwagi }}</p>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>

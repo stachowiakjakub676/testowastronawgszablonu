@@ -1,0 +1,127 @@
+{
+  "sala": {
+    "szer": 1920,
+    "wys": 1280,
+    "szerokosci": [
+      480,
+      960,
+      1440,
+      1920
+    ],
+    "formaty": [
+      "avif",
+      "webp",
+      "jpg"
+    ]
+  },
+  "zupa": {
+    "szer": 1200,
+    "wys": 1200,
+    "szerokosci": [
+      480,
+      960,
+      1200
+    ],
+    "formaty": [
+      "avif",
+      "webp",
+      "jpg"
+    ]
+  },
+  "pierogi": {
+    "szer": 1440,
+    "wys": 960,
+    "szerokosci": [
+      480,
+      960,
+      1440
+    ],
+    "formaty": [
+      "avif",
+      "webp",
+      "jpg"
+    ]
+  },
+  "ogrod": {
+    "szer": 1440,
+    "wys": 810,
+    "szerokosci": [
+      480,
+      960,
+      1440
+    ],
+    "formaty": [
+      "avif",
+      "webp",
+      "jpg"
+    ]
+  },
+  "bar": {
+    "szer": 960,
+    "wys": 1200,
+    "szerokosci": [
+      480,
+      960
+    ],
+    "formaty": [
+      "avif",
+      "webp",
+      "jpg"
+    ]
+  },
+  "kuchnia": {
+    "szer": 1440,
+    "wys": 960,
+    "szerokosci": [
+      480,
+      960,
+      1440
+    ],
+    "formaty": [
+      "avif",
+      "webp",
+      "jpg"
+    ]
+  },
+  "deser": {
+    "szer": 1200,
+    "wys": 1500,
+    "szerokosci": [
+      480,
+      960,
+      1200
+    ],
+    "formaty": [
+      "avif",
+      "webp",
+      "jpg"
+    ]
+  },
+  "wejscie": {
+    "szer": 1440,
+    "wys": 960,
+    "szerokosci": [
+      480,
+      960,
+      1440
+    ],
+    "formaty": [
+      "avif",
+      "webp",
+      "jpg"
+    ]
+  },
+  "szef": {
+    "szer": 960,
+    "wys": 1200,
+    "szerokosci": [
+      480,
+      960
+    ],
+    "formaty": [
+      "avif",
+      "webp",
+      "jpg"
+    ]
+  }
+}

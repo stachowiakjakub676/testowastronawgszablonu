@@ -1,0 +1,124 @@
+{
+  "$komentarz": "Reguły branży (nie wygląd). KONTRAKT §5. Klucze naglowki i nav_etykiety to domyślne teksty — klient zmienia je w data/tresc.json (pole naglowek sekcji), nie tutaj.",
+  "branza": "producent",
+  "typ_schema": "Organization",
+  "wymagane": [
+    "tresc.produkty.pozycje"
+  ],
+  "zalecane": [
+    "tresc.do_pobrania",
+    "tresc.gdzie_kupic",
+    "kontakt.email",
+    "tresc.hero.zdjecie"
+  ],
+  "sekcje_glowna": [
+    "hero",
+    "ogloszenie",
+    "produkty",
+    "cennik",
+    "o_firmie",
+    "proces",
+    "liczby",
+    "zasady",
+    "wspolpraca",
+    "gdzie_kupic",
+    "do_pobrania",
+    "faq",
+    "aktualnosci",
+    "kontakt"
+  ],
+  "warianty": {
+    "proces": "tint",
+    "zasady": "sm",
+    "do_pobrania": "sm",
+    "aktualnosci": "sm",
+    "gdzie_kupic": "sm"
+  },
+  "strony": [
+    "produkty",
+    "o-firmie",
+    "aktualnosci",
+    "wpis",
+    "kariera",
+    "kontakt",
+    "polityka-prywatnosci",
+    "dostepnosc"
+  ],
+  "nav": [
+    "produkty",
+    "o_firmie",
+    "wspolpraca",
+    "gdzie_kupic",
+    "kariera",
+    "kontakt"
+  ],
+  "cta_glowne": {
+    "tekst": "Pobierz katalog",
+    "href": "katalog"
+  },
+  "cta_drugie": {
+    "tekst": "Napisz do nas",
+    "href": "kontakt"
+  },
+  "pasek_mobilny": [
+    "kontakt",
+    "katalog"
+  ],
+  "telefon_w_naglowku": false,
+  "pokazuj_status_w_hero": false,
+  "naglowki": {
+    "oferta": "Zakres usług",
+    "cennik": "Cennik",
+    "menu": "Karta",
+    "produkty": "Produkty",
+    "realizacje": "Realizacje",
+    "przetargi": "Zamówienia publiczne",
+    "proces": "Produkcja",
+    "zasady": "Warunki współpracy",
+    "o_firmie": "O firmie",
+    "zespol": "Zespół",
+    "liczby": "Firma w liczbach",
+    "opinie": "Opinie",
+    "certyfikaty": "Uprawnienia i certyfikaty",
+    "faq": "Pytania i odpowiedzi",
+    "galeria": "Zdjęcia",
+    "do_pobrania": "Katalogi i dokumenty",
+    "kariera": "Praca",
+    "wspolpraca": "Współpraca z salonami",
+    "gdzie_kupic": "Gdzie kupić",
+    "aktualnosci": "Aktualności",
+    "godziny": "Godziny otwarcia",
+    "kontakt": "Kontakt"
+  },
+  "nav_etykiety": {
+    "oferta": "Oferta",
+    "menu": "Karta",
+    "produkty": "Produkty",
+    "realizacje": "Realizacje",
+    "przetargi": "Zamówienia publiczne",
+    "o_firmie": "O firmie",
+    "zespol": "Zespół",
+    "cennik": "Cennik",
+    "galeria": "Zdjęcia",
+    "godziny": "Godziny",
+    "wspolpraca": "Współpraca",
+    "gdzie_kupic": "Gdzie kupić",
+    "aktualnosci": "Aktualności",
+    "kariera": "Praca",
+    "kontakt": "Kontakt"
+  },
+  "limity": {
+    "oferta": 6,
+    "realizacje": 6,
+    "przetargi": 8,
+    "produkty": 6,
+    "galeria": 6,
+    "cennik": 8,
+    "aktualnosci": 3,
+    "menu": 12,
+    "certyfikaty": 6,
+    "faq": 6,
+    "zespol": 4
+  },
+  "cennik_netto": true
+}

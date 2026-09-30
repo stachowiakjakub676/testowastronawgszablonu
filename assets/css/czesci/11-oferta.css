@@ -1,0 +1,203 @@
+/* 11 — oferta, cennik, produkty i podstrona usługi. Linie 1 px zamiast kart, bez ikon i cieni; ceny cyframi
+   tabelarycznymi. Kolor marki tylko w drobnych znakach (znacznik zakresu, podkreślenie linku, bieżąca kategoria).
+   Druk cennika: 12-menu.css (wspólne reguły z kartą). */
+
+/* ---------- oferta: indeks pozycji (nazwa | opis i cena | zdjęcie) ---------- */
+.oferta__lista { list-style: none; padding: 0; border-bottom: 1px solid var(--linia); }
+.oferta__poz { display: grid; gap: var(--s-4); padding-block: var(--s-6); border-top: 1px solid var(--linia); }
+/* pierwszy wiersz bez linii: nad nim jest już linia nagłówka sekcji (albo nagłówka podstrony) */
+.oferta__poz:first-child { border-top: 0; padding-top: 0; }
+.oferta__nazwa { font-size: clamp(1.5rem, 1.15rem + 1.2vw, 2.125rem); line-height: 1.08; letter-spacing: -.01em; max-width: 16ch; }
+.oferta__nazwa a { color: inherit; text-decoration-color: var(--marka); text-decoration-thickness: 3px; text-underline-offset: .16em; }
+.oferta__nazwa a:hover { text-decoration-color: var(--tekst); }
+.oferta__opis { max-width: 52ch; }
+.oferta__fakty { display: flex; flex-wrap: wrap; gap: var(--s-3) var(--s-7); margin-top: var(--s-4); }
+.oferta__fakty dt { font-size: var(--fs-maly); color: var(--tekst-2); }
+.oferta__fakty dd {
+  font-family: var(--font-naglowki); font-weight: var(--fw-naglowki); font-size: var(--fs-h3); line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+.oferta__foto { margin-top: var(--s-2); }
+.oferta__foto img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+.oferta__foto figcaption { margin-top: var(--s-2); }
+
+@media (min-width: 600px) {
+  .oferta__poz { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--s-6); align-items: start; }
+  .oferta__nazwa { grid-column: 1 / 6; }
+  .oferta__tresc, .oferta__foto { grid-column: 6 / 13; }
+  .oferta__foto { margin-top: 0; }
+}
+@media (min-width: 960px) {
+  .oferta__poz { padding-block: var(--s-6) var(--s-7); }
+  .oferta__nazwa { grid-column: 1 / 5; }
+  .oferta__tresc { grid-column: 5 / 9; }
+  .oferta__foto { grid-column: 9 / 13; grid-row: 1; }
+  .oferta__opis { font-size: var(--fs-lead); line-height: 1.5; }
+  /* wiersz bez zdjęcia: opis na całą prawą stronę, nie wąska kolumna obok pustego miejsca */
+  .oferta__poz:not(.oferta__poz--foto) .oferta__tresc { grid-column: 5 / 13; }
+}
+
+/* pełna wersja (/oferta): pozycja ze zdjęciem albo zakresem jest rozłożona szerzej — tekst i zakres po lewej,
+   duże zdjęcie po prawej; pozycja z samym opisem zostaje wierszem indeksu */
+.oferta__zakres { list-style: none; padding: 0; margin-top: var(--s-6); border-top: 1px solid var(--linia); }
+.oferta__zakres li {
+  display: grid; grid-template-columns: .5rem minmax(0, 1fr); gap: var(--s-4); align-items: baseline;
+  padding-block: var(--s-3); border-bottom: 1px solid var(--linia); break-inside: avoid;
+}
+/* znacznik w kolorze marki (żółta tablica BIMEX, czerwień szyldu…) — kwadrat, nie ikona */
+.oferta__zakres li::before { content: ""; width: .5rem; height: .5rem; background: var(--marka); transform: translateY(-.1em); }
+@media (min-width: 600px) { .oferta__zakres { columns: 2; column-gap: var(--s-6); } }
+
+@media (min-width: 960px) {
+  /* trzeci wiersz 1fr: wysokie zdjęcie (rozpięte na 3 wiersze) nie rozsuwa nazwy i opisu */
+  .oferta--pelna .oferta__poz--duza { row-gap: var(--s-5); padding-block: var(--s-7) var(--s-8); grid-template-rows: auto auto 1fr; }
+  .oferta--pelna .oferta__poz--duza:first-child { padding-top: 0; }
+  .oferta--pelna .oferta__poz--duza .oferta__nazwa { grid-column: 1 / 7; font-size: clamp(2rem, 1.2rem + 2vw, 3rem); max-width: 14ch; }
+  .oferta--pelna .oferta__poz--duza .oferta__tresc { grid-column: 1 / 7; }
+  .oferta--pelna .oferta__poz--duza .oferta__opis { font-size: var(--fs-lead); line-height: 1.5; max-width: 44ch; }
+  .oferta--pelna .oferta__poz--foto .oferta__foto { grid-column: 8 / 13; grid-row: 1 / span 3; }
+  .oferta--pelna .oferta__poz--foto .oferta__foto img { aspect-ratio: 4 / 3; }
+  /* bez zdjęcia: zakres zajmuje prawą stronę */
+  .oferta--pelna .oferta__poz--duza:not(.oferta__poz--foto) .oferta__tresc { grid-column: 1 / 13; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--s-6); }
+  .oferta--pelna .oferta__poz--duza:not(.oferta__poz--foto) .oferta__tresc > * { grid-column: 1 / 7; }
+  .oferta--pelna .oferta__poz--duza:not(.oferta__poz--foto) .oferta__zakres { grid-column: 8 / 13; grid-row: 1 / span 3; margin-top: 0; }
+}
+@media (min-width: 600px) and (max-width: 959px) {
+  .oferta--pelna .oferta__poz--duza .oferta__nazwa, .oferta--pelna .oferta__poz--duza .oferta__tresc,
+  .oferta--pelna .oferta__poz--duza .oferta__foto { grid-column: 1 / 13; }
+}
+
+/* ---------- cennik: tabele w grupach, cena do prawej ---------- */
+/* na /oferta cennik stoi zaraz pod ofertą — jeden odstęp sekcji zamiast dwóch */
+.section.oferta + .section.cennik { padding-top: 0; }
+.cennik__siatka { display: grid; gap: var(--s-6); }
+.cennik__meta { color: var(--tekst-2); max-width: 36ch; }
+.cennik__meta strong { color: var(--tekst); }
+.cennik__grupa + .cennik__grupa { margin-top: var(--s-8); }
+.cennik__h { font-size: var(--fs-h3); margin-bottom: var(--s-4); }
+.cennik__tabela { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.cennik__tabela thead th {
+  padding: 0 0 var(--s-2); border-bottom: 1px solid var(--tekst); text-align: left;
+  font-size: var(--fs-maly); font-weight: var(--fw-tekst); color: var(--tekst-2);
+}
+.cennik__tabela tbody th, .cennik__tabela tbody td { padding: var(--s-4) 0; border-bottom: 1px solid var(--linia); vertical-align: baseline; }
+.cennik__tabela tbody th { text-align: left; font-weight: var(--fw-tekst); padding-right: var(--s-5); }
+.cennik__nazwa { display: block; font-weight: var(--fw-mocna); }
+.cennik__opis { display: block; margin-top: 2px; color: var(--tekst-2); max-width: 56ch; }
+.cennik__tabela .cennik__czas { padding-right: var(--s-5); color: var(--tekst-2); white-space: nowrap; }
+.cennik__tabela thead .cennik__czas { color: var(--tekst-2); }
+.cennik__tabela .cennik__cena { text-align: right; white-space: nowrap; }
+.cennik__tabela tbody .cennik__cena { font-weight: var(--fw-mocna); }
+.cennik__dopiski { margin-top: var(--s-6); display: grid; gap: var(--s-3); color: var(--tekst-2); max-width: 60ch; }
+/* wąsko: czas pod nazwą (osobna kolumna zabrałaby miejsce cenie); szeroko: własna kolumna — zawsze tylko jedno widoczne */
+.cennik__czas-waski { display: block; margin-top: 2px; color: var(--tekst-2); }
+@media (max-width: 599px) {
+  .cennik__tabela .cennik__czas { display: none; }
+}
+@media (min-width: 600px) {
+  .cennik__czas-waski { display: none; }
+}
+@media (min-width: 960px) {
+  .cennik__siatka { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--s-6); align-items: start; }
+  .cennik__meta { grid-column: 1 / 4; position: sticky; top: calc(var(--header-h) + var(--s-5)); }
+  .cennik__grupy { grid-column: 4 / 13; }
+  .cennik__h { margin-bottom: var(--s-5); }
+}
+@media (min-width: 1280px) {
+  .cennik__grupy { grid-column: 5 / 13; }
+}
+
+/* ---------- produkty: katalog ze zdjęciami, parametry jako lista definicji ---------- */
+.produkty__pasek { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--s-2) var(--s-6); margin-bottom: var(--s-7); }
+.produkty__meta { color: var(--tekst-2); }
+.produkty__meta--pod { margin-top: var(--s-7); }
+.produkty__siatka { list-style: none; padding: 0; display: grid; gap: var(--s-8) var(--s-6); }
+.produkt { display: grid; align-content: start; gap: var(--s-4); }
+.produkt__foto img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+
+.produkt__nazwa { font-size: var(--fs-h3); line-height: 1.15; }
+.produkt__opis { margin-top: var(--s-2); color: var(--tekst-2); max-width: 48ch; }
+.produkt__parametry { margin-top: var(--s-4); border-top: 1px solid var(--linia); font-variant-numeric: tabular-nums; }
+.produkt__parametry div {
+  display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-4);
+  padding-block: var(--s-2); border-bottom: 1px solid var(--linia);
+}
+.produkt__parametry dt { color: var(--tekst-2); }
+.produkt__parametry dd { text-align: right; }
+.produkt__cena {
+  margin-top: var(--s-4); font-family: var(--font-naglowki); font-weight: var(--fw-naglowki); font-size: var(--fs-h3);
+  line-height: 1.2; font-variant-numeric: tabular-nums;
+}
+@media (min-width: 600px) { .produkty__siatka { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 960px) { .produkty__siatka { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+/* bez zdjęcia: lista wierszy (nazwa | opis | parametry | cena) zamiast gołego tekstu w siatce zdjęć — cała sekcja
+   (.produkty--lista) albo produkty bez zdjęcia pod siatką w tej samej grupie (.produkty__wiersze) */
+.produkty__wiersze, .produkty--lista .produkty__siatka { gap: 0; grid-template-columns: minmax(0, 1fr); border-bottom: 1px solid var(--linia); }
+.produkty__siatka + .produkty__wiersze { margin-top: var(--s-8); }
+.produkty__wiersze .produkt__tekst, .produkty--lista .produkt__tekst { padding-block: var(--s-5); border-top: 1px solid var(--linia); }
+@media (min-width: 600px) { .produkty__wiersze { grid-template-columns: minmax(0, 1fr); } }
+@media (min-width: 960px) {
+  .produkty__wiersze, .produkty--lista .produkty__siatka { grid-template-columns: minmax(0, 1fr); }
+  .produkty__wiersze .produkt__tekst, .produkty--lista .produkt__tekst { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--s-6); align-items: baseline; }
+  .produkty__wiersze .produkt__nazwa, .produkty--lista .produkt__nazwa { grid-column: 1 / 5; }
+  .produkty__wiersze .produkt__opis, .produkty--lista .produkt__opis { grid-column: 5 / 9; margin-top: 0; }
+  .produkty__wiersze .produkt__parametry, .produkty--lista .produkt__parametry { grid-column: 5 / 11; }
+  .produkty__wiersze .produkt__cena, .produkty--lista .produkt__cena { grid-column: 11 / 13; grid-row: 1; margin-top: 0; text-align: right; }
+}
+
+/* grupy wg kategorii i filtr (50-filtr.js ustawia aria-current na wybranym linku) */
+.produkty__grupa + .produkty__grupa { margin-top: var(--s-9); }
+.produkty__h { font-size: var(--fs-h3); margin-bottom: var(--s-6); padding-top: var(--s-4); border-top: 1px solid var(--tekst); }
+.filtr { flex: 1 1 auto; }
+.filtr__lista { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0 var(--s-6); }
+.filtr__lista a {
+  display: inline-flex; align-items: baseline; gap: var(--s-2); min-height: 44px; padding-block: var(--s-3);
+  border-bottom: 2px solid transparent; color: var(--tekst-2); text-decoration: none;
+}
+.filtr__lista a:hover { color: var(--tekst); border-bottom-color: var(--linia-mocna); }
+.filtr__lista a[aria-current="true"] { color: var(--tekst); border-bottom-color: var(--marka); font-weight: var(--fw-mocna); }
+.filtr__n { font-size: var(--fs-maly); font-weight: var(--fw-tekst); font-variant-numeric: tabular-nums; color: var(--tekst-2); }
+
+/* ---------- podstrona usługi ---------- */
+.usluga__siatka { display: grid; gap: var(--s-7); }
+.usluga__foto { margin-inline: calc(var(--gutter) * -1); }
+.usluga__foto img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+.usluga__foto figcaption { margin-top: var(--s-3); padding-inline: var(--gutter); }
+.usluga__bok { display: grid; gap: var(--s-6); align-content: start; }
+.usluga__fakty { display: grid; gap: var(--s-4); padding-top: var(--s-4); border-top: 1px solid var(--tekst); }
+.usluga__fakty dt { font-size: var(--fs-maly); color: var(--tekst-2); }
+.usluga__fakty dd {
+  font-family: var(--font-naglowki); font-weight: var(--fw-naglowki); font-size: var(--fs-h3); line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+.usluga__h { font-size: var(--fs-body); font-family: var(--font-tekst); font-weight: var(--fw-mocna); margin-bottom: calc(var(--s-6) * -1 + var(--s-3)); }
+.usluga__zakres { list-style: none; padding: 0; border-top: 1px solid var(--linia); }
+.usluga__zakres li {
+  display: grid; grid-template-columns: .5rem minmax(0, 1fr); gap: var(--s-4); align-items: baseline;
+  padding-block: var(--s-3); border-bottom: 1px solid var(--linia);
+}
+.usluga__zakres li::before { content: ""; width: .5rem; height: .5rem; background: var(--marka); transform: translateY(-.1em); }
+.usluga__akcja .btn { width: 100%; }
+.usluga__powrot { margin-top: var(--s-8); padding-top: var(--s-5); border-top: 1px solid var(--linia); }
+@media (min-width: 600px) {
+  .usluga__foto { margin-inline: 0; }
+  .usluga__foto figcaption { padding-inline: 0; }
+  .usluga__foto img { aspect-ratio: 2 / 1; }
+}
+@media (min-width: 960px) {
+  .usluga__siatka { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--s-6); row-gap: var(--s-8); }
+  .usluga__foto { grid-column: 1 / 13; }
+  .usluga__foto img { aspect-ratio: 21 / 9; }
+  .usluga__tresc { grid-column: 1 / 8; }
+  .usluga__bok { grid-column: 9 / 13; position: sticky; top: calc(var(--header-h) + var(--s-5)); }
+  .usluga__akcja .btn { width: auto; }
+}
+
+/* wymuszone kolory: znaczniki w kolorze marki i przezroczyste ramki filtra muszą zostać widoczne */
+@media (forced-colors: active) {
+  .oferta__zakres li::before, .usluga__zakres li::before { forced-color-adjust: none; background: CanvasText; }
+  .filtr__lista a { border-bottom-color: Canvas; }
+  .filtr__lista a[aria-current="true"] { border-bottom-color: LinkText; }
+  .oferta__nazwa a { text-decoration-color: LinkText; }
+}

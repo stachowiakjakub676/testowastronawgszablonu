@@ -1,0 +1,186 @@
+/* 13 — realizacje, zamówienia publiczne (przetargi) i galeria: trzy rodzaje dowodu, trzy różne układy.
+   Realizacje: duże własne zdjęcia w asymetrycznej siatce 7/4 kolumn (główna) albo wiersze „zdjęcia + tekst” (/realizacje).
+   Przetargi: prawdziwa tabela pogrupowana latami; na telefonie wiersz = siatka (rok | zadanie, zamawiający).
+   Galeria: równa siatka z podpisami. Filtr kategorii i „Pokaż więcej” — 50-filtr.js. */
+
+/* ---------- wspólne: „Pokaż więcej” ---------- */
+.wiecej { margin-top: var(--s-6); }
+/* .is-zwiniete dodaje 50-filtr.js — bez JS (albo gdy skrypt się nie wczyta) widać wszystko; na wydruku zawsze całość */
+@media screen {
+  .is-zwiniete [data-wiecej-reszta] { display: none; }
+}
+
+/* ---------- realizacje ---------- */
+/* pełna lista pod nagłówkiem podstrony: bez drugiej wielkiej przerwy (linia page-head już oddziela) */
+.page-head + .realizacje--pelna, .page-head + .przetargi { padding-top: var(--section-y-sm); }
+.realizacja { display: flex; flex-direction: column; min-width: 0; }
+.realizacja__foto { margin: 0; }
+.realizacja__foto img { width: 100%; object-fit: cover; aspect-ratio: 4 / 3; }
+.realizacja__foto figcaption { margin-top: var(--s-2); }
+.realizacja__tytul { font-size: var(--fs-h3); line-height: 1.2; max-width: 30ch; }
+.realizacja__meta {
+  display: flex; flex-wrap: wrap; margin-top: var(--s-2);
+  color: var(--tekst-2); font-variant-numeric: tabular-nums;
+}
+/* separator tylko wizualny — czytnik nie przeczyta „kropka” (druga deklaracja: tekst alternatywny pusty) */
+.realizacja__meta span + span::before { content: "·"; content: "·" / ""; padding-inline: .5em; }
+.realizacja__klient { margin-top: var(--s-1); color: var(--tekst-2); }
+.realizacja__opis { margin-top: var(--s-4); max-width: 60ch; }
+.realizacja__zrodlo { margin-top: var(--s-3); }
+.realizacja--bez-zdjec { border-top: 1px solid var(--linia); }
+
+/* skrót na głównej: zdjęcie nad tekstem (w HTML po nagłówku — czytnik zaczyna od tytułu) */
+.realizacje__lista:not(:has(li)) { display: none; }
+.realizacje__lista--siatka { display: grid; row-gap: var(--s-8); }
+.realizacje__lista--siatka .realizacja__foto { order: -1; margin-bottom: var(--s-4); }
+/* telefon: zdjęcie od krawędzi do krawędzi, jak w hero */
+@media (max-width: 599px) {
+  .realizacje__lista--siatka .realizacja__foto { margin-inline: calc(var(--gutter) * -1); }
+  .realizacje__lista--siatka .realizacja__foto img { border-radius: 0; }
+}
+@media (min-width: 600px) {
+  .realizacje__lista--siatka { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--s-6); }
+}
+/* ≥ 960: rozkładówka — w wierszu szeroka (7 kolumn, 3:2) i wąska (4 kolumny, 5:6) o tej samej wysokości zdjęcia,
+   jedna kolumna przerwy; następny wiersz odbity. Podpisy stoją na jednej linii. */
+@media (min-width: 960px) {
+  .realizacje__lista--siatka { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--s-6); row-gap: var(--s-9); align-items: start; }
+  .realizacje__lista--siatka > :nth-child(4n+1) { grid-column: 1 / 8; }
+  .realizacje__lista--siatka > :nth-child(4n+2) { grid-column: 9 / 13; }
+  .realizacje__lista--siatka > :nth-child(4n+3) { grid-column: 1 / 5; }
+  .realizacje__lista--siatka > :nth-child(4n+4) { grid-column: 6 / 13; }
+  .realizacje__lista--siatka > :nth-child(4n+1) .realizacja__foto img,
+  .realizacje__lista--siatka > :nth-child(4n+4) .realizacja__foto img { aspect-ratio: 3 / 2; }
+  .realizacje__lista--siatka > :nth-child(4n+2) .realizacja__foto img,
+  .realizacje__lista--siatka > :nth-child(4n+3) .realizacja__foto img { aspect-ratio: 5 / 6; }
+  /* ostatnia bez pary w odbitym wierszu — szeroka, nie wąski słupek z pustką obok */
+  .realizacje__lista--siatka > :nth-child(4n+3):last-child { grid-column: 1 / 8; }
+  .realizacje__lista--siatka > :nth-child(4n+3):last-child .realizacja__foto img { aspect-ratio: 3 / 2; }
+}
+/* skrót: realizacje bez zdjęcia — gęsta lista pod rozkładówką, linia 1 px nad każdą */
+.realizacje__lista--tekst { display: grid; margin-top: var(--s-8); border-bottom: 1px solid var(--linia); }
+.realizacje__lista--tekst .realizacja { padding-block: var(--s-4); }
+@media (min-width: 960px) {
+  .realizacje__lista--tekst .realizacja {
+    display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--s-6); align-items: baseline;
+  }
+  .realizacje__lista--tekst .realizacja__tytul { grid-column: 1 / 8; grid-row: 1 / span 2; font-size: 1.375rem; max-width: none; }
+  .realizacje__lista--tekst .realizacja__meta,
+  .realizacje__lista--tekst .realizacja__klient { grid-column: 8 / 13; margin-top: 0; }
+}
+
+/* pełna lista (/realizacje): każda realizacja w wierszu, linia 1 px nad wierszem */
+.realizacje__lista--wiersze { display: grid; row-gap: var(--s-8); }
+.realizacje__lista--wiersze .realizacja { display: grid; gap: var(--s-5); padding-top: var(--s-5); border-top: 1px solid var(--linia); }
+.realizacje__lista--wiersze .realizacja__tytul { font-size: clamp(1.375rem, 1.15rem + .9vw, 2rem); line-height: 1.12; max-width: 24ch; }
+.realizacja__zdjecia { order: -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-3); }
+.realizacja__zdjecia > .realizacja__foto--glowne { grid-column: 1 / -1; }
+.realizacja__zdjecia > .realizacja__foto--glowne img { aspect-ratio: 3 / 2; }
+@media (min-width: 960px) {
+  .realizacje__lista--wiersze { row-gap: var(--s-9); }
+  .realizacje__lista--wiersze .realizacja {
+    grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--s-6); align-items: start; padding-top: var(--s-6);
+  }
+  .realizacja__zdjecia { order: 0; grid-row: 1; grid-column: 1 / 9; gap: var(--s-5); }
+  .realizacje__lista--wiersze .realizacja__tekst {
+    grid-row: 1; grid-column: 9 / 13; position: sticky; top: calc(var(--header-h) + var(--s-5));
+  }
+  /* co druga (licząc tylko widoczne po filtrze) — zdjęcia po prawej, tekst po lewej */
+  .realizacje__lista--wiersze > :nth-child(even of :not([hidden])) .realizacja__zdjecia { grid-column: 5 / 13; }
+  .realizacje__lista--wiersze > :nth-child(even of :not([hidden])) .realizacja__tekst { grid-column: 1 / 5; }
+  .realizacje__lista--wiersze > .realizacja--bez-zdjec .realizacja__tekst { grid-column: 1 / 9; position: static; }
+}
+
+/* filtr kategorii — tylko z JS (bez JS linki nic by nie filtrowały, a lista i tak jest cała).
+   Podkreślenie aktywnej kategorii leży na linii pierwszego wiersza listy (jak zakładka). */
+:root:not(.js) .filtr { display: none; }
+.filtr__lista { display: flex; flex-wrap: wrap; gap: 0 var(--s-5); }
+.filtr__link:not([aria-current]) { color: var(--tekst-2); }
+.filtr__link {
+  display: inline-block; padding-block: var(--s-3); margin-bottom: -1px;
+  color: var(--tekst); text-decoration: none; border-bottom: 2px solid transparent;
+}
+.filtr__link:hover { border-bottom-color: var(--linia-mocna); }
+/* bez zmiany grubości pisma — zakładki nie przeskakują przy przełączaniu */
+.filtr__link[aria-current="true"] { border-bottom-color: var(--tekst); }
+.filtr__n { margin-left: .2em; color: var(--tekst-2); font-weight: var(--fw-tekst); font-variant-numeric: tabular-nums; }
+
+/* ---------- zamówienia publiczne ---------- */
+.przetargi__tabela { border-collapse: separate; border-spacing: 0; border-bottom: 1px solid var(--linia); }
+.przetargi__podsumowanie {
+  caption-side: top; text-align: left; padding-bottom: var(--s-5);
+  font-size: var(--fs-lead); line-height: 1.5; font-variant-numeric: tabular-nums;
+}
+.przetargi__tabela thead th {
+  padding-block: 0 var(--s-3); border-bottom: 1px solid var(--tekst);
+  font-family: var(--font-tekst); font-size: var(--fs-maly); font-weight: var(--fw-mocna); color: var(--tekst-2);
+}
+.przetargi__tabela tbody th, .przetargi__tabela tbody td { border-bottom: 0; vertical-align: baseline; overflow-wrap: break-word; }
+.przetargi__tabela tbody th { font-weight: var(--fw-tekst); color: var(--tekst); }
+.przetargi__zamawiajacy { color: var(--tekst-2); }
+.przetargi__tabela tbody .przetargi__rok {
+  font-family: var(--font-naglowki); font-weight: var(--fw-naglowki); font-size: var(--fs-h3); line-height: 1.1;
+  font-variant-numeric: tabular-nums; letter-spacing: -.01em; color: var(--tekst);
+}
+.przetargi__wartosc { font-variant-numeric: tabular-nums; }
+.przetargi__stopka { display: grid; gap: var(--s-2); margin-top: var(--s-5); max-width: 72ch; color: var(--tekst-2); }
+.przetargi .section__wiecej { margin-top: var(--s-6); }
+
+/* telefon: wiersz tabeli = siatka „rok | zadanie, zamawiający”; rok tylko w pierwszym wierszu roku, linia grubsza nad nim.
+   Nagłówki kolumn są ukryte wizualnie (czytnik je ma), role tabeli dopisuje 50-filtr.js. */
+@media (max-width: 599px) {
+  .przetargi__tabela, .przetargi__tabela tbody, .przetargi__tabela caption { display: block; }
+  .przetargi__tabela thead {
+    position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+  }
+  .przetargi__tabela tbody tr { display: grid; grid-template-columns: 3.25rem minmax(0, 1fr); column-gap: var(--s-4); }
+  .przetargi__tabela tbody tr > * { display: block; grid-column: 2; padding: 0; border: 0; overflow-wrap: anywhere; }
+  .przetargi__tabela tbody tr > .przetargi__rok { grid-column: 1; grid-row: 1 / span 4; padding-top: var(--s-4); font-size: 1.25rem; }
+  .przetargi__tabela tbody tr > .przetargi__zadanie { padding-top: var(--s-4); border-top: 1px solid var(--linia); }
+  .przetargi__tabela tbody tr > :last-child { padding-bottom: var(--s-4); }
+  .przetargi__tabela tbody tr > .przetargi__zamawiajacy { margin-top: var(--s-1); }
+  /* pierwszy wiersz roku: jedna ciągła linia przez obie kolumny; kolejne — linia tylko nad treścią */
+  .przetargi__tabela tbody tr.is-nowy-rok { border-top: 1px solid var(--tekst); }
+  .przetargi__tabela tbody tr.is-nowy-rok > .przetargi__zadanie { border-top: 0; }
+  .przetargi__tabela tbody tr > .przetargi__wartosc, .przetargi__tabela tbody tr > .przetargi__zrodlo { margin-top: var(--s-1); }
+  /* bez nagłówków kolumn samo „BZP” nic nie mówi — etykieta tylko wizualna (czytnik ma nagłówek kolumny) */
+  .przetargi__tabela tbody .przetargi__zrodlo:not(:empty)::before { content: "Źródło: "; content: "Źródło: " / ""; color: var(--tekst-2); }
+}
+/* ≥ 600: zwykła tabela; rok — kolumna z linią tylko nad pierwszym wierszem roku (oś czasu) */
+@media (min-width: 600px) {
+  .przetargi__tabela tbody th, .przetargi__tabela tbody td { padding: var(--s-4) var(--s-5) var(--s-4) 0; border-top: 1px solid var(--linia); }
+  .przetargi__tabela tbody tr.is-nowy-rok > * { border-top-color: var(--tekst); }
+  .przetargi__tabela tbody tr:first-child > * { border-top: 0; }
+  .przetargi__tabela tbody tr:not(.is-nowy-rok) > .przetargi__rok { border-top-width: 0; padding-top: calc(var(--s-4) + 1px); }
+  .przetargi__tabela .przetargi__rok { width: 5.5rem; }
+  .przetargi__tabela .przetargi__zamawiajacy { width: 36%; }
+  .przetargi__tabela .przetargi__wartosc { text-align: right; white-space: nowrap; }
+  .przetargi__tabela .przetargi__zrodlo { white-space: nowrap; }
+  .przetargi__tabela tr > :last-child { padding-right: 0; }
+}
+@media (min-width: 1280px) {
+  .przetargi__tabela .przetargi__rok { width: 8.5rem; }
+}
+
+/* ---------- galeria ---------- */
+.galeria__siatka { display: grid; gap: var(--s-6); }
+.galeria__foto { margin: 0; }
+.galeria__foto img { width: 100%; }
+.galeria__foto figcaption { margin-top: var(--s-2); }
+@media (min-width: 600px) {
+  .galeria__siatka { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-7) var(--s-5); }
+  .galeria__foto img { aspect-ratio: 3 / 2; object-fit: cover; }
+}
+@media (min-width: 960px) {
+  .galeria__siatka { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: var(--s-6); }
+}
+
+@media (forced-colors: active) {
+  .filtr__link { border-bottom-color: Canvas; }
+  .filtr__link:hover { border-bottom-color: CanvasText; }
+  .filtr__link[aria-current="true"] { border-bottom-color: LinkText; }
+}
+@media print {
+  .filtr, .wiecej { display: none !important; }
+  .realizacje__lista--wiersze .realizacja__tekst { position: static; }
+}

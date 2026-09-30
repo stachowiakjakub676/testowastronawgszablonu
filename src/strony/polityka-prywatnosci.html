@@ -1,0 +1,100 @@
+{# strona: sciezka="/polityka-prywatnosci" tytul="Polityka prywatności" h1="Polityka prywatności" opis="Kto administruje danymi, co zapisuje strona {{ firma.firma.nazwa }}, komu przekazujemy dane, jak długo je trzymamy i jakie masz prawa." #}
+{# Informacja z art. 13 RODO. Opisuje tylko to, co strona naprawdę robi — każdy akapit zależy od flagi w data/firma.json →
+   funkcje (hosting, formularz, mapa, statystyki_cf_token). Te same flagi ustawiają CSP w _headers (naglowki.py), więc
+   polityka i nagłówki nie mogą się rozjechać. Okresy przechowywania są te, które wynikają z przepisów, bez liczb
+   „na wyczucie”. „Stan na” = data ostatniej zmiany data/firma.json albo tego szablonu (auto.polityka_prywatnosci_data). #}
+{% set administrator = firma.firma.nazwa_prawna | domyslnie:firma.firma.nazwa %}
+{% set hostujacy = "Cloudflare, Inc." %}
+{% if funkcje.hosting == "github_pages" %}
+{% set hostujacy = "GitHub, Inc." %}
+{% endif %}
+{% set worker = auto.formularz and auto.formularz.tryb == "worker" %}
+{% set mapa = funkcje.mapa == "po_kliknieciu" and auto.osm_embed %}
+{% include "czesci/naglowek-strony.html" %}
+<div class="section section--sm dokument">
+  <div class="wrap dokument__siatka">
+    <nav class="dokument__spis" aria-label="Spis treści">
+      <ul>
+        <li><a href="#administrator">Administrator</a></li>
+        <li><a href="#cookies">Cookies</a></li>
+        <li><a href="#serwer">Serwer</a></li>
+        {% if auto.formularz %}
+        <li><a href="#zapytania">Zapytania</a></li>
+        {% endif %}
+        {% if mapa %}
+        <li><a href="#mapa">Mapa</a></li>
+        {% endif %}
+        {% if funkcje.statystyki_cf_token %}
+        <li><a href="#statystyki">Statystyki</a></li>
+        {% endif %}
+        <li><a href="#odbiorcy">Odbiorcy danych</a></li>
+        <li><a href="#prawa">Twoje prawa</a></li>
+      </ul>
+    </nav>
+    <div class="prose dokument__tresc">
+      <h2 id="administrator">Administrator danych</h2>
+      <p>Administratorem danych osobowych zbieranych przez tę stronę jest {{ administrator }}, {{ auto.adres_linia_html }}{% if firma.rejestr.krs %}, KRS&nbsp;{{ firma.rejestr.krs }}{% endif %}{% if firma.rejestr.nip %}, NIP&nbsp;{{ firma.rejestr.nip }}{% endif %}.</p>
+      <p>W sprawach danych osobowych pisz na {% if firma.kontakt.email %}<a href="{{ auto.email_href | url }}">{{ firma.kontakt.email }}</a>{% if auto.tel_href %} albo dzwoń: <a class="tel" href="{{ auto.tel_href | url }}">{{ auto.telefon_krajowy }}</a>{% endif %}{% else %}adres firmy albo dzwoń: <a class="tel" href="{{ auto.tel_href | url }}">{{ auto.telefon_krajowy }}</a>{% endif %}.</p>
+
+      <h2 id="cookies">Cookies i pamięć przeglądarki</h2>
+      <p>Strona nie używa plików cookies i nie zapisuje niczego w pamięci twojej przeglądarki. Przy wejściu nie ładuje niczego z serwerów innych firm{% if funkcje.statystyki_cf_token %} poza skryptem statystyk opisanym niżej{% endif %}. Dlatego nie wyświetla banera cookies.</p>
+      <p>Nie profilujemy odwiedzających i nie podejmujemy wobec nikogo decyzji w sposób zautomatyzowany.</p>
+
+      <h2 id="serwer">Serwer i dane połączenia</h2>
+      {% if funkcje.hosting == "github_pages" %}
+      <p>Stronę udostępnia GitHub, Inc. (usługa GitHub Pages). Przy każdym wejściu serwer otrzymuje techniczne dane połączenia: adres IP, czas, adres podstrony i nazwę przeglądarki. GitHub używa ich, żeby dostarczyć stronę i chronić ją przed atakami, jako osobny administrator, według swojego oświadczenia o prywatności (GitHub General Privacy Statement), które określa też, jak długo je przechowuje. My nie prowadzimy własnych dzienników odwiedzin.</p>
+      {% else %}
+      <p>Stronę udostępnia Cloudflare, Inc. w naszym imieniu (podmiot przetwarzający, umowa powierzenia: Cloudflare Data Processing Addendum). Przy każdym wejściu serwer otrzymuje techniczne dane połączenia: adres IP, czas, adres podstrony i nazwę przeglądarki. Służą tylko do dostarczenia strony i ochrony przed atakami i są przechowywane tak krótko, jak to do tego potrzebne. My nie prowadzimy własnych dzienników odwiedzin – widzimy tylko zbiorcze liczby i zablokowane ataki.</p>
+      {% endif %}
+      <p>Podstawa: nasz prawnie uzasadniony interes, czyli działająca i bezpieczna strona (art. 6 ust. 1 lit. f RODO).</p>
+
+      {% if auto.formularz %}
+      <h2 id="zapytania">Zapytania</h2>
+      {% if worker %}
+      <p>Formularz zapytania wysyła imię i nazwisko, telefon albo e-mail oraz treść wiadomości. Na serwerze Cloudflare działa krótki program, który odrzuca spam (także gdy z jednego adresu IP przychodzi więcej niż kilka wiadomości na minutę) i od razu przekazuje wiadomość do serwisu Resend (Resend, Inc.), a ten dostarcza ją na naszą skrzynkę e-mail. Program nie zapisuje treści wiadomości ani adresu IP; w dzienniku Cloudflare zostają tylko kody błędów wysyłki, przez 3 dni (7 dni w płatnym planie Cloudflare).</p>
+      {% else %}
+      <p>Zapytanie wysyłasz ze swojego programu pocztowego. Dostajemy wtedy twój adres e-mail, treść wiadomości i to, co w niej podasz (np. imię i numer telefonu).</p>
+      {% endif %}
+      <p>Używamy tych danych, żeby odpowiedzieć i przygotować ofertę, o którą prosisz (art. 6 ust. 1 lit. b RODO), a przy zwykłej korespondencji – w naszym prawnie uzasadnionym interesie, czyli żeby odpowiadać na pytania (art. 6 ust. 1 lit. f RODO). Podanie danych jest dobrowolne, ale bez telefonu albo adresu e-mail nie będziemy mogli odpowiedzieć.</p>
+      {% if worker and auto.formularz.zgoda_checkbox %}
+      <p>Pole pod formularzem potwierdza tylko, że znasz tę informację. Nie jest zgodą i nie jest obowiązkowe. Wiadomość wyślesz także bez jego zaznaczenia.</p>
+      {% endif %}
+      <p>Korespondencję trzymamy do załatwienia sprawy. Jeśli dojdzie do zlecenia, dane z nim związane przechowujemy tak długo, jak wymagają tego przepisy podatkowe i o rachunkowości, oraz do upływu terminu przedawnienia roszczeń.</p>
+      {% endif %}
+
+      {% if mapa %}
+      <h2 id="mapa">Mapa</h2>
+      <p>Mapa OpenStreetMap na stronie kontaktu ładuje się dopiero po kliknięciu „Pokaż mapę”. Wtedy twoja przeglądarka łączy się z serwerami OpenStreetMap Foundation (Wielka Brytania), które otrzymują adres IP i dane przeglądarki. Od tego momentu obowiązują zasady prywatności OpenStreetMap Foundation. Bez kliknięcia nic nie jest przesyłane.</p>
+      {% endif %}
+
+      {% if funkcje.statystyki_cf_token %}
+      <h2 id="statystyki">Statystyki odwiedzin</h2>
+      <p>Liczymy odwiedziny narzędziem Cloudflare Web Analytics. Nie używa ono cookies, nie zapisuje niczego w przeglądarce i nie tworzy profili odwiedzających. Dostajemy wyłącznie zbiorcze liczby: ile osób odwiedziło podstrony, skąd przyszły i jak szybko strona się ładowała. Podstawa: prawnie uzasadniony interes, czyli ulepszanie strony (art. 6 ust. 1 lit. f RODO).</p>
+      {% endif %}
+
+      <h2 id="odbiorcy">Komu przekazujemy dane</h2>
+      <p>Dane trafiają tylko do dostawców usług potrzebnych do działania strony:</p>
+      <ul>
+        {% if funkcje.hosting == "github_pages" %}
+        <li>GitHub, Inc. – serwer strony (jako osobny administrator, opis wyżej),</li>
+        {% else %}
+        <li>Cloudflare, Inc. – serwer strony{% if worker %} i program obsługujący formularz{% endif %}{% if funkcje.statystyki_cf_token %}, statystyki odwiedzin{% endif %} (w naszym imieniu, na podstawie umowy powierzenia),</li>
+        {% endif %}
+        {% if worker %}
+        <li>Resend, Inc. – dostarczenie wiadomości z formularza (w naszym imieniu, na podstawie umowy powierzenia: Resend Data Processing Agreement),</li>
+        {% endif %}
+        {% if auto.formularz %}
+        <li>dostawca naszej poczty e-mail – przechowywanie korespondencji.</li>
+        {% endif %}
+      </ul>
+      <p>{{ hostujacy }}{% if worker %} i Resend, Inc. mają{% else %} ma{% endif %} siedzibę w Stanach Zjednoczonych, więc dane mogą trafiać na serwery w USA. {% if funkcje.hosting == "github_pages" %}GitHub{% else %}Cloudflare{% endif %} uczestniczy w programie EU-US Data Privacy Framework, więc przekazanie opiera się na decyzji Komisji Europejskiej o odpowiednim stopniu ochrony (art. 45 RODO; lista uczestników: dataprivacyframework.gov).{% if worker %} Resend, Inc. przyjmuje dane na podstawie standardowych klauzul umownych Komisji Europejskiej zawartych w swojej umowie powierzenia (art. 46 RODO).{% endif %} Kopię tych zabezpieczeń wyślemy na prośbę wysłaną na adres podany wyżej.</p>
+
+      <h2 id="prawa">Twoje prawa</h2>
+      <p>Masz prawo dostępu do swoich danych, ich sprostowania, usunięcia, ograniczenia przetwarzania i przeniesienia, a także prawo sprzeciwu wobec przetwarzania opartego na naszym prawnie uzasadnionym interesie. Wystarczy wiadomość na adres podany wyżej.</p>
+      <p>Jeśli uważasz, że przetwarzamy dane niezgodnie z prawem, możesz złożyć skargę do Prezesa Urzędu Ochrony Danych Osobowych, ul.&nbsp;Stawki 2, <span class="nowrap">00-193</span> Warszawa (uodo.gov.pl).</p>
+      {% if auto.polityka_prywatnosci_data %}
+      <p class="meta dokument__stan">Stan na {{ auto.polityka_prywatnosci_data | data }}.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,203 @@
+{
+  "$schema": "../../../../../tools/schemat/tresc.schema.json",
+  "$komentarz": "FIKSTURA TESTOWA — treść wymyślona do sprawdzenia modułów szablonu (generuj.py).",
+  "wersja_danych": 1,
+  "hero": {
+    "naglowek": "Gabinet lekarski w Testowie",
+    "lead": "Interna, pediatria i fizjoterapia. Wizyty prywatne, zwykle w ciągu tygodnia. Dane są testowe.",
+    "zdjecie": "gabinet",
+    "podpis": null,
+    "cta_glowne": null,
+    "cta_drugie": null
+  },
+  "ogloszenie": {
+    "tekst": "Test ogłoszenia bez daty początku: szczepienia przeciw grypie od października",
+    "od": null,
+    "do": "2026-11-15"
+  },
+  "oferta": {
+    "naglowek": null,
+    "wstep": null,
+    "pozycje": [
+      {
+        "slug": "interna",
+        "nazwa": "Konsultacja internistyczna",
+        "opis": "Wizyta 30 minut.",
+        "zakres": null,
+        "cena": 200,
+        "jednostka": null,
+        "czas": "30 min",
+        "zdjecie": null,
+        "tresc": null
+      },
+      {
+        "slug": "pediatria",
+        "nazwa": "Wizyta pediatryczna",
+        "opis": null,
+        "zakres": null,
+        "cena": 180,
+        "jednostka": null,
+        "czas": null,
+        "zdjecie": null,
+        "tresc": null
+      },
+      {
+        "slug": "fizjoterapia",
+        "nazwa": "Fizjoterapia",
+        "opis": "Terapia manualna i ćwiczenia.",
+        "zakres": null,
+        "cena": null,
+        "jednostka": null,
+        "czas": null,
+        "zdjecie": null,
+        "tresc": null
+      }
+    ]
+  },
+  "cennik": {
+    "naglowek": null,
+    "dla": "konsumenci",
+    "data": "2026-06-23",
+    "uwagi": null,
+    "pdf": "assets/img/pliki/cennik-gabinetu.pdf",
+    "grupy": [
+      {
+        "nazwa": "Wizyty",
+        "pozycje": [
+          {
+            "nazwa": "Konsultacja internistyczna",
+            "opis": null,
+            "cena": 200,
+            "jednostka": null,
+            "czas": "30 min"
+          },
+          {
+            "nazwa": "Wizyta pediatryczna",
+            "opis": null,
+            "cena": 180,
+            "jednostka": null,
+            "czas": "20 min"
+          },
+          {
+            "nazwa": "Wizyta domowa",
+            "opis": "w granicach Testowa",
+            "cena": 350,
+            "jednostka": null,
+            "czas": null
+          }
+        ]
+      },
+      {
+        "nazwa": "Fizjoterapia",
+        "pozycje": [
+          {
+            "nazwa": "Terapia manualna",
+            "opis": null,
+            "cena": 180,
+            "jednostka": null,
+            "czas": "50 min"
+          },
+          {
+            "nazwa": "Pakiet 5 wizyt",
+            "opis": null,
+            "cena": 800,
+            "jednostka": null,
+            "czas": null
+          }
+        ]
+      }
+    ]
+  },
+  "menu": null,
+  "produkty": null,
+  "realizacje": null,
+  "przetargi": null,
+  "proces": null,
+  "zasady": {
+    "naglowek": "Wizyty i odwołania",
+    "wstep": null,
+    "pozycje": [
+      {
+        "nazwa": "Odwołanie wizyty",
+        "opis": "Najpóźniej 24 godziny wcześniej, telefonicznie."
+      },
+      {
+        "nazwa": "Płatność",
+        "opis": "Gotówka lub karta po wizycie."
+      }
+    ]
+  },
+  "o_firmie": null,
+  "zespol": {
+    "naglowek": null,
+    "wstep": null,
+    "osoby": [
+      {
+        "imie": "lek. Anna Testowa",
+        "rola": "specjalistka chorób wewnętrznych, właścicielka",
+        "fakt": null,
+        "zdjecie": "portret-1",
+        "zgoda": true
+      },
+      {
+        "imie": "lek. Jan Próbny",
+        "rola": "pediatra",
+        "fakt": null,
+        "zdjecie": "portret-2",
+        "zgoda": true
+      },
+      {
+        "imie": "mgr Ewa Przykład",
+        "rola": "fizjoterapeutka",
+        "fakt": null,
+        "zdjecie": "portret-3",
+        "zgoda": true
+      },
+      {
+        "imie": "Maria Test",
+        "rola": "rejestracja",
+        "fakt": null,
+        "zdjecie": "portret-4",
+        "zgoda": true
+      }
+    ]
+  },
+  "liczby": null,
+  "opinie": null,
+  "certyfikaty": {
+    "naglowek": null,
+    "wstep": null,
+    "pozycje": [
+      {
+        "nazwa": "Certyfikat jakości (test)",
+        "wydawca": "Jednostka Testowa",
+        "numer": null,
+        "rok": 2023,
+        "waznosc": null,
+        "plik": null
+      }
+    ]
+  },
+  "faq": {
+    "naglowek": null,
+    "pozycje": [
+      {
+        "pytanie": "Czy przyjmujecie na NFZ?",
+        "odpowiedz": "Nie, tylko wizyty prywatne (dane testowe)."
+      },
+      {
+        "pytanie": "Czy potrzebne jest skierowanie?",
+        "odpowiedz": "Nie."
+      }
+    ]
+  },
+  "galeria": null,
+  "do_pobrania": null,
+  "kariera": null,
+  "wspolpraca": null,
+  "gdzie_kupic": null,
+  "kontakt": {
+    "naglowek": null,
+    "wstep": null
+  }
+}

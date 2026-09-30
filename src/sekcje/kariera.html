@@ -1,0 +1,84 @@
+{# wymaga: auto.kariera #}
+{# Praca (KONTRAKT §4.2, §6.1): tylko aktualne oferty (bez wazne_do albo wazne_do ≥ dziś — po terminie znikają same,
+   a z ostatnią znika strona /kariera). Dwie wersje, bez powtórzeń:
+   - tryb="pelny" (/kariera, bez_naglowka=true): duży przycisk „Zadzwoń” (blok z data-ukryj-pasek — pasek na telefonie
+     chowa się, gdy ten numer jest na ekranie; ≥ 960 px blok stoi obok ofert i jedzie razem z nimi), potem oferty:
+     stanowisko, fakty w <dl>, opis, e-mail z CV z tematem stanowiska. JobPosting w JSON-LD (jsonld.py) tylko tu i tylko
+     dla ofert z datą publikacji, terminem i opisem;
+   - tryb="skrot" (gdy preset postawi sekcję na głównej): same stanowiska i link do /kariera. #}
+{% set kk = auto.kariera_kontakt %}
+<section class="section{% if sekcja.klasa %} {{ sekcja.klasa }}{% endif %} kariera" id="{{ sekcja.html_id }}" aria-labelledby="{% if bez_naglowka %}tytul-strony{% else %}kariera-h{% endif %}">
+  <div class="wrap">
+    {% if not bez_naglowka %}
+    <div class="section__head">
+      <h2 id="kariera-h">{{ sekcja.naglowek }}</h2>
+      {% if tresc.kariera.wstep %}
+      <p class="section__lead">{{ tresc.kariera.wstep }}</p>
+      {% endif %}
+    </div>
+    {% endif %}
+    {% if tryb == "pelny" %}
+    <div class="kariera__siatka">
+      {% if kk.tel_href or kk.email %}
+      <div class="kariera__kontakt"{% if kk.tel_href %} data-ukryj-pasek{% endif %}>
+        <h{{ hn }} class="kariera__h">Zgłoszenia</h{{ hn }}>
+        {% if kk.osoba %}
+        <p class="kariera__osoba">{{ kk.osoba }}</p>
+        {% endif %}
+        {% if kk.tel_href %}
+        <p class="kariera__zadzwon"><a class="btn btn--primary" href="{{ kk.tel_href | url }}">Zadzwoń: {{ kk.telefon_krajowy }}</a></p>
+        {% endif %}
+        {% if kk.email %}
+        <p class="kariera__email">{% if kk.tel_href %}CV i pytania e-mailem:{% else %}CV i pytania:{% endif %} <a href="{{ kk.mailto | url }}">{{ kk.email }}</a></p>
+        {% endif %}
+      </div>
+      {% endif %}
+      <div class="kariera__oferty">
+        {% for p in auto.kariera %}
+        <article class="praca" id="{{ p.html_id }}" aria-labelledby="{{ p.html_id }}-h">
+          <div class="praca__glowa">
+            <h{{ hn }} class="praca__tytul" id="{{ p.html_id }}-h">{{ p.stanowisko }}</h{{ hn }}>
+            {% if p.opublikowano %}
+            <p class="praca__data">Opublikowano <time datetime="{{ p.opublikowano | data_iso }}">{{ p.opublikowano | data }}</time></p>
+            {% endif %}
+          </div>
+          <div class="praca__tresc">
+            {% if p.miejsce or p.wymiar or p.wynagrodzenie or p.wazne_do %}
+            <dl class="praca__fakty">
+              {% if p.miejsce %}
+              <div><dt>Miejsce pracy</dt><dd>{{ p.miejsce }}</dd></div>
+              {% endif %}
+              {% if p.wymiar %}
+              <div><dt>Wymiar</dt><dd>{{ p.wymiar }}</dd></div>
+              {% endif %}
+              {% if p.wynagrodzenie %}
+              <div><dt>Wynagrodzenie</dt><dd>{{ p.wynagrodzenie }}</dd></div>
+              {% endif %}
+              {% if p.wazne_do %}
+              <div><dt>Zgłoszenia do</dt><dd><time datetime="{{ p.wazne_do | data_iso }}">{{ p.wazne_do | data }}</time></dd></div>
+              {% endif %}
+            </dl>
+            {% endif %}
+            {% if p.opis %}
+            <p class="praca__opis">{{ p.opis }}</p>
+            {% endif %}
+            {% if p.mailto %}
+            <p class="praca__cv"><a href="{{ p.mailto | url }}">Wyślij CV na stanowisko: {{ p.stanowisko }}</a></p>
+            {% endif %}
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+    {% else %}
+    <ul class="kariera__lista">
+      {% for p in auto.kariera %}
+      <li><span class="kariera__stanowisko">{{ p.stanowisko }}</span>{% if p.wymiar or p.miejsce %} <span class="kariera__meta">{{ p.wymiar | domyslnie:"" }}{% if p.wymiar and p.miejsce %}, {% endif %}{{ p.miejsce | domyslnie:"" }}</span>{% endif %}</li>
+      {% endfor %}
+    </ul>
+    {% if sekcja.strona %}
+    <p class="section__wiecej"><a href="{{ sekcja.strona | url }}">Oferty pracy: szczegóły i zgłoszenia ({{ auto.kariera | dlugosc }})</a></p>
+    {% endif %}
+    {% endif %}
+  </div>
+</section>

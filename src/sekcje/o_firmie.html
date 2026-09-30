@@ -1,0 +1,54 @@
+{# wymaga: tresc.o_firmie.tresc|tresc.o_firmie.wstep|tresc.o_firmie.fakty #}
+{# O firmie (KONTRAKT §6.1, §6.2): tekst z pliku .md (md_plik), duże zdjęcie firmy na całą szerokość, fakty jako <dl>.
+   - Gdy nie ma podstrony /o-firmie (tekst ≤ 250 słów i zespół < 4 osób): na głównej cała treść.
+   - Gdy podstrona jest: na głównej wstęp (albo pierwszy akapit tekstu), zdjęcie, fakty i opisowy link
+     (auto.o_firmie_wiecej: „Cały tekst o firmie, zespół (6 osób) i certyfikaty”); na /o-firmie (bez_naglowka=true,
+     wstęp stoi pod h1 strony) — cały tekst, nagłówki z .md o poziom niżej niż h1. #}
+{% set o = tresc.o_firmie %}
+{% set cala = tryb == "pelny" or not sekcja.strona %}
+<section class="section{% if sekcja.klasa %} {{ sekcja.klasa }}{% endif %} o-firmie" id="{{ sekcja.html_id }}" aria-labelledby="{% if bez_naglowka %}tytul-strony{% else %}o-firmie-h{% endif %}">
+  <div class="wrap">
+    {% if not bez_naglowka %}
+    <div class="section__head">
+      <h2 id="o-firmie-h">{{ sekcja.naglowek }}</h2>
+      {% if o.wstep %}
+      <p class="section__lead">{{ o.wstep }}</p>
+      {% endif %}
+    </div>
+    {% endif %}
+    {% if o.zdjecie %}
+    <figure class="o-firmie__foto">
+      {{ o.zdjecie | obraz:"pelny" }}
+      {% if auto.o_firmie_podpis %}
+      <figcaption>{{ auto.o_firmie_podpis }}</figcaption>
+      {% endif %}
+    </figure>
+    {% endif %}
+    {% if o.fakty or (o.tresc and (cala or not o.wstep)) %}
+    <div class="o-firmie__siatka">
+      {% if o.tresc and (cala or not o.wstep) %}
+      <div class="o-firmie__tekst prose">
+        {% if cala %}
+        {{ o.tresc | md_plik:hn }}
+        {% else %}
+        {{ o.tresc | md_plik_poczatek }}
+        {% endif %}
+      </div>
+      {% endif %}
+      {% if o.fakty %}
+      <dl class="o-firmie__fakty">
+        {% for f in o.fakty %}
+        <div class="o-firmie__fakt">
+          <dt>{{ f.nazwa }}</dt>
+          <dd>{{ f.wartosc }}</dd>
+        </div>
+        {% endfor %}
+      </dl>
+      {% endif %}
+    </div>
+    {% endif %}
+    {% if not cala and auto.o_firmie_wiecej %}
+    <p class="section__wiecej"><a href="{{ sekcja.strona | url }}">{{ auto.o_firmie_wiecej }}</a></p>
+    {% endif %}
+  </div>
+</section>

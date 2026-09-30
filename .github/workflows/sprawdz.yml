@@ -1,0 +1,62 @@
+# Sprawdzenie silnika przy każdym pushu i pull requeście: testy jednostkowe, build przykładu BIMEX i klientów
+# testowych (tools/testy/klienci/), walidacja HTML. Build to sama biblioteka standardowa Pythona — bez pip install.
+name: Sprawdź
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sprawdz-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # stały „dziś” — ten sam co DZIS w tools/testy/_wspolne.py (daty w fiksturach są liczone od niego)
+  SZABLON_DZIS: "2026-10-01"
+  PYTHONDONTWRITEBYTECODE: "1"
+
+jobs:
+  sprawdz:
+    name: Testy i build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Testy jednostkowe (tools/testy)
+        run: python3 tools/testy/uruchom.py -q
+
+      - name: Build przykładu i klientów testowych
+        run: |
+          set -e
+          python3 tools/build.py --klient przyklady/bimex --wyjscie dist-ci/bimex
+          for k in restauracja producent uslugi gabinet; do
+            python3 tools/build.py --klient "tools/testy/klienci/$k" --wyjscie "dist-ci/$k"
+          done
+
+      - name: Lint „AI slop” (P0 = błąd; build zgłasza już P1 jako ostrzeżenia)
+        run: |
+          set -e
+          for d in dist-ci/*/; do
+            k="$(basename "$d")"
+            if [ "$k" = bimex ]; then dane=przyklady/bimex/data; else dane="tools/testy/klienci/$k/data"; fi
+            python3 tools/lint_slop.py "$d" "$dane"
+          done
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Test Workera formularza (node, bez zależności)
+        run: node tools/test_worker.mjs
+
+      - name: Walidacja HTML (html-validate, konfiguracja .htmlvalidate.json)
+        run: find dist-ci -name '*.html' -print0 | xargs -0 npx --yes html-validate@11

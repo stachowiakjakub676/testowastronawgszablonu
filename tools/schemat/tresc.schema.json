@@ -1,0 +1,2333 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tresc.schema.json",
+  "title": "data/tresc.json — co firma robi (treść sekcji)",
+  "description": "KONTRAKT §4.2. Każdy blok to null albo obiekt; null = sekcja się nie pokazuje. naglowek null = nagłówek z presetu.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "$komentarz": {
+      "type": "string"
+    },
+    "wersja_danych": {
+      "const": 1
+    },
+    "hero": {
+      "type": "object",
+      "properties": {
+        "naglowek": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 70
+            }
+          ]
+        },
+        "lead": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 300
+            }
+          ]
+        },
+        "zdjecie": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/id_zdjecia"
+            }
+          ]
+        },
+        "podpis": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            }
+          ]
+        },
+        "cta_glowne": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/cta"
+            }
+          ]
+        },
+        "cta_drugie": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/cta"
+            }
+          ]
+        }
+      },
+      "required": [
+        "naglowek",
+        "lead",
+        "zdjecie",
+        "podpis",
+        "cta_glowne",
+        "cta_drugie"
+      ],
+      "additionalProperties": false
+    },
+    "ogloszenie": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "tekst": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "od": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/data"
+                }
+              ]
+            },
+            "do": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/data"
+                }
+              ]
+            }
+          },
+          "required": [
+            "tekst",
+            "od",
+            "do"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "oferta": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "naglowek": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                }
+              ]
+            },
+            "wstep": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 400
+                }
+              ]
+            },
+            "pozycje": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "slug": {
+                    "$ref": "#/$defs/slug"
+                  },
+                  "nazwa": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 80
+                  },
+                  "opis": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 400
+                      }
+                    ]
+                  },
+                  "zakres": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "minItems": 1
+                      }
+                    ]
+                  },
+                  "cena": {
+                    "$ref": "#/$defs/cena"
+                  },
+                  "jednostka": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 20
+                      }
+                    ]
+                  },
+                  "czas": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 40
+                      }
+                    ]
+                  },
+                  "zdjecie": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "$ref": "#/$defs/id_zdjecia"
+                      }
+                    ]
+                  },
+                  "tresc": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "$ref": "#/$defs/plik_md"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "slug",
+                  "nazwa",
+                  "opis",
+                  "zakres",
+                  "cena",
+                  "jednostka",
+                  "czas",
+                  "zdjecie",
+                  "tresc"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "naglowek",
+            "wstep",
+            "pozycje"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "cennik": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "naglowek": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                }
+              ]
+            },
+            "dla": {
+              "enum": [
+                "konsumenci",
+                "firmy"
+              ]
+            },
+            "data": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/data"
+                }
+              ]
+            },
+            "grupy": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "nazwa": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    ]
+                  },
+                  "pozycje": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "nazwa": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "opis": {
+                          "oneOf": [
+                            {
+                              "type": "null"
+                            },
+                            {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          ]
+                        },
+                        "cena": {
+                          "$ref": "#/$defs/cena"
+                        },
+                        "jednostka": {
+                          "oneOf": [
+                            {
+                              "type": "null"
+                            },
+                            {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 20
+                            }
+                          ]
+                        },
+                        "czas": {
+                          "oneOf": [
+                            {
+                              "type": "null"
+                            },
+                            {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 40
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "nazwa",
+                        "opis",
+                        "cena",
+                        "jednostka"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 1
+                  }
+                },
+                "required": [
+                  "nazwa",
+                  "pozycje"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            },
+            "uwagi": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1
+                }
+              ]
+            },
+            "pdf": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1
+                }
+              ]
+            }
+          },
+          "required": [
+            "naglowek",
+            "dla",
+            "data",
+            "grupy",
+            "uwagi",
+            "pdf"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "menu": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "naglowek": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                }
+              ]
+            },
+            "data": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/data"
+                }
+              ]
+            },
+            "ceny": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "enum": [
+                    "podane",
+                    "w_lokalu"
+                  ]
+                }
+              ],
+              "description": "„w_lokalu” — karta bez cen na stronie (ceny tylko na miejscu); pod kartą stoi wtedy menu.uwagi albo zdanie „Ceny podajemy w lokalu.”"
+            },
+            "kategorie": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "nazwa": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "pozycje": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "nazwa": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "opis": {
+                          "oneOf": [
+                            {
+                              "type": "null"
+                            },
+                            {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          ]
+                        },
+                        "cena": {
+                          "$ref": "#/$defs/cena"
+                        },
+                        "wege": {
+                          "type": "boolean"
+                        },
+                        "ostre": {
+                          "type": "boolean"
+                        },
+                        "alergeny": {
+                          "oneOf": [
+                            {
+                              "type": "null"
+                            },
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "minLength": 1
+                              }
+                            }
+                          ]
+                        },
+                        "porcja": {
+                          "oneOf": [
+                            {
+                              "type": "null"
+                            },
+                            {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 30
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "nazwa",
+                        "opis",
+                        "cena",
+                        "wege",
+                        "ostre",
+                        "alergeny"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 1
+                  }
+                },
+                "required": [
+                  "nazwa",
+                  "pozycje"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            },
+            "uwagi": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1
+                }
+              ]
+            },
+            "pdf": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1
+                }
+              ]
+            }
+          },
+          "required": [
+            "naglowek",
+            "data",
+            "kategorie",
+            "uwagi",
+            "pdf"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "produkty": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "naglowek": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                }
+              ]
+            },
+            "wstep": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1
+                }
+              ]
+            },
+            "kategorie": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/kategoria"
+                  },
+                  "minItems": 1
+                }
+              ]
+            },
+            "pozycje": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "slug": {
+                    "$ref": "#/$defs/slug"
+                  },
+                  "nazwa": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "kategoria": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "$ref": "#/$defs/slug"
+                      }
+                    ]
+                  },
+                  "opis": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    ]
+                  },
+                  "parametry": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "nazwa": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "wartosc": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "required": [
+                            "nazwa",
+                            "wartosc"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "minItems": 1
+                      }
+                    ]
+                  },
+                  "zdjecie": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "$ref": "#/$defs/id_zdjecia"
+                      }
+                    ]
+                  },
+                  "cena": {
+                    "$ref": "#/$defs/cena"
+                  },
+                  "jednostka": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 20
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "slug",
+                  "nazwa",
+                  "kategoria",
+                  "opis",
+                  "parametry",
+                  "zdjecie",
+                  "cena"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "naglowek",
+            "wstep",
+            "kategorie",
+            "pozycje"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "realizacje": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "naglowek": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                }
+              ]
+            },
+            "wstep": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1
+                }
+              ]
+            },
+            "kategorie": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/kategoria"
+                  },
+                  "minItems": 1
+                }
+              ]
+            },
+            "pozycje": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "tytul": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 160
+                  },
+                  "miejsce": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    ]
+                  },
+                  "rok": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "integer",
+                        "minimum": 1900,
+                        "maximum": 2100
+                      }
+                    ]
+                  },
+                  "kategoria": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "$ref": "#/$defs/slug"
+                      }
+                    ]
+                  },
+                  "parametr": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 60
+                      }
+                    ]
+                  },
+                  "opis": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    ]
+                  },
+                  "klient": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    ]
+                  },
+                  "zdjecia": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/$defs/id_zdjecia"
+                        },
+                        "minItems": 1
+                      }
+                    ]
+                  },
+                  "zrodlo": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    ]
+                  },
+                  "prywatna": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "tytul",
+                  "miejsce",
+                  "rok",
+                  "kategoria",
+                  "parametr",
+                  "opis",
+                  "klient",
+                  "zdjecia",
+                  "zrodlo",
+                  "prywatna"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "naglowek",
+            "wstep",
+            "kategorie",
+            "pozycje"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "przetargi": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "naglowek": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                }
+              ]
+            },
+            "wstep": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1
+                }
+              ]
+            },
+            "zrodlo_opis": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1
+                }
+              ]
+            },
+            "pozycje": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "zadanie": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 250
+                  },
+                  "zamawiajacy": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "rok": {
+                    "type": "integer",
+                    "minimum": 1990,
+                    "maximum": 2100
+                  },
+                  "wartosc": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "number",
+                        "minimum": 0
+                      }
+                    ]
+                  },
+                  "zrodlo": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "zadanie",
+                  "zamawiajacy",
+                  "rok",
+                  "wartosc",
+                  "zrodlo"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "naglowek",
+            "wstep",
+            "zrodlo_opis",
+            "pozycje"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "proces": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "naglowek": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                }
+              ]
+            },
+            "wstep": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1
+                }
+              ]
+            },
+            "kroki": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "nazwa": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "opis": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    ]
+                  },
+                  "czas": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 40
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "nazwa",
+                  "opis",
+                  "czas"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 2
+            }
+          },
+          "required": [
+            "naglowek",
+            "wstep",
+            "kroki"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "zasady": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "naglowek": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                }
+              ]
+            },
+            "wstep": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1
+                }
+              ]
+            },
+            "pozycje": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "nazwa": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "opis": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "nazwa",
+                  "opis"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "naglowek",
+            "wstep",
+            "pozycje"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "o_firmie": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "naglowek": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                }
+              ]
+            },
+            "wstep": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1
+                }
+              ]
+            },
+            "tresc": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/plik_md"
+                }
+              ]
+            },
+            "zdjecie": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/id_zdjecia"
+                }
+              ]
+            },
+            "fakty": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "nazwa": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "wartosc": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "required": [
+                      "nazwa",
+                      "wartosc"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "minItems": 1
+                }
+              ]
+            }
+          },
+          "required": [
+            "naglowek",
+            "wstep",
+            "tresc",
+            "zdjecie",
+            "fakty"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "zespol": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "naglowek": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                }
+              ]
+            },
+            "wstep": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1
+                }
+              ]
+            },
+            "osoby": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "imie": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "rola": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    ]
+                  },
+                  "fakt": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    ]
+                  },
+                  "zdjecie": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "$ref": "#/$defs/id_zdjecia"
+                      }
+                    ]
+                  },
+                  "zgoda": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "imie",
+                  "rola",
+                  "fakt",
+                  "zdjecie",
+                  "zgoda"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "naglowek",
+            "wstep",
+            "osoby"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "liczby": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "naglowek": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                }
+              ]
+            },
+            "pozycje": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "wartosc": {
+                    "oneOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    ]
+                  },
+                  "jednostka": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    ]
+                  },
+                  "opis": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "zrodlo": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "data": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "$ref": "#/$defs/data"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "wartosc",
+                  "jednostka",
+                  "opis",
+                  "zrodlo",
+                  "data"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "naglowek",
+            "pozycje"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "opinie": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "naglowek": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                }
+              ]
+            },
+            "weryfikacja": {
+              "type": "string",
+              "minLength": 1
+            },
+            "pozycje": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "tekst": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 600
+                  },
+                  "autor": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "miejscowosc": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    ]
+                  },
+                  "data": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "$ref": "#/$defs/data"
+                      }
+                    ]
+                  },
+                  "url": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "$ref": "#/$defs/https"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "tekst",
+                  "autor",
+                  "miejscowosc",
+                  "data",
+                  "url"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 3
+            }
+          },
+          "required": [
+            "naglowek",
+            "weryfikacja",
+            "pozycje"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "certyfikaty": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "naglowek": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                }
+              ]
+            },
+            "wstep": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1
+                }
+              ]
+            },
+            "pozycje": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "nazwa": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "wydawca": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    ]
+                  },
+                  "numer": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    ]
+                  },
+                  "rok": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "integer",
+                        "minimum": 1900,
+                        "maximum": 2100
+                      }
+                    ]
+                  },
+                  "waznosc": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "$ref": "#/$defs/data"
+                      }
+                    ]
+                  },
+                  "plik": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "nazwa",
+                  "wydawca",
+                  "numer",
+                  "rok",
+                  "waznosc",
+                  "plik"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "naglowek",
+            "wstep",
+            "pozycje"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "faq": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "naglowek": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                }
+              ]
+            },
+            "pozycje": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "pytanie": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "odpowiedz": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "pytanie",
+                  "odpowiedz"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "naglowek",
+            "pozycje"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "galeria": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "naglowek": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                }
+              ]
+            },
+            "zdjecia": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/id_zdjecia"
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "naglowek",
+            "zdjecia"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "do_pobrania": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "naglowek": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                }
+              ]
+            },
+            "pozycje": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "plik": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "opis": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "plik",
+                  "opis"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "naglowek",
+            "pozycje"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "kariera": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "naglowek": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                }
+              ]
+            },
+            "wstep": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1
+                }
+              ]
+            },
+            "pozycje": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "stanowisko": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "miejsce": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    ]
+                  },
+                  "wymiar": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    ]
+                  },
+                  "wynagrodzenie": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    ]
+                  },
+                  "opis": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    ]
+                  },
+                  "wazne_do": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "$ref": "#/$defs/data"
+                      }
+                    ]
+                  },
+                  "opublikowano": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "$ref": "#/$defs/data"
+                      }
+                    ],
+                    "description": "data publikacji oferty (JobPosting datePosted); null = oferta bez danych JobPosting"
+                  }
+                },
+                "required": [
+                  "stanowisko",
+                  "miejsce",
+                  "wymiar",
+                  "wynagrodzenie",
+                  "opis",
+                  "wazne_do",
+                  "opublikowano"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            },
+            "kontakt": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "osoba": {
+                      "oneOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 80
+                        }
+                      ]
+                    },
+                    "telefon": {
+                      "oneOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "$ref": "#/$defs/telefon"
+                        }
+                      ]
+                    },
+                    "email": {
+                      "oneOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "$ref": "#/$defs/email"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "osoba",
+                    "telefon",
+                    "email"
+                  ],
+                  "additionalProperties": false
+                }
+              ],
+              "description": "kto przyjmuje zgłoszenia (przycisk „Zadzwoń”, e-mail na CV); null = główny telefon i e-mail firmy"
+            }
+          },
+          "required": [
+            "naglowek",
+            "wstep",
+            "pozycje",
+            "kontakt"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "wspolpraca": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "naglowek": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                }
+              ]
+            },
+            "wstep": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1
+                }
+              ]
+            },
+            "tresc": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/plik_md"
+                }
+              ]
+            },
+            "warunki": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "minItems": 1
+                }
+              ]
+            }
+          },
+          "required": [
+            "naglowek",
+            "wstep",
+            "tresc",
+            "warunki"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "gdzie_kupic": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "naglowek": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                }
+              ]
+            },
+            "wstep": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 1
+                }
+              ]
+            },
+            "punkty": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "nazwa": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "miasto": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "wojewodztwo": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    ]
+                  },
+                  "adres": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    ]
+                  },
+                  "www": {
+                    "oneOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "$ref": "#/$defs/https"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "nazwa",
+                  "miasto",
+                  "wojewodztwo",
+                  "adres",
+                  "www"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "naglowek",
+            "wstep",
+            "punkty"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "kontakt": {
+      "type": "object",
+      "properties": {
+        "naglowek": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 80
+            }
+          ]
+        },
+        "wstep": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 400
+            }
+          ]
+        }
+      },
+      "required": [
+        "naglowek",
+        "wstep"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "id_zdjecia": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "opis_formatu": "id z data/zdjecia.json: małe litery, cyfry, myślnik"
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "opis_formatu": "małe litery, cyfry, myślnik"
+    },
+    "data": {
+      "type": "string",
+      "format": "date"
+    },
+    "https": {
+      "type": "string",
+      "pattern": "^https://[^\\s]+$",
+      "opis_formatu": "pełny adres https://…"
+    },
+    "telefon": {
+      "type": "string",
+      "pattern": "^\\+[1-9]\\d{7,14}$",
+      "opis_formatu": "E.164 bez spacji, np. +48672683408"
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "cena": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "number",
+          "minimum": 0
+        },
+        {
+          "type": "object",
+          "properties": {
+            "od": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "number",
+                  "minimum": 0
+                }
+              ]
+            },
+            "do": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "number",
+                  "minimum": 0
+                }
+              ]
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "cta": {
+      "type": "object",
+      "properties": {
+        "tekst": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "href": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(https://\\S+|mailto:\\S+|tel:\\+?\\d+|/(?!/)\\S*|#[\\w-]+|tel|trasa|kontakt|katalog)$",
+          "opis_formatu": "tel | trasa | kontakt | katalog | /podstrona | #kotwica | https://… | mailto:… | tel:+48…"
+        }
+      },
+      "required": [
+        "tekst",
+        "href"
+      ],
+      "additionalProperties": false
+    },
+    "kategoria": {
+      "type": "object",
+      "properties": {
+        "slug": {
+          "$ref": "#/$defs/slug"
+        },
+        "nazwa": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        }
+      },
+      "required": [
+        "slug",
+        "nazwa"
+      ],
+      "additionalProperties": false
+    },
+    "plik_md": {
+      "type": "string",
+      "pattern": "^(data/)?tresc/[a-z0-9/_-]+\\.md$",
+      "opis_formatu": "tresc/nazwa.md"
+    }
+  },
+  "required": [
+    "wersja_danych",
+    "hero",
+    "ogloszenie",
+    "oferta",
+    "cennik",
+    "menu",
+    "produkty",
+    "realizacje",
+    "przetargi",
+    "proces",
+    "zasady",
+    "o_firmie",
+    "zespol",
+    "liczby",
+    "opinie",
+    "certyfikaty",
+    "faq",
+    "galeria",
+    "do_pobrania",
+    "kariera",
+    "wspolpraca",
+    "gdzie_kupic",
+    "kontakt"
+  ]
+}

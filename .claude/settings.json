@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(python3 tools/build.py:*)",
+      "Bash(python3 tools/start.py:*)",
+      "Bash(python3 tools/zdjecia.py:*)",
+      "Bash(python3 tools/kolory.py:*)",
+      "Bash(python3 tools/lint_slop.py:*)",
+      "Bash(python3 tools/swieta.py:*)",
+      "Bash(python3 tools/raport.py:*)",
+      "Bash(python3 tools/co_zawiera.py:*)",
+      "Bash(python3 tools/podglad.py:*)",
+      "Bash(bash tools/sprawdz.sh:*)",
+      "Bash(node tools/zrzuty.cjs:*)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3",
+            "args": ["${CLAUDE_PROJECT_DIR}/.claude/hooks/po_edycji.py"],
+            "timeout": 90
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3",
+            "args": ["${CLAUDE_PROJECT_DIR}/.claude/hooks/przed_koncem.py"],
+            "timeout": 300
+          }
+        ]
+      }
+    ]
+  }
+}

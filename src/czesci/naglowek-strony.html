@@ -1,0 +1,10 @@
+{# Początek podstrony: okruszki, h1 i opcjonalny wstęp (nagłówek strony: h1="…", wstep="…"). #}
+<div class="page-head">
+  <div class="wrap">
+    {% include "czesci/okruszki.html" %}
+    <h1 id="tytul-strony">{{ strona.h1 }}</h1>
+    {% if strona.wstep %}
+    <p class="page-head__lead">{{ strona.wstep }}</p>
+    {% endif %}
+  </div>
+</div>

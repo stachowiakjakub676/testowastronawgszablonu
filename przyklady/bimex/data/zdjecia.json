@@ -1,0 +1,81 @@
+{
+  "$schema": "../../../tools/schemat/zdjecia.schema.json",
+  "wersja_danych": 1,
+  "zdjecia": [
+    {
+      "id": "wytwornia",
+      "zrodlo_plik": "brief/zdjecia/wytwornia.jpg",
+      "alt": "Wytwórnia betonu BIMEX: trzy białe silosy na cement z drabinami i szary budynek węzła betoniarskiego",
+      "podpis": null,
+      "zrodlo": "ulotka firmy na bimex-rogozno.pl (zdjęcie wycięte z ulotki), pobrane 2026-09-26",
+      "autor": null,
+      "zgoda": null,
+      "osoby": false,
+      "punkt": [
+        0.4,
+        0.55
+      ],
+      "kadr_mobilny": null
+    },
+    {
+      "id": "walec",
+      "zrodlo_plik": "brief/zdjecia/walec.jpg",
+      "alt": "Żółty walec ogumiony i równiarka na utwardzanej drodze gruntowej w sosnowym lesie",
+      "podpis": "Walec i równiarka przy budowie drogi",
+      "zrodlo": "ulotka firmy na bimex-rogozno.pl (zdjęcie wycięte z ulotki), pobrane 2026-09-26",
+      "autor": null,
+      "zgoda": null,
+      "osoby": false,
+      "punkt": [
+        0.35,
+        0.6
+      ],
+      "kadr_mobilny": null
+    },
+    {
+      "id": "betonomieszarka",
+      "zrodlo_plik": "brief/zdjecia/betonomieszarka.jpg",
+      "alt": "Czerwona betonomieszarka z szarym bębnem, na którym widać napis BIMEX i numery telefonów firmy",
+      "podpis": null,
+      "zrodlo": "ulotka firmy na bimex-rogozno.pl (zdjęcie wycięte z ulotki), pobrane 2026-09-26",
+      "autor": null,
+      "zgoda": null,
+      "osoby": false,
+      "punkt": [
+        0.5,
+        0.4
+      ],
+      "kadr_mobilny": null
+    },
+    {
+      "id": "droga",
+      "zrodlo_plik": "brief/zdjecia/droga.jpg",
+      "alt": "Nowa asfaltowa jezdnia z białymi liniami i pomarańczowymi słupkami ostrzegawczymi przy krawędzi",
+      "podpis": null,
+      "zrodlo": "ulotka firmy na bimex-rogozno.pl (zdjęcie wycięte z ulotki), pobrane 2026-09-26",
+      "autor": null,
+      "zgoda": null,
+      "osoby": false,
+      "punkt": [
+        0.6,
+        0.5
+      ],
+      "kadr_mobilny": null
+    },
+    {
+      "id": "wytwornia-panorama",
+      "zrodlo_plik": "brief/zdjecia/wytwornia-panorama.jpg",
+      "alt": "Szare hale i węzeł betoniarski wytwórni BIMEX przy ul. Fabrycznej w Rogoźnie, na placu kałuże po deszczu",
+      "podpis": "Wytwórnia przy ul. Fabrycznej 7",
+      "zrodlo": "ulotka firmy na bimex-rogozno.pl (zdjęcie wycięte z ulotki), pobrane 2026-09-26",
+      "autor": null,
+      "zgoda": null,
+      "osoby": false,
+      "punkt": [
+        0.5,
+        0.6
+      ],
+      "kadr_mobilny": null
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{# wymaga: tresc.oferta.pozycje #}
+{# Oferta: usługi albo zakres prac (KONTRAKT §6.2, critic §5.1 p. 5). Bez ikon: pozycja ze zdjęciem ma własne zdjęcie,
+   pozycja bez zdjęcia jest wierszem typograficznym (nazwa, opis, cena). Ceny brutto.
+   - tryb="skrot" (główna, gdy jest podstrona /oferta): nazwa, opis, cena, zdjęcie — do limitu z presetu; link
+     do /oferta tylko wtedy, gdy pełna wersja pokazuje coś więcej (auto.oferta.wiecej);
+   - pełna wersja (/oferta albo główna bez podstrony): także zakres prac, czas realizacji i link do podstrony usługi. #}
+{% set pelny = tryb == "pelny" or not sekcja.strona %}
+{% if pelny %}
+{% set pozycje = auto.oferta.pozycje %}
+{% set ze_zdjeciami = true %}
+{% else %}
+{% set pozycje = auto.oferta.skrot %}
+{# skrót: zdjęcia tylko, gdy ma je każda pozycja (równe wiersze indeksu); pełna wersja pokazuje wszystkie #}
+{% set ze_zdjeciami = auto.oferta.skrot_zdjecia %}
+{% endif %}
+{# skrót nie powtarza ceny, którą cennik na tej samej stronie pokazuje kilka wierszy niżej #}
+{% set cennik_obok = not pelny and "cennik" in auto.sekcje_widoczne %}
+<section class="section{% if sekcja.klasa %} {{ sekcja.klasa }}{% endif %} oferta{% if pelny %} oferta--pelna{% endif %}" id="{{ sekcja.html_id }}" aria-labelledby="{% if bez_naglowka %}tytul-strony{% else %}oferta-h{% endif %}">
+  <div class="wrap">
+    {% if not bez_naglowka %}
+    <div class="section__head">
+      <h2 id="oferta-h">{{ sekcja.naglowek }}</h2>
+      {% if tresc.oferta.wstep %}
+      <p class="section__lead">{{ tresc.oferta.wstep }}</p>
+      {% endif %}
+    </div>
+    {% endif %}
+    <ul class="oferta__lista">
+      {% for poz in pozycje %}
+      {% set cena = poz.cena %}
+      {% if cennik_obok and poz.cena_w_cenniku %}
+      {% set cena = null %}
+      {% endif %}
+      <li class="oferta__poz{% if poz.zdjecie and ze_zdjeciami %} oferta__poz--foto{% endif %}{% if pelny and (poz.zdjecie or poz.zakres) %} oferta__poz--duza{% endif %}" id="oferta-{{ poz.slug }}">
+        <h{{ hn }} class="oferta__nazwa">{% if poz.url %}<a href="{{ poz.url | url }}">{{ poz.nazwa }}</a>{% else %}{{ poz.nazwa }}{% endif %}</h{{ hn }}>
+        <div class="oferta__tresc">
+          {% if poz.opis %}
+          <p class="oferta__opis">{{ poz.opis }}</p>
+          {% endif %}
+          {% if cena != null or (pelny and poz.czas) %}
+          <dl class="oferta__fakty">
+            {% if cena != null %}
+            <div><dt>Cena</dt><dd>{% include "czesci/cena.html" cena=cena jednostka=poz.jednostka %}</dd></div>
+            {% endif %}
+            {% if pelny and poz.czas %}
+            <div><dt>Czas realizacji</dt><dd>{{ poz.czas }}</dd></div>
+            {% endif %}
+          </dl>
+          {% endif %}
+          {% if pelny and poz.zakres %}
+          <ul class="oferta__zakres">
+            {% for z in poz.zakres %}
+            <li>{{ z | wersaliki_pierwsza }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+        {% if poz.zdjecie and ze_zdjeciami %}
+        <figure class="oferta__foto">
+          {% if pelny %}{{ poz.zdjecie | obraz:"pol" }}{% else %}{{ poz.zdjecie | obraz:"tercja" }}{% endif %}
+          {% if pelny and poz.podpis %}
+          <figcaption>{{ poz.podpis }}</figcaption>
+          {% endif %}
+        </figure>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+    {% if not pelny and auto.oferta.wiecej %}
+    <p class="section__wiecej"><a href="{{ sekcja.strona | url }}">{{ auto.oferta.wiecej }}</a></p>
+    {% endif %}
+  </div>
+</section>

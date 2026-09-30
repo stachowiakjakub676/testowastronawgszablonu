@@ -1,0 +1,3 @@
+{# strona: sciezka="/kontakt" sekcja="kontakt" nav="Kontakt" tytul="Kontakt" h1="Kontakt" opis="Adres, telefony{% if firma.kontakt.email %}, e-mail{% endif %}{% if firma.godziny %}, godziny{% endif %} i dojazd: {{ firma.firma.nazwa }}, {{ auto.adres_linia }}." #}
+{% include "czesci/naglowek-strony.html" %}
+{% include "sekcje/kontakt.html" tryb="pelny" bez_naglowka=true %}

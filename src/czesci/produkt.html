@@ -1,0 +1,23 @@
+{# Jeden produkt w siatce (sekcje/produkty.html). Zmienne: p (auto.produkty.pozycje[…]), hp (poziom nagłówka nazwy),
+   pelny (parametry i pełny opis), kat (slug kategorii dla filtra albo brak). Kotwica #produkt-<slug> = @id w JSON-LD. #}
+<li class="produkt{% if not p.zdjecie %} produkt--bez-zdjecia{% endif %}" id="produkt-{{ p.slug }}"{% if kat %} data-kategoria="{{ kat }}"{% endif %}>
+  {% if p.zdjecie %}
+  <figure class="produkt__foto">{{ p.zdjecie | obraz:"tercja" }}</figure>
+  {% endif %}
+  <div class="produkt__tekst">
+    <h{{ hp }} class="produkt__nazwa">{{ p.nazwa }}</h{{ hp }}>
+    {% if p.opis %}
+    <p class="produkt__opis">{{ p.opis }}</p>
+    {% endif %}
+    {% if pelny and p.parametry %}
+    <dl class="produkt__parametry">
+      {% for par in p.parametry %}
+      <div><dt>{{ par.nazwa }}</dt><dd>{{ par.wartosc }}</dd></div>
+      {% endfor %}
+    </dl>
+    {% endif %}
+    {% if p.cena != null %}
+    <p class="produkt__cena"><span class="wizualnie-ukryte">Cena brutto: </span>{% include "czesci/cena.html" cena=p.cena jednostka=p.jednostka %}</p>
+    {% endif %}
+  </div>
+</li>

@@ -1,0 +1,87 @@
+{# wymaga: tresc.produkty.pozycje #}
+{# Produkty (KONTRAKT §6.2, §11): katalog ze zdjęciami (bez zdjęć — lista typograficzna), parametry jako lista definicji,
+   cena tylko, gdy firma ją podaje (brutto). Nazwa kategorii nie stoi nad nazwą produktu (to byłaby „etykieta”) —
+   w pełnej wersji produkty są w grupach z nagłówkiem kategorii.
+   - tryb="skrot" (główna, gdy jest /produkty): pierwsze produkty do limitu z presetu i link „Wszystkie produkty (n)”;
+   - pełna wersja: grupy wg kategorii i filtr (50-filtr.js): kontener [data-filtr], linki [data-kategoria] z adresem
+     ?kategoria=<slug>#kategoria-<slug> (bez JS przewijają do grupy), grupy i produkty z [data-kategoria].
+   W grupie najpierw produkty ze zdjęciem (siatka), potem bez zdjęcia jako wiersze listy (.produkty__wiersze) —
+   goły tekst obok zdjęć 4:3 rozbijał siatkę. „Ceny brutto.” stoi raz, pod katalogiem (nie przy filtrze), i wcale,
+   gdy wstęp sekcji już to mówi. #}
+{% set pelny = tryb == "pelny" or not sekcja.strona %}
+{# filtr tylko na podstronie /produkty — przy kilku produktach na głównej niczego nie ułatwia #}
+{% set z_filtrem = auto.produkty.filtr and tryb == "pelny" %}
+{% if hn == 2 %}
+{% set hn2 = 3 %}
+{% else %}
+{% set hn2 = 4 %}
+{% endif %}
+<section class="section{% if sekcja.klasa %} {{ sekcja.klasa }}{% endif %} produkty{% if not auto.produkty.ma_zdjecia %} produkty--lista{% endif %}" id="{{ sekcja.html_id }}" aria-labelledby="{% if bez_naglowka %}tytul-strony{% else %}produkty-h{% endif %}">
+  <div class="wrap">
+    {% if not bez_naglowka %}
+    <div class="section__head">
+      <h2 id="produkty-h">{{ sekcja.naglowek }}</h2>
+      {% if tresc.produkty.wstep %}
+      <p class="section__lead">{{ tresc.produkty.wstep }}</p>
+      {% endif %}
+    </div>
+    {% endif %}
+    {% if pelny %}
+    <div class="produkty__katalog"{% if z_filtrem %} data-filtr{% endif %}>
+      {% if z_filtrem %}
+      <div class="produkty__pasek">
+      <nav class="filtr" aria-label="Kategorie produktów">
+        <ul class="filtr__lista">
+          <li><a href="{{ strona.sciezka | url }}" data-kategoria="" aria-current="true">Wszystkie <span class="filtr__n">{{ auto.produkty.liczba }}</span></a></li>
+          {% for g in auto.produkty.grupy %}
+          <li><a href="?kategoria={{ g.slug }}#kategoria-{{ g.slug }}" data-kategoria="{{ g.slug }}">{{ g.nazwa }} <span class="filtr__n">{{ g.liczba }}</span></a></li>
+          {% endfor %}
+        </ul>
+      </nav>
+      </div>
+      {% endif %}
+      {% for g in auto.produkty.grupy %}
+      <div class="produkty__grupa" id="kategoria-{{ g.slug }}"{% if z_filtrem %} data-kategoria="{{ g.slug }}"{% endif %}>
+        {% if g.nazwa %}
+        <h{{ hn }} class="produkty__h">{{ g.nazwa }}</h{{ hn }}>
+        {% endif %}
+        {# bez nagłówka grupy (produkty bez kategorii) nazwa produktu jest o poziom wyżej — bez przeskoku h1 → h3 #}
+        {% if g.nazwa %}
+        {% set hp = hn2 %}
+        {% else %}
+        {% set hp = hn %}
+        {% endif %}
+        {% for lista in g.listy %}
+        <ul class="produkty__siatka{% if not lista.zdjecia %} produkty__wiersze{% endif %}">
+          {% for p in lista.pozycje %}
+          {% if z_filtrem %}
+          {% include "czesci/produkt.html" p=p hp=hp pelny=true kat=g.slug %}
+          {% else %}
+          {% include "czesci/produkt.html" p=p hp=hp pelny=true %}
+          {% endif %}
+          {% endfor %}
+        </ul>
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+    {% if auto.produkty.ma_ceny and not auto.produkty.brutto_we_wstepie %}
+    <p class="produkty__meta produkty__meta--pod">Ceny brutto.</p>
+    {% endif %}
+    {% else %}
+    {% for lista in auto.produkty.skrot_listy %}
+    <ul class="produkty__siatka{% if not lista.zdjecia %} produkty__wiersze{% endif %}">
+      {% for p in lista.pozycje %}
+      {% include "czesci/produkt.html" p=p hp=hn pelny=false %}
+      {% endfor %}
+    </ul>
+    {% endfor %}
+    {% if auto.produkty.ma_ceny_skrot and not auto.produkty.brutto_we_wstepie %}
+    <p class="produkty__meta produkty__meta--pod">Ceny brutto.</p>
+    {% endif %}
+    {% if auto.produkty.wiecej %}
+    <p class="section__wiecej"><a href="{{ sekcja.strona | url }}">{{ auto.produkty.wiecej }}</a></p>
+    {% endif %}
+    {% endif %}
+  </div>
+</section>

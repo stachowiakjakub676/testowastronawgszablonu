@@ -1,0 +1,52 @@
+{# wymaga: auto.certyfikaty #}
+{# Uprawnienia i certyfikaty (critic §5.1 p. 14, web-smb-best U10): nazwa, kto wydał, numer, rok, ważność; skan jako
+   link z typem i rozmiarem pliku („PDF, 240 kB”). Tylko ważne (auto.certyfikaty — wygasłe pomija dane.py z ostrzeżeniem).
+   Bez rzędu logotypów. Skrót na głównej tnie listę do `limit` tylko wtedy, gdy jest podstrona z pełną listą. #}
+{% set poz = auto.certyfikaty %}
+{% set wszystkie = poz | dlugosc %}
+{% if tryb == "skrot" and sekcja.strona and limit %}
+{% set poz = poz | pierwsze:limit %}
+{% endif %}
+<section class="section{% if sekcja.klasa %} {{ sekcja.klasa }}{% endif %} certyfikaty" id="{{ sekcja.html_id }}" aria-labelledby="{% if bez_naglowka %}tytul-strony{% else %}certyfikaty-h{% endif %}">
+  <div class="wrap">
+    {% if not bez_naglowka %}
+    <div class="section__head">
+      <h2 id="certyfikaty-h">{{ sekcja.naglowek }}</h2>
+      {% if tresc.certyfikaty.wstep %}
+      <p class="section__lead">{{ tresc.certyfikaty.wstep }}</p>
+      {% endif %}
+    </div>
+    {% elif tresc.certyfikaty.wstep %}
+    <p class="section__lead certyfikaty__wstep">{{ tresc.certyfikaty.wstep }}</p>
+    {% endif %}
+    <ul class="certyfikaty__lista">
+      {% for c in poz %}
+      <li class="certyfikaty__poz">
+        <h{{ hn }} class="certyfikaty__nazwa" id="certyfikat-{{ petla.indeks }}">{{ c.nazwa }}</h{{ hn }}>
+        {% if c.wydawca or c.numer or c.rok or c.waznosc %}
+        <dl class="certyfikaty__dane">
+          {% if c.wydawca %}
+          <div><dt>Wydał</dt><dd>{{ c.wydawca }}</dd></div>
+          {% endif %}
+          {% if c.numer %}
+          <div><dt>Numer</dt><dd class="num">{{ c.numer }}</dd></div>
+          {% endif %}
+          {% if c.rok %}
+          <div><dt>Rok</dt><dd class="num">{{ c.rok }}</dd></div>
+          {% endif %}
+          {% if c.waznosc %}
+          <div><dt>Ważny do</dt><dd class="num">{{ c.waznosc | data_krotka }}</dd></div>
+          {% endif %}
+        </dl>
+        {% endif %}
+        {% if c.plik_info %}
+        <p class="certyfikaty__plik"><a href="{{ c.plik | zasob }}" aria-describedby="certyfikat-{{ petla.indeks }}">Skan dokumentu ({{ c.plik_info.typ }}, {{ c.plik_info.rozmiar }})</a></p>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+    {% if tryb == "skrot" and sekcja.strona and limit and wszystkie > limit %}
+    <p class="section__wiecej"><a href="{{ sekcja.strona | url }}#{{ sekcja.html_id }}">{{ sekcja.naglowek }}: pełna lista ({{ wszystkie }})</a></p>
+    {% endif %}
+  </div>
+</section>

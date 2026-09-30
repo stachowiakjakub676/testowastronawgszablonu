@@ -1,0 +1,40 @@
+{# strona: sciezka="/aktualnosci/{slug}" kolekcja="aktualnosci" rodzic="/aktualnosci" tytul="{{ element.tytul }}" opis="{{ element.opis }}" #}
+{# Wpis z data/aktualnosci/<slug>.md: data, zdjęcie z nagłówka „zdjecie:” (u góry strony — bez leniwego ładowania),
+   treść Markdown (## → h2 pod h1 strony), na końcu inne wpisy i link do listy. JSON-LD Article (jsonld.py).
+   Opis z nagłówka idzie do listy, meta description i RSS — tu go nie powtarzamy nad treścią. #}
+{% include "czesci/naglowek-strony.html" %}
+<article class="section section--sm wpis" aria-labelledby="tytul-strony">
+  <div class="wrap wpis__siatka">
+    <p class="wpis__data">Opublikowano <time datetime="{{ element.data | data_iso }}">{{ element.data | data }}</time></p>
+    {% if element.zdjecie %}
+    <figure class="wpis__foto">
+      {{ element.zdjecie | obraz:"hero" }}
+    </figure>
+    {% endif %}
+    <div class="wpis__tresc prose">
+      {{ element.tresc | md:2 }}
+    </div>
+  </div>
+</article>
+{% if aktualnosci | dlugosc > 1 %}
+<section class="section section--sm wpis-inne" aria-labelledby="wpis-inne-h">
+  <div class="wrap">
+    <div class="section__head">
+      <h2 id="wpis-inne-h">Inne wpisy</h2>
+    </div>
+    <ul class="wpisy">
+      {% for w in aktualnosci | pierwsze:4 %}
+      {% if w.slug != element.slug %}
+      <li class="wpisy__poz">
+        <p class="wpisy__data"><time datetime="{{ w.data | data_iso }}">{{ w.data | data }}</time></p>
+        <div class="wpisy__tekst">
+          <h3 class="wpisy__tytul"><a href="{{ w.sciezka | url }}">{{ w.tytul }}</a></h3>
+        </div>
+      </li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+    <p class="section__wiecej"><a href="{{ "/aktualnosci" | url }}">Wszystkie aktualności ({{ aktualnosci | dlugosc }})</a></p>
+  </div>
+</section>
+{% endif %}

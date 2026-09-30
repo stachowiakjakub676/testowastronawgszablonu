@@ -1,0 +1,121 @@
+{
+  "$komentarz": "Reguły branży (nie wygląd). KONTRAKT §5. Klucze naglowki i nav_etykiety to domyślne teksty — klient zmienia je w data/tresc.json (pole naglowek sekcji), nie tutaj.",
+  "branza": "restauracja",
+  "typ_schema": "Restaurant",
+  "wymagane": [
+    "godziny",
+    "tresc.menu|tresc.cennik"
+  ],
+  "zalecane": [
+    "tresc.galeria",
+    "social.facebook",
+    "social.google_maps",
+    "tresc.hero.zdjecie"
+  ],
+  "sekcje_glowna": [
+    "hero",
+    "ogloszenie",
+    "menu",
+    "cennik",
+    "galeria",
+    "o_firmie",
+    "opinie",
+    "aktualnosci",
+    "godziny",
+    "zasady",
+    "faq",
+    "kontakt"
+  ],
+  "warianty": {
+    "godziny": "tint",
+    "zasady": "sm",
+    "aktualnosci": "sm"
+  },
+  "strony": [
+    "menu",
+    "o-firmie",
+    "aktualnosci",
+    "wpis",
+    "kariera",
+    "kontakt",
+    "polityka-prywatnosci",
+    "dostepnosc"
+  ],
+  "nav": [
+    "menu",
+    "galeria",
+    "o_firmie",
+    "godziny",
+    "kariera",
+    "kontakt"
+  ],
+  "cta_glowne": {
+    "tekst": "Zadzwoń: {tel}",
+    "href": "tel"
+  },
+  "cta_drugie": {
+    "tekst": "Wyznacz trasę",
+    "href": "trasa"
+  },
+  "pasek_mobilny": [
+    "tel",
+    "trasa"
+  ],
+  "telefon_w_naglowku": true,
+  "pokazuj_status_w_hero": true,
+  "naglowki": {
+    "oferta": "Zakres usług",
+    "cennik": "Cennik",
+    "menu": "Karta",
+    "produkty": "Produkty",
+    "realizacje": "Realizacje",
+    "przetargi": "Zamówienia publiczne",
+    "proces": "Przebieg zlecenia",
+    "zasady": "Zasady",
+    "o_firmie": "O lokalu",
+    "zespol": "Zespół",
+    "liczby": "Firma w liczbach",
+    "opinie": "Opinie gości",
+    "certyfikaty": "Uprawnienia i certyfikaty",
+    "faq": "Pytania i odpowiedzi",
+    "galeria": "Zdjęcia",
+    "do_pobrania": "Do pobrania",
+    "kariera": "Praca",
+    "wspolpraca": "Współpraca",
+    "gdzie_kupic": "Gdzie kupić",
+    "aktualnosci": "Aktualności",
+    "godziny": "Godziny otwarcia",
+    "kontakt": "Adres i dojazd"
+  },
+  "nav_etykiety": {
+    "oferta": "Oferta",
+    "menu": "Karta",
+    "produkty": "Produkty",
+    "realizacje": "Realizacje",
+    "przetargi": "Zamówienia publiczne",
+    "o_firmie": "O nas",
+    "zespol": "Zespół",
+    "cennik": "Cennik",
+    "galeria": "Zdjęcia",
+    "godziny": "Godziny",
+    "wspolpraca": "Współpraca",
+    "gdzie_kupic": "Gdzie kupić",
+    "aktualnosci": "Aktualności",
+    "kariera": "Praca",
+    "kontakt": "Kontakt"
+  },
+  "limity": {
+    "oferta": 6,
+    "realizacje": 6,
+    "przetargi": 8,
+    "produkty": 6,
+    "galeria": 6,
+    "cennik": 8,
+    "aktualnosci": 3,
+    "menu": 12,
+    "certyfikaty": 6,
+    "faq": 6,
+    "zespol": 4
+  },
+  "cennik_netto": false
+}

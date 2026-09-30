@@ -1,0 +1,26 @@
+{# wymaga: tresc.zasady.pozycje #}
+{# Zasady (critic §5.1 p. 10, web-smb-best U7): gwarancja, płatności, zadatek, ważność wyceny, rezerwacje, dostawa —
+   lista definicji <dl>: nazwa zasady po lewej, treść po prawej (od 600 px), wiersze rozdzielone linią 1 px.
+   Treść jest faktem firmy, nie obietnicą szablonu: bez danych sekcja nie powstaje. #}
+<section class="section{% if sekcja.klasa %} {{ sekcja.klasa }}{% endif %} zasady" id="{{ sekcja.html_id }}" aria-labelledby="{% if bez_naglowka %}tytul-strony{% else %}zasady-h{% endif %}">
+  <div class="wrap{% if not bez_naglowka %} bok{% endif %}">
+    {% if not bez_naglowka %}
+    <div class="section__head">
+      <h2 id="zasady-h">{{ sekcja.naglowek }}</h2>
+      {% if tresc.zasady.wstep %}
+      <p class="section__lead">{{ tresc.zasady.wstep }}</p>
+      {% endif %}
+    </div>
+    {% elif tresc.zasady.wstep %}
+    <p class="section__lead zasady__wstep">{{ tresc.zasady.wstep }}</p>
+    {% endif %}
+    <dl class="zasady__lista">
+      {% for z in tresc.zasady.pozycje %}
+      <div class="zasady__poz">
+        <dt class="zasady__nazwa">{{ z.nazwa }}</dt>
+        <dd class="zasady__opis">{{ z.opis }}</dd>
+      </div>
+      {% endfor %}
+    </dl>
+  </div>
+</section>

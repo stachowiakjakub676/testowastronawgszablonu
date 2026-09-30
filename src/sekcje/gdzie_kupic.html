@@ -1,0 +1,34 @@
+{# wymaga: tresc.gdzie_kupic.punkty #}
+{# Gdzie kupić (KONTRAKT §4.2): salony i sklepy pogrupowane po województwach (polski alfabet; bez województwa —
+   „Pozostałe” na końcu, bez nagłówka, gdy to jedyna grupa), w grupie po miejscowości. Zwykła lista z linkami do stron
+   punktów — bez mapy (mapa to dane dla obcego serwera) i bez wyszukiwarki. ≥ 600 px grupy w kolumnach. #}
+{% set grupy = auto.gdzie_kupic | dlugosc > 1 %}
+<section class="section{% if sekcja.klasa %} {{ sekcja.klasa }}{% endif %} gdzie-kupic" id="{{ sekcja.html_id }}" aria-labelledby="{% if bez_naglowka %}tytul-strony{% else %}gdzie-kupic-h{% endif %}">
+  <div class="wrap{% if not bez_naglowka %} bok{% endif %}">
+    {% if not bez_naglowka %}
+    <div class="section__head">
+      <h2 id="gdzie-kupic-h">{{ sekcja.naglowek }}</h2>
+      {% if tresc.gdzie_kupic.wstep %}
+      <p class="section__lead">{{ tresc.gdzie_kupic.wstep }}</p>
+      {% endif %}
+    </div>
+    {% endif %}
+    <div class="punkty{% if grupy %} punkty--grupy{% endif %}">
+      {% for g in auto.gdzie_kupic %}
+      <div class="punkty__grupa">
+        {% if g.nazwa %}
+        <h{{ hn }} class="punkty__woj">{{ g.nazwa }}</h{{ hn }}>
+        {% endif %}
+        <ul class="punkty__lista">
+          {% for p in g.punkty %}
+          <li class="punkty__poz">
+            <p class="punkty__nazwa">{% if p.www %}<a href="{{ p.www | url }}">{{ p.nazwa }}</a>{% else %}{{ p.nazwa }}{% endif %}</p>
+            <p class="punkty__adres">{{ p.adres_html }}</p>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

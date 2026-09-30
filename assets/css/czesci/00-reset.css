@@ -1,0 +1,13 @@
+/* 00 — reset: przewidywalny punkt wyjścia, bez stylowania wyglądu */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { margin: 0; min-height: 100vh; }
+h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd, ul, ol { margin: 0; }
+ul[class], ol[class] { list-style: none; padding: 0; }
+img, picture, svg, video, iframe { display: block; max-width: 100%; }
+img { height: auto; }
+input, button, textarea, select { font: inherit; color: inherit; letter-spacing: inherit; }
+button { cursor: pointer; background: none; }
+table { border-collapse: collapse; border-spacing: 0; }
+address { font-style: normal; }
+[hidden] { display: none !important; }

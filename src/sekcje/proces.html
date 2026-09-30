@@ -1,0 +1,35 @@
+{# wymaga: tresc.proces.kroki #}
+{# Proces (KONTRAKT §6.2, critic §5.1 p. 9): kroki jako prawdziwa lista <ol> — numer to znacznik listy (::marker),
+   nie ozdobna cyfra. Krok: nazwa, opis (Markdown: można wstawić link tel:/mailto:) i czas albo rezultat
+   („2–3 dni”, „wycena w PDF w 3 dni robocze”) — opis i czas tylko, gdy są w danych.
+   Układ jak instrukcja: numer wisi po lewej, od 960 px nazwa kroku, opis i czas w kolumnach jednego wiersza.
+   Sekcja jest krótka — bez skrótu i podstrony. #}
+<section class="section{% if sekcja.klasa %} {{ sekcja.klasa }}{% endif %} proces" id="{{ sekcja.html_id }}" aria-labelledby="{% if bez_naglowka %}tytul-strony{% else %}proces-h{% endif %}">
+  <div class="wrap">
+    {% if not bez_naglowka %}
+    <div class="section__head">
+      <h2 id="proces-h">{{ sekcja.naglowek }}</h2>
+      {% if tresc.proces.wstep %}
+      <p class="section__lead">{{ tresc.proces.wstep }}</p>
+      {% endif %}
+    </div>
+    {% elif tresc.proces.wstep %}
+    <p class="section__lead proces__wstep">{{ tresc.proces.wstep }}</p>
+    {% endif %}
+    <ol class="proces__kroki{% if tresc.proces.kroki | dlugosc <= 4 %} proces__kroki--krotkie{% endif %}">
+      {% for k in tresc.proces.kroki %}
+      <li class="proces__krok">
+        <div class="proces__tresc">
+          <h{{ hn }} class="proces__nazwa">{{ k.nazwa }}</h{{ hn }}>
+          {% if k.opis %}
+          <div class="proces__opis">{{ k.opis | md:hn }}</div>
+          {% endif %}
+          {% if k.czas %}
+          <p class="proces__czas">{{ k.czas }}</p>
+          {% endif %}
+        </div>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>

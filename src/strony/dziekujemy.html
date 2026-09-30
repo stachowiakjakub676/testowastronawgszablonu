@@ -1,0 +1,9 @@
+{# strona: sciezka="/dziekujemy" tytul="Wiadomość wysłana" indeksuj="nie" #}
+{# Tu Worker przekierowuje (303) po wysłaniu formularza bez JavaScriptu. #}
+<section class="section" aria-labelledby="tytul-strony">
+  <div class="wrap">
+    <h1 id="tytul-strony">Dziękujemy, wiadomość wysłana</h1>
+    <p class="lead">{% if firma.kontakt.czas_odpowiedzi %}{{ firma.kontakt.czas_odpowiedzi | wersaliki_pierwsza }}.{% else %}Odpowiemy na podany telefon albo adres e-mail.{% endif %}{% if auto.tel_href %} W pilnej sprawie zadzwoń: <a class="tel" href="{{ auto.tel_href | url }}">{{ auto.telefon_krajowy }}</a>.{% endif %}</p>
+    <p><a class="btn btn--secondary" href="{{ "/" | url }}">Wróć na stronę główną</a></p>
+  </div>
+</section>

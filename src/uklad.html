@@ -1,0 +1,71 @@
+{# Szkielet każdej strony. Zmienna tresc_strony = wyrenderowany plik z src/strony/. #}
+<!doctype html>
+{# funkcje.animacje = "wejscie" → klasa „ruch” (91-ruch.css, D6) — wpisana w HTML, nie skryptem, więc CSP bez zmian #}
+<html lang="pl"{% if funkcje.animacje == "wejscie" %} class="ruch"{% endif %}>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{ strona.tytul }}</title>
+<meta name="description" content="{{ strona.opis }}">
+{% if strona.kanoniczny %}
+<link rel="canonical" href="{{ strona.kanoniczny | url }}">
+{% endif %}
+{% if not strona.indeksuj or auto.bez_domeny %}
+<meta name="robots" content="noindex">
+{% endif %}
+<meta name="theme-color" content="{{ auto.kolor_tla }}">
+{% if auto.ikony.ico %}
+<link rel="icon" href="{{ "assets/img/ikony/favicon.ico" | zasob }}" sizes="32x32">
+{% endif %}
+{% if auto.ikony.svg %}
+<link rel="icon" href="{{ "assets/img/ikony/icon.svg" | zasob }}" type="image/svg+xml">
+{% endif %}
+{% if auto.ikony.png %}
+<link rel="icon" href="{{ "assets/img/ikony/icon-192.png" | zasob }}" type="image/png" sizes="192x192">
+{% endif %}
+{% if auto.ikony.apple %}
+<link rel="apple-touch-icon" href="{{ "assets/img/ikony/apple-touch-icon.png" | zasob }}">
+{% endif %}
+{% if auto.ikony.manifest %}
+<link rel="manifest" href="{{ "site.webmanifest" | zasob }}">
+{% endif %}
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:site_name" content="{{ firma.firma.nazwa }}">
+<meta property="og:title" content="{{ strona.tytul }}">
+<meta property="og:description" content="{{ strona.opis }}">
+{% if strona.kanoniczny %}
+<meta property="og:url" content="{{ strona.kanoniczny | url }}">
+{% endif %}
+{% if strona.og_obraz %}
+<meta property="og:image" content="{{ strona.og_obraz | url }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{{ strona.og_obraz_alt }}">
+{% endif %}
+<meta name="twitter:card" content="summary_large_image">
+{% if auto.rss %}
+<link rel="alternate" type="application/rss+xml" title="Aktualności – {{ firma.firma.nazwa }}" href="{{ "/aktualnosci.xml" | url }}">
+{% endif %}
+{% for plik in auto.fonty_preload %}
+<link rel="preload" href="{{ plik | zasob }}" as="font" type="font/woff2" crossorigin>
+{% endfor %}
+<link rel="stylesheet" href="{{ "assets/css/strona.css" | zasob }}">
+<script>{{ auto.inline_js | surowe }}</script>
+<script src="{{ "assets/js/strona.js" | zasob }}" defer></script>
+<script type="application/ld+json">{{ auto.jsonld }}</script>
+{% if funkcje.statystyki_cf_token %}
+{# Cloudflare Web Analytics bez cookies — jedyny zewnętrzny skrypt, tylko gdy włączony (CSP dopuszcza go wtedy w _headers) #}
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "{{ funkcje.statystyki_cf_token }}"}'></script>
+{% endif %}
+</head>
+<body{% if auto.pasek_mobilny %} class="ma-pasek"{% endif %}>
+<a class="skip" href="#tresc">Przejdź do treści</a>
+{% include "czesci/naglowek.html" %}
+<main id="tresc" tabindex="-1">
+{{ tresc_strony }}
+</main>
+{% include "czesci/stopka.html" %}
+{% include "czesci/pasek-mobilny.html" %}
+</body>
+</html>

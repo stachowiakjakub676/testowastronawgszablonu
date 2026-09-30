@@ -1,0 +1,73 @@
+{# wymaga: tresc.menu.kategorie #}
+{# Karta (menu) w HTML, nie tylko PDF (critic §5.1 p. 6): działy, nazwa dania, porcja, opis, cena cyframi tabelarycznymi,
+   oznaczenia W/O tekstem z legendą (bez emoji; czytnik ekranu dostaje pełne słowa), alergeny, data karty.
+   - tryb="skrot" (główna, gdy jest /menu): po kilka dań z każdego działu do limitu z presetu (auto.menu.skrot),
+     bez alergenów; link do /menu. Uwagi (auto.menu.uwagi: menu.uwagi albo zdanie o cenach przy menu.ceny = "w_lokalu")
+     są w obu wersjach — zdanie „ceny w lokalu” musi stać przy karcie, którą widać;
+   - pełna wersja (/menu, do druku — 12-menu.css): wszystkie dania, alergeny, uwagi, PDF z typem i rozmiarem.
+   /menu powstaje tylko wtedy, gdy pokazuje coś więcej niż kilka nazw (strony.py, _menu_podstrona). #}
+{% set pelny = tryb == "pelny" or not sekcja.strona %}
+{% if pelny %}
+{% set kategorie = auto.menu.kategorie %}
+{% set legenda = auto.menu.legenda %}
+{% else %}
+{% set kategorie = auto.menu.skrot %}
+{% set legenda = auto.menu.legenda_skrot %}
+{% endif %}
+<section class="section{% if sekcja.klasa %} {{ sekcja.klasa }}{% endif %} menu{% if pelny %} menu--pelna{% endif %}" id="{{ sekcja.html_id }}" aria-labelledby="{% if bez_naglowka %}tytul-strony{% else %}menu-h{% endif %}">
+  <div class="wrap">
+    {% if not bez_naglowka %}
+    <div class="section__head">
+      <h2 id="menu-h">{{ sekcja.naglowek }}</h2>
+    </div>
+    {% endif %}
+    {% if tresc.menu.data or legenda or (pelny and auto.menu.pdf) %}
+    <div class="menu__info">
+      {% if tresc.menu.data %}
+      <p class="menu__data">Karta z dnia <time datetime="{{ tresc.menu.data | data_iso }}">{{ tresc.menu.data | data }}</time></p>
+      {% endif %}
+      {% if legenda %}
+      <dl class="menu__legenda">
+        {% for z in legenda %}
+        <div><dt>{{ z.skrot }}</dt><dd>– {{ z.opis }}</dd></div>
+        {% endfor %}
+      </dl>
+      {% endif %}
+      {% if pelny and auto.menu.pdf %}
+      <p class="menu__pdf"><a href="{{ auto.menu.pdf.href | zasob }}">Karta do pobrania ({{ auto.menu.pdf.tekst }})</a></p>
+      {% endif %}
+    </div>
+    {% endif %}
+    <div class="menu__dzialy">
+      {% for k in kategorie %}
+      <div class="menu__dzial">
+        <h{{ hn }} class="menu__h">{{ k.nazwa }}</h{{ hn }}>
+        <ul class="menu__lista">
+          {% for p in k.pozycje %}
+          <li class="menu__poz">
+            <p class="menu__wiersz">
+              <span class="menu__nazwa">{{ p.nazwa }}{% for z in p.znaki %} <span class="menu__znak" aria-hidden="true">{{ z.skrot }}</span><span class="wizualnie-ukryte">, {{ z.opis }}</span>{% endfor %}{% if p.porcja %} <span class="menu__porcja">{{ p.porcja }}</span>{% endif %}</span>
+              {% if p.cena != null %}
+              <span class="menu__cena">{% include "czesci/cena.html" cena=p.cena %}</span>
+              {% endif %}
+            </p>
+            {% if p.opis %}
+            <p class="menu__opis">{{ p.opis }}</p>
+            {% endif %}
+            {% if pelny and p.alergeny %}
+            <p class="menu__alergeny">Alergeny: {{ p.alergeny | polacz:", " }}</p>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+    {% if auto.menu.uwagi %}
+    <p class="menu__uwagi">{{ auto.menu.uwagi }}</p>
+    {% endif %}
+    {% if not pelny and auto.menu.wiecej %}
+    <p class="section__wiecej"><a href="{{ sekcja.strona | url }}">{{ auto.menu.wiecej }}</a></p>
+    {% endif %}
+  </div>
+</section>

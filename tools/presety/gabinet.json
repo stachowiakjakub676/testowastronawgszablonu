@@ -1,0 +1,120 @@
+{
+  "$komentarz": "Reguły branży (nie wygląd). KONTRAKT §5. Klucze naglowki i nav_etykiety to domyślne teksty — klient zmienia je w data/tresc.json (pole naglowek sekcji), nie tutaj.",
+  "branza": "gabinet",
+  "typ_schema": "MedicalBusiness",
+  "wymagane": [
+    "godziny",
+    "tresc.oferta.pozycje|tresc.cennik"
+  ],
+  "zalecane": [
+    "tresc.zespol",
+    "tresc.cennik",
+    "rejestr.samorzad_zawodowy",
+    "social.google_maps"
+  ],
+  "sekcje_glowna": [
+    "hero",
+    "ogloszenie",
+    "oferta",
+    "zespol",
+    "cennik",
+    "zasady",
+    "aktualnosci",
+    "godziny",
+    "faq",
+    "kontakt"
+  ],
+  "warianty": {
+    "cennik": "tint",
+    "zasady": "sm",
+    "aktualnosci": "sm"
+  },
+  "strony": [
+    "oferta",
+    "usluga",
+    "o-firmie",
+    "aktualnosci",
+    "wpis",
+    "kariera",
+    "kontakt",
+    "polityka-prywatnosci",
+    "dostepnosc"
+  ],
+  "nav": [
+    "oferta",
+    "zespol",
+    "cennik",
+    "godziny",
+    "kariera",
+    "kontakt"
+  ],
+  "cta_glowne": {
+    "tekst": "Zadzwoń i umów wizytę",
+    "href": "tel"
+  },
+  "cta_drugie": {
+    "tekst": "Wyznacz trasę",
+    "href": "trasa"
+  },
+  "pasek_mobilny": [
+    "tel",
+    "trasa"
+  ],
+  "telefon_w_naglowku": true,
+  "pokazuj_status_w_hero": true,
+  "naglowki": {
+    "oferta": "Zakres usług",
+    "cennik": "Cennik",
+    "menu": "Karta",
+    "produkty": "Produkty",
+    "realizacje": "Realizacje",
+    "przetargi": "Zamówienia publiczne",
+    "proces": "Przebieg zlecenia",
+    "zasady": "Zasady wizyt",
+    "o_firmie": "O firmie",
+    "zespol": "Specjaliści",
+    "liczby": "Firma w liczbach",
+    "opinie": "Opinie",
+    "certyfikaty": "Uprawnienia i certyfikaty",
+    "faq": "Pytania i odpowiedzi",
+    "galeria": "Zdjęcia",
+    "do_pobrania": "Do pobrania",
+    "kariera": "Praca",
+    "wspolpraca": "Współpraca",
+    "gdzie_kupic": "Gdzie kupić",
+    "aktualnosci": "Aktualności",
+    "godziny": "Godziny przyjęć",
+    "kontakt": "Kontakt i dojazd"
+  },
+  "nav_etykiety": {
+    "oferta": "Usługi",
+    "menu": "Karta",
+    "produkty": "Produkty",
+    "realizacje": "Realizacje",
+    "przetargi": "Zamówienia publiczne",
+    "o_firmie": "O firmie",
+    "zespol": "Specjaliści",
+    "cennik": "Cennik",
+    "galeria": "Zdjęcia",
+    "godziny": "Godziny",
+    "wspolpraca": "Współpraca",
+    "gdzie_kupic": "Gdzie kupić",
+    "aktualnosci": "Aktualności",
+    "kariera": "Praca",
+    "kontakt": "Kontakt"
+  },
+  "limity": {
+    "oferta": 6,
+    "realizacje": 6,
+    "przetargi": 8,
+    "produkty": 6,
+    "galeria": 6,
+    "cennik": 8,
+    "aktualnosci": 3,
+    "menu": 12,
+    "certyfikaty": 6,
+    "faq": 6,
+    "zespol": 4
+  },
+  "cennik_netto": false
+}

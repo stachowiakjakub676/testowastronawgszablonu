@@ -1,0 +1,39 @@
+{# wymaga: aktualnosci #}
+{# Aktualności (KONTRAKT §4.4, §6.1) z data/aktualnosci/*.md, od najnowszego. Dwie wersje, bez powtórzeń:
+   - tryb="skrot" (strona główna): trzy najnowsze (preset → limity) jako lista typograficzna — data, tytuł, jedno zdanie;
+     link „Wszystkie aktualności (n)” tylko wtedy, gdy na /aktualnosci jest coś więcej. Zapowiedź znika, gdy najnowszy
+     wpis jest starszy niż 12 miesięcy (strony.plan — martwy blok wygląda jak porzucona firma);
+   - tryb="pelny" (/aktualnosci, bez_naglowka=true): wszystkie wpisy, obok zdjęcie wpisu, jeśli jest. #}
+{% set skrot = tryb == "skrot" %}
+{% set wpisy = aktualnosci %}
+{% if skrot %}
+{% set wpisy = aktualnosci | pierwsze:(limit | domyslnie:3) %}
+{% endif %}
+<section class="section{% if sekcja.klasa %} {{ sekcja.klasa }}{% endif %} aktualnosci{% if not skrot %} aktualnosci--pelne{% endif %}" id="{{ sekcja.html_id }}" aria-labelledby="{% if bez_naglowka %}tytul-strony{% else %}aktualnosci-h{% endif %}">
+  <div class="wrap{% if skrot and not bez_naglowka %} bok{% endif %}">
+    {% if not bez_naglowka %}
+    <div class="section__head">
+      <h2 id="aktualnosci-h">{{ sekcja.naglowek }}</h2>
+    </div>
+    {% endif %}
+    <ul class="wpisy">
+      {% for w in wpisy %}
+      <li class="wpisy__poz{% if not skrot and w.zdjecie %} wpisy__poz--foto{% endif %}">
+        <p class="wpisy__data"><time datetime="{{ w.data | data_iso }}">{{ w.data | data }}</time></p>
+        <div class="wpisy__tekst">
+          <h{{ hn }} class="wpisy__tytul"><a href="{{ w.sciezka | url }}">{{ w.tytul }}</a></h{{ hn }}>
+          {% if w.opis %}
+          <p class="wpisy__opis">{{ w.opis }}</p>
+          {% endif %}
+        </div>
+        {% if not skrot and w.zdjecie %}
+        <div class="wpisy__foto">{{ w.zdjecie | obraz:"miniatura" }}</div>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+    {% if skrot and sekcja.strona and aktualnosci | dlugosc > wpisy | dlugosc %}
+    <p class="section__wiecej"><a href="{{ sekcja.strona | url }}">Wszystkie aktualności ({{ aktualnosci | dlugosc }})</a></p>
+    {% endif %}
+  </div>
+</section>

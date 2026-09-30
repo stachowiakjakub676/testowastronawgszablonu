@@ -1,0 +1,83 @@
+{
+  "gabinet": {
+    "szer": 1920,
+    "wys": 1080,
+    "szerokosci": [
+      480,
+      960,
+      1440,
+      1920
+    ],
+    "formaty": [
+      "avif",
+      "webp",
+      "jpg"
+    ]
+  },
+  "poczekalnia": {
+    "szer": 1440,
+    "wys": 960,
+    "szerokosci": [
+      480,
+      960,
+      1440
+    ],
+    "formaty": [
+      "avif",
+      "webp",
+      "jpg"
+    ]
+  },
+  "portret-1": {
+    "szer": 960,
+    "wys": 1200,
+    "szerokosci": [
+      480,
+      960
+    ],
+    "formaty": [
+      "avif",
+      "webp",
+      "jpg"
+    ]
+  },
+  "portret-2": {
+    "szer": 960,
+    "wys": 1200,
+    "szerokosci": [
+      480,
+      960
+    ],
+    "formaty": [
+      "avif",
+      "webp",
+      "jpg"
+    ]
+  },
+  "portret-3": {
+    "szer": 960,
+    "wys": 1200,
+    "szerokosci": [
+      480,
+      960
+    ],
+    "formaty": [
+      "avif",
+      "webp",
+      "jpg"
+    ]
+  },
+  "portret-4": {
+    "szer": 960,
+    "wys": 1200,
+    "szerokosci": [
+      480,
+      960
+    ],
+    "formaty": [
+      "avif",
+      "webp",
+      "jpg"
+    ]
+  }
+}
